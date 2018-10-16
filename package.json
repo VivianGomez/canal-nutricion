@@ -1,0 +1,32 @@
+{
+  "name": "Foohealli",
+  "author": "Gabriel Pinto & Vivian Gómez",
+  "license": "MIT",
+  "description": "Esta aplicación busca crear un canal de comunicación entre nutricionistas y personas con insuficiencia renal crónica, con el fin de mejorar el tratamiento llevado por estos últimos y mejorar las posibilidades de hacer seguimiento a los nutricionistas.",
+  "private": true,
+  "scripts": {
+    "start": "meteor run",
+    "test": "meteor test --once --driver-package meteortesting:mocha",
+    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+    "visualize": "meteor --production --extra-packages bundle-visualizer"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.0.0-beta.55",
+    "cryptr": "^4.0.0",
+    "jsonwebtoken": "^8.3.0",
+    "meteor-node-stubs": "^0.4.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-loading-screen": "0.0.17",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-transition-group": "^2.5.0"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.js",
+      "server": "server/main.js"
+    },
+    "testModule": "tests/main.js"
+  }
+}
