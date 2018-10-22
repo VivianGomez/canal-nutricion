@@ -1,8 +1,13 @@
 body {
-  padding: 10px;
-  font-family: sans-serif;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 
+html {
+  overflow-x: hidden;
+  height: 100%;
+}
 
 .foohealli-footer {
   background-color: #f45454;
@@ -10,4 +15,51 @@ body {
 
 .foohealli-navbar {
   background-color: #f45454;
+}
+
+.bg-foohealli {
+  background-color: #f45454;
+}
+
+
+.btn-foohealli {
+  color: white;
+  background-color: #f45454;
+  border-color: #f45454;
+}
+
+.btn-foohealli:hover {
+  color: white;
+  background-color: #c53030;
+  border-color: #c53030;
+}
+
+.btn-ubtn-foohealliniandes:focus,
+.btn-foohealli.focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+}
+
+.btn-foohealli.disabled,
+.btn-foohealli:disabled {
+  color: white;
+  background-color: #f45454;
+  border-color: #f45454;
+}
+
+.btn-foohealli:not(:disabled):not(.disabled):active,
+.btn-foohealli:not(:disabled):not(.disabled).active,
+.show>.btn-foohealli.dropdown-toggle {
+  color: white;
+  background-color: #c53030;
+  border-color: #c53030;
+}
+
+.btn-foohealli:not(:disabled):not(.disabled):active:focus,
+.btn-foohealli:not(:disabled):not(.disabled).active:focus,
+.show>.btn-foohealli.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+}
+
+.pointer {
+  cursor: pointer;
 }

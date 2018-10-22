@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Navbar from './Navbar.jsx';
+import Navbar from './components/Navbar.jsx';
 import Inicio from './Inicio.jsx';
-import Registro from './Registro.jsx';
-import Login from './Login.jsx';
-import Footer from './Footer.jsx';
+import Registro from './components/Registro.jsx';
+import Login from './components/Login.jsx';
+import Footer from './components/Footer.jsx';
 
 class App extends Component {
   render() {
