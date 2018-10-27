@@ -5,6 +5,7 @@ import Inicio from './Inicio.jsx';
 import Registro from './components/Registro.jsx';
 import Login from './components/Login.jsx';
 import Footer from './components/Footer.jsx';
+//import Doctor from './components/Doctor.jsx';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
             <Route exact path="/" component={Inicio} />
             <Route exact path="/registro" component={Registro} />
             <Route exact path="/login" component={Login} />
+
             <Redirect from="*" to="/" />
           </Switch>
         </div>
@@ -27,3 +29,10 @@ class App extends Component {
 }
 
 export default App;
+
+
+//            <Route
+//              exact
+//              path="/dashboardDoctor"
+//              component={Doctor}
+//            />

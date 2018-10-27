@@ -61,7 +61,7 @@ class Login extends Component {
       return (
         <button
           type="button"
-          class="btn btn-primary"
+          className="btn btn-primary"
           onClick={() => this.cambiarRolIngreso('doctor')}
         >
           <i className="fas fa-user-md" />
@@ -72,7 +72,7 @@ class Login extends Component {
       return (
         <button
           type="button"
-          class="btn btn-success"
+          className="btn btn-success"
           onClick={() => this.cambiarRolIngreso('paciente')}
         >
           <i className="fas fa-user" />

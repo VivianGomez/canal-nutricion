@@ -7,6 +7,9 @@ import {
 import {
     check
 } from 'meteor/check';
+import {
+    Match
+} from 'meteor/check';
 
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
@@ -14,12 +17,39 @@ const cryptr = new Cryptr(process.env.CODE_CRYPTR);
 
 export const Pacientes = new Mongo.Collection('pacientes');
 
-if (Meteor.isServer) {
+//if (Meteor.isServer) {
 
-    Meteor.publish('pacientes.identificacion', function pacientesPublication(identificacion) {
-        return Pacientes.find({
-            identificacion: identificacion
-        });
+//    Meteor.publish('pacientes.identificacion', function pacientesPublication(identificacion) {
+//        return Pacientes.find({
+//            identificacion: identificacion
+//        });
+//    });
+//}
+
+
+if (Meteor.isServer) {
+    console. log("ENTRA COMO SERVER", process.env.CODE_CRYPTR);
+
+    Meteor.publish('pacientes', function pacientesPublication(token) {
+
+    console. log("PUBLISH", process.env.CODE_CRYPTR);
+    console. log("hiii");
+
+        let usuario = decodificarToken(token);
+
+        if (usuario) {
+            if (usuario.rol === "doctor") {
+                return Pacientes.find({
+                    $or: [{
+                        doctor: usuario.identificacion
+                    }, ],
+                });
+            } else {
+                return pacientes.find();
+            }
+        } else {
+            throw new Meteor.Error("Debes haber iniciado sesión para acceder a esta funcionalidad.");
+        }
     });
 }
 
