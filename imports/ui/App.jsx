@@ -26,9 +26,9 @@ class App extends Component {
 
             <Route
               exact
-              path="/doctor/DetailPaciente/:identificacion"
+              path="/doctor/detailPaciente/:identificacion"
               component={DetailPaciente}
-             />
+            />
             <Route
               exact
               path="/paciente/dashboard"
@@ -54,4 +54,3 @@ class App extends Component {
 }
 
 export default App;
-
