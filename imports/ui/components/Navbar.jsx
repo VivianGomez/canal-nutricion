@@ -29,6 +29,7 @@ class Navbar extends Component {
             nombre: res.nombre,
             usuario: res
           });
+          this.props.history.push('/paciente/dashboard');
         }
       }
     });
@@ -99,7 +100,7 @@ class Navbar extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-md navbar-light bg-light py-md-2">
+        <nav className="navbar navbar-expand-md navbar-dark bg-foohealli py-md-2">
           <div className="container">
             <Link to={'/'} style={{ textDecoration: 'none' }}>
               <div className="navbar-brand">

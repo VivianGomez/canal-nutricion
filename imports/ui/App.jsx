@@ -7,7 +7,7 @@ import Login from './components/Login.jsx';
 import Footer from './components/Footer.jsx';
 import DashboardDoctor from './doctor/DashboardDoctor.jsx';
 import DetailPaciente from './paciente/DetailPaciente.jsx';
-
+import DashboardPaciente from './paciente/DashboardPaciente.jsx';
 
 class App extends Component {
   render() {
@@ -17,16 +17,13 @@ class App extends Component {
         <div id="mainContainer" className="container container-fluid">
           <Switch>
             <Route exact path="/" component={Inicio} />
-            <Route
-              exact
-              path="/dashboardDoctor"
-              component={DashboardDoctor}
-            />
+            <Route exact path="/dashboardDoctor" component={DashboardDoctor} />
 
+            <Route exact path="/DetailPaciente" component={DetailPaciente} />
             <Route
               exact
-              path="/DetailPaciente"
-              component={DetailPaciente}
+              path="/paciente/dashboard"
+              component={DashboardPaciente}
             />
 
             <Route exact path="/registro" component={Registro} />
@@ -43,7 +40,6 @@ class App extends Component {
 }
 
 export default App;
-
 
 //            <Route
 //              exact
