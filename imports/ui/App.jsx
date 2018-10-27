@@ -5,7 +5,9 @@ import Inicio from './Inicio.jsx';
 import Registro from './components/Registro.jsx';
 import Login from './components/Login.jsx';
 import Footer from './components/Footer.jsx';
-import Doctor from './components/Doctor.jsx';
+import Doctor from './doctor/Doctor.jsx';
+import DetailPaciente from './doctor/DetailPaciente.jsx';
+
 
 class App extends Component {
   render() {
@@ -20,6 +22,13 @@ class App extends Component {
               path="/dashboardDoctor"
               component={Doctor}
             />
+
+            <Route
+              exact
+              path="/DetailPaciente"
+              component={DetailPaciente}
+            />
+
             <Route exact path="/registro" component={Registro} />
             <Route exact path="/login" component={Login} />
 

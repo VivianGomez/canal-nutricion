@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Link } from 'react-router-dom';
+import DetailPaciente from './DetailPaciente.jsx';
+
 
 class InfoPaciente extends Component {
   constructor(props) {
@@ -43,8 +46,9 @@ class InfoPaciente extends Component {
       );
   }
 
-  mostrarContenidoUsuario() {
+    mostrarContenidoUsuario() {
       return (
+        <Link to={'/DetailPaciente'} style={{ textDecoration: 'none' }}>
         <li className="list-group-item">
           <div className="row">
             <div className="col-md-9 col-12">
@@ -58,11 +62,12 @@ class InfoPaciente extends Component {
                 &nbsp;
                 {this.state.identificacion}
               </p>
-              <b className="foohealli-text">Contacto: </b>
+              <b className="text-warning">Contacto: </b>
               {this.mostrarContactoUsuario()}
             </div>
           </div>
         </li>
+        </Link>
       );
   }
 

@@ -56,7 +56,7 @@ class Doctor extends Component {
     return (
       <div id="pacientes-doctor" className="row">
         <div className="col-12">
-          <div className="bg-foohealli text-light">
+          <div className="bg-foohealli-green text-light">
             <br />
             <h3 className="text-center font-weight-bold">
               &nbsp;Tus Pacientes&nbsp;

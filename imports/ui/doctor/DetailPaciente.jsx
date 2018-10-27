@@ -13,7 +13,7 @@ class DetailPaciente extends Component {
 
   }
 
-  buscarContactoUsuario(idPaciente) {
+  buscarPaciente(idPaciente) {
     Meteor.call(
       'pacientes.buscarPaciente',
       { identificacion: idPaciente },
@@ -31,7 +31,11 @@ class DetailPaciente extends Component {
 
 
   render() {
-    return this.mostrarContenidoUsuario();
+    return (
+      <div className="row">
+            HOLA!
+      </div>
+    );
   }
 }
 
