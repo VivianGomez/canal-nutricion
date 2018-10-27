@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Link } from 'react-router-dom';
-
 
 class DetailPaciente extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      pacienteActual: null
+      identificacionP: props.match.params.identificacion,
+      paciente: null
     };
 
   }
 
-  buscarPaciente(idPaciente) {
+
+  buscarPaciente(identificacion) {
     Meteor.call(
       'pacientes.buscarPaciente',
-      { identificacion: idPaciente },
+      { identificacion: identificacion },
       (err, res) => {
         if (err) {
           alert(err.error);
         } else {
+          console.log(res);
           this.setState({
-            pacienteActual: res
+            paciente: res
           });
         }
       }
@@ -30,14 +31,27 @@ class DetailPaciente extends Component {
   }
 
 
+  renderMedicamentos() {
+    this.buscarPaciente(this.state.identificacionP);
+    console.log("EL PACIENTE", this.state.paciente);
+    let medicamentos = this.state.paciente.medicamentosAsignados;
+    return medicamentos.map(medicamento => (
+      <Medicamento
+        key={medicamento._id}
+        usuario={this.state.usuario}
+        medicamento={medicamento.medicamento}
+        posologia={medicamento.posologia}
+        frecuencia={medicamento.frecuencia}
+        cantidad={medicamento.cantidad}
+        via={medicamento.via}
+      />
+    ));
+  }
+
+
   render() {
-    return (
-      <div className="row">
-            HOLA!
-      </div>
-    );
+    return this.renderMedicamentos();
   }
 }
 
 export default DetailPaciente;
-

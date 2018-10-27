@@ -53,7 +53,7 @@ export default class Inicio extends Component {
           className="col-md-6 col-12 text-center mt-5"
         >
           <Link
-            to={'/dashboardDoctor'}
+            to={'/doctor/dashboardDoctor'}
             style={{ textDecoration: 'none' }}
           >
             <h5 className="mt-2 text-dark">Ver Pacientes</h5>

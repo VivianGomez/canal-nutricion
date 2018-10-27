@@ -18,9 +18,17 @@ class App extends Component {
         <div id="mainContainer" className="container container-fluid">
           <Switch>
             <Route exact path="/" component={Inicio} />
-            <Route exact path="/dashboardDoctor" component={DashboardDoctor} />
+            <Route
+              exact
+              path="/doctor/dashboardDoctor"
+              component={DashboardDoctor}
+            />
 
-            <Route exact path="/DetailPaciente" component={DetailPaciente} />
+            <Route
+              exact
+              path="/doctor/DetailPaciente/:identificacion"
+              component={DetailPaciente}
+             />
             <Route
               exact
               path="/paciente/dashboard"
@@ -47,8 +55,3 @@ class App extends Component {
 
 export default App;
 
-//            <Route
-//              exact
-//              path="/dashboardDoctor"
-//              component={Doctor}
-//            />

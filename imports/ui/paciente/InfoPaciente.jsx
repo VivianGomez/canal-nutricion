@@ -48,7 +48,7 @@ class InfoPaciente extends Component {
 
     mostrarContenidoUsuario() {
       return (
-        <Link to={'/DetailPaciente'} style={{ textDecoration: 'none' }}>
+        <Link to={'/doctor/DetailPaciente/'+ this.state.identificacion} style={{ textDecoration: 'none' }}>
         <li className="list-group-item">
           <div className="row">
             <div className="col-md-9 col-12">
