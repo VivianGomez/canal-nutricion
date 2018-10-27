@@ -5,8 +5,8 @@ import Inicio from './Inicio.jsx';
 import Registro from './components/Registro.jsx';
 import Login from './components/Login.jsx';
 import Footer from './components/Footer.jsx';
-import Doctor from './doctor/Doctor.jsx';
-import DetailPaciente from './doctor/DetailPaciente.jsx';
+import DashboardDoctor from './doctor/DashboardDoctor.jsx';
+import DetailPaciente from './paciente/DetailPaciente.jsx';
 
 
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
             <Route
               exact
               path="/dashboardDoctor"
-              component={Doctor}
+              component={DashboardDoctor}
             />
 
             <Route

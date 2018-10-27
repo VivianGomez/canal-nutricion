@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import InfoPaciente from './InfoPaciente.jsx';
+import InfoPaciente from '../paciente/InfoPaciente.jsx';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Pacientes } from '../../api/pacientes.js';
 import { withRouter } from 'react-router';
 
-class Doctor extends Component {
+class DashboardDoctor extends Component {
   constructor(props) {
     super(props);
 
@@ -73,7 +73,7 @@ class Doctor extends Component {
   }
 }
 
-Doctor = withRouter(Doctor);
+DashboardDoctor = withRouter(DashboardDoctor);
 
 export default withTracker(() => {
   console.log("subscribe pacientes");
@@ -81,5 +81,5 @@ export default withTracker(() => {
   return {
     pacientes: Pacientes.find({}).fetch()
   };
-})(Doctor);
+})(DashboardDoctor);
 
