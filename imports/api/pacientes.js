@@ -114,6 +114,20 @@ Meteor.methods({
         } catch (error) {
             throw new Meteor.Error(error);
         }
+    },
+    'pacientes.alimentosConsumidosFecha'({
+        correo,
+        fecha
+    }) {
+        check(correo, String);
+        check(fecha, String);
+
+        return Pacientes.find({
+            identificacion: identificacion,
+            "alimentosConsumidos": {
+                fechaConsumo: fecha
+            }
+        });
     }
 });
 

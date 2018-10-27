@@ -29,8 +29,9 @@ class Navbar extends Component {
             nombre: res.nombre,
             usuario: res
           });
-          this.props.history.push('/paciente/dashboard');
         }
+      } else {
+        this.props.history.push('/');
       }
     });
   }

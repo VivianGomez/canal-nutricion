@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import DetailPaciente from './DetailPaciente.jsx';
 
-
 class InfoPaciente extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +16,6 @@ class InfoPaciente extends Component {
       usuarioLogueado: this.props.usuarioLogueado,
       actualizar: false
     };
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,24 +29,25 @@ class InfoPaciente extends Component {
   }
 
   mostrarContactoUsuario() {
-      return (
-        <p>
-          <b>Celular: </b>
-          <a href={'tel:' + this.state.celular}>
-            {this.state.celular}
-            &nbsp;
-          </a>
-          <b>Correo: </b>
-          <a href={'mailto:' + this.state.correo}>
-            {this.state.correo}
-          </a>
-        </p>
-      );
+    return (
+      <p>
+        <b>Celular: </b>
+        <a href={'tel:' + this.state.celular}>
+          {this.state.celular}
+          &nbsp;
+        </a>
+        <b>Correo: </b>
+        <a href={'mailto:' + this.state.correo}>{this.state.correo}</a>
+      </p>
+    );
   }
 
-    mostrarContenidoUsuario() {
-      return (
-        <Link to={'/doctor/DetailPaciente/'+ this.state.identificacion} style={{ textDecoration: 'none' }}>
+  mostrarContenidoUsuario() {
+    return (
+      <Link
+        to={'/doctor/detailPaciente/' + this.state.identificacion}
+        style={{ textDecoration: 'none' }}
+      >
         <li className="list-group-item">
           <div className="row">
             <div className="col-md-9 col-12">
@@ -67,10 +66,9 @@ class InfoPaciente extends Component {
             </div>
           </div>
         </li>
-        </Link>
-      );
+      </Link>
+    );
   }
-
 
   render() {
     return this.mostrarContenidoUsuario();

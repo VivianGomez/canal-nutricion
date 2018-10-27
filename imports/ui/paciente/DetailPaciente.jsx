@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Medicamento } from './Medicamento.jsx';
 
 class DetailPaciente extends Component {
   constructor(props) {
@@ -9,9 +10,11 @@ class DetailPaciente extends Component {
       identificacionP: props.match.params.identificacion,
       paciente: null
     };
-
   }
 
+  componentDidMount() {
+    this.buscarPaciente(this.state.identificacionP);
+  }
 
   buscarPaciente(identificacion) {
     Meteor.call(
@@ -30,27 +33,28 @@ class DetailPaciente extends Component {
     );
   }
 
-
   renderMedicamentos() {
-    this.buscarPaciente(this.state.identificacionP);
-    console.log("EL PACIENTE", this.state.paciente);
-    let medicamentos = this.state.paciente.medicamentosAsignados;
-    return medicamentos.map(medicamento => (
-      <Medicamento
-        key={medicamento._id}
-        usuario={this.state.usuario}
-        medicamento={medicamento.medicamento}
-        posologia={medicamento.posologia}
-        frecuencia={medicamento.frecuencia}
-        cantidad={medicamento.cantidad}
-        via={medicamento.via}
-      />
-    ));
+    if (this.state.paciente) {
+      let medicamentos = this.state.paciente.medicamentosAsignados;
+      return medicamentos.map(medicamento => (
+        //   // <Medicamento
+        //   //   key={medicamento._id}
+        //   //   // usuario={this.state.usuario}
+        //   //   medicamento={medicamento.medicamento}
+        //   //   // posologia={medicamento.posologia}
+        //   //   // frecuencia={medicamento.frecuencia}
+        //   //   // cantidad={medicamento.cantidad}
+        //   //   // via={medicamento.via}
+        //   // />
+        <h1 key={medicamento._id}>{medicamento.medicamento}</h1>
+      ));
+    } else {
+      return <h1>Cargando medicamentos...</h1>;
+    }
   }
 
-
   render() {
-    return this.renderMedicamentos();
+    return <div>{this.renderMedicamentos()}</div>;
   }
 }
 
