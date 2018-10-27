@@ -62,7 +62,7 @@ class InfoPaciente extends Component {
                 &nbsp;
                 {this.state.identificacion}
               </p>
-              <b className="text-warning">Contacto: </b>
+              <b className="foohealli-text">Contacto: </b>
               {this.mostrarContactoUsuario()}
             </div>
           </div>
