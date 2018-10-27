@@ -9,15 +9,12 @@ class InfoPaciente extends Component {
       paciente: this.props.paciente,
       nombre: this.props.nombre,
       identificacion: this.props.identificacion,
-      celular: this.props.celular,
       correo: this.props.correo,
+      celular: this.props.celular,
       usuarioLogueado: this.props.usuarioLogueado,
       actualizar: false
     };
-    
-    this.toggleFormActualizarMedicamento = this.toggleFormActualizarMedicamento.bind(this);
-    this.actualizarEstadoInput = React.createRef();
-    
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,8 +22,8 @@ class InfoPaciente extends Component {
       paciente: nextProps.paciente,
       nombre: nextProps.nombre,
       identificacion: nextProps.identificacion,
-      celular: nextProps.celular,
       correo: nextProps.correo,
+      celular: nextProps.celular
     });
   }
 
@@ -35,12 +32,12 @@ class InfoPaciente extends Component {
         <p>
           <b>Celular: </b>
           <a href={'tel:' + this.state.celular}>
-            {this.state.usuario.celular}
+            {this.state.celular}
             &nbsp;
           </a>
           <b>Correo: </b>
           <a href={'mailto:' + this.state.correo}>
-            {this.state.usuario.correo}
+            {this.state.correo}
           </a>
         </p>
       );
@@ -61,7 +58,7 @@ class InfoPaciente extends Component {
                 &nbsp;
                 {this.state.identificacion}
               </p>
-              <b className="text-warning">Contacto: </b>
+              <b className="foohealli-text">Contacto: </b>
               {this.mostrarContactoUsuario()}
             </div>
           </div>

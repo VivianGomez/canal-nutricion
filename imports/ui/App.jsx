@@ -5,16 +5,21 @@ import Inicio from './Inicio.jsx';
 import Registro from './components/Registro.jsx';
 import Login from './components/Login.jsx';
 import Footer from './components/Footer.jsx';
-//import Doctor from './components/Doctor.jsx';
+import Doctor from './components/Doctor.jsx';
 
 class App extends Component {
   render() {
     return (
       <div>
         <Navbar />
-        <div id="mainContainer" className="container container-fluid mt-3">
+        <div id="mainContainer" className="container container-fluid">
           <Switch>
             <Route exact path="/" component={Inicio} />
+            <Route
+              exact
+              path="/dashboardDoctor"
+              component={Doctor}
+            />
             <Route exact path="/registro" component={Registro} />
             <Route exact path="/login" component={Login} />
 

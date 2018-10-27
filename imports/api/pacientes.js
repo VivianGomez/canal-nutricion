@@ -13,27 +13,15 @@ import {
 
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
-const cryptr = new Cryptr(process.env.CODE_CRYPTR);
 
 export const Pacientes = new Mongo.Collection('pacientes');
-
-//if (Meteor.isServer) {
-
-//    Meteor.publish('pacientes.identificacion', function pacientesPublication(identificacion) {
-//        return Pacientes.find({
-//            identificacion: identificacion
-//        });
-//    });
-//}
 
 
 if (Meteor.isServer) {
     console. log("ENTRA COMO SERVER", process.env.CODE_CRYPTR);
+    const cryptr = new Cryptr(process.env.CODE_CRYPTR);
 
     Meteor.publish('pacientes', function pacientesPublication(token) {
-
-    console. log("PUBLISH", process.env.CODE_CRYPTR);
-    console. log("hiii");
 
         let usuario = decodificarToken(token);
 
@@ -90,9 +78,58 @@ Meteor.methods({
         let token = jwt.sign(paciente, process.env.CODE_TOKEN);
 
         return token;
+    },
+    'pacientes.insertarMedicamentos'({
+        idPaciente,
+        nuevoMedicamento,
+        usuario
+    }) {
+        check(idPaciente, String);
+        check(nuevoMedicamento, Object);
+        check(usuario, Object);
+
+        verificarPermisos(usuario.rol);
+
+        const paciente = Pacientes.findOne({
+            idPaciente: idPaciente
+        });
+
+        verificarExistenciaPaciente(paciente);
+        let fecha = moment().format('DD/MM/YYYY - h:mm:ss a');
+
+        try {
+            Pacientes.update({
+                idPaciente: idPaciente
+            }, { $addToSet: { medicamentosAsignados: {
+                id: nuevoMedicamento._id, 
+                medicamento: nuevoMedicamento.medicamento,
+                posologia: nuevoMedicamento.posologia,
+                frecuencia: nuevoMedicamento.frecuencia,
+                cantidad: nuevoMedicamento.cantidad,
+                via: nuevoMedicamento.via,
+                fechaInicio: fecha
+               }}}
+            );
+
+            return "El medicamento " + nuevoMedicamento.nombre + " se actualizó correctamente";
+        } catch (error) {
+            throw new Meteor.Error(error);
+        }
     }
 });
 
 function decodificarToken(token) {
     return token ? jwt.verify(token, process.env.CODE_TOKEN) : null;
+}
+
+function verificarPermisos(rol) {
+    if (rol !== "doctor") {
+        throw new Meteor.Error('No se encuentra autorizado para realizar esta acción');
+    }
+}
+
+function verificarExistenciaPaciente(paciente) {
+    if (!paciente) {
+        throw new Meteor.Error('No se encuentra el paciente.');
+    }
 }

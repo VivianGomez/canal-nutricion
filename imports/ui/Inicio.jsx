@@ -10,6 +10,7 @@ export default class Inicio extends Component {
       token: localStorage.getItem('foohealliStuff'),
       doctor: false,
       usuario: null,
+      logueado: false,
       cargando: true
     };
   }
@@ -23,11 +24,13 @@ export default class Inicio extends Component {
           this.setState({
             doctor: true,
             usuario: res,
+            logueado: true,
             cargando: false
           });
         } else {
           this.setState({
             usuario: res,
+            logueado: true,
             cargando: false
           });
         }
@@ -60,7 +63,6 @@ export default class Inicio extends Component {
     } else {
       opciones.push(
         <div>
-        HOLA!
         </div>
       );
     }
@@ -69,10 +71,33 @@ export default class Inicio extends Component {
   }
 
 
+verInicio() {
+    if (!this.state.logueado) {
+      <h3 id="transbox" className="text-options">Para comenzar inicia sesión</h3>
+    } else{
+      return (
+        <h3 id="transbox" className="text-options">Elige una opción</h3>
+      );
+    }
+  }
+
   render() {
       return (
-        <div>
-          <div className="row">{this.mostrarOpciones()}</div>
+        <div >
+            <header id="homeR">
+              <div className="container-fluid">
+                <center>
+                  <h1 >¡Bienvenido a Foohealli!</h1>
+                  {this.verInicio()}
+                </center>
+                <img
+                    src="fondo.jpg"
+                    className="img-fluid"
+                    alt="banner foohealli"
+                  />
+              </div>
+            </header>
+            <div className="row">{this.mostrarOpciones()}</div>
         </div>
       );
   }

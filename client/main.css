@@ -9,6 +9,27 @@ html {
   height: 100%;
 }
 
+#header-site{
+  background:  url('./fondo.jpg');
+  background-size: 100%  auto;
+  background-repeat: no-repeat;
+}
+
+#transbox {
+  height: 100%;
+  width: 100%;
+  background-color: #9ff581;
+  opacity: .5;
+}
+
+.foohealli-text-green {
+  color: #9ff581;
+}
+
+.foohealli-text {
+  color: #f45454;
+}
+
 .foohealli-footer {
   background-color: #f45454;
 }
@@ -19,6 +40,10 @@ html {
 
 .bg-foohealli {
   background-color: #f45454;
+}
+
+.bg-foohealli-green {
+  background-color: #9ff581;
 }
 
 

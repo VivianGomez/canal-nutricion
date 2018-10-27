@@ -46,8 +46,8 @@ class Doctor extends Component {
         paciente={paciente}
         nombre= {paciente.nombre}
         identificacion= {paciente.identificacion}
-        celular= {paciente.celular}
         correo= {paciente.correo}
+        celular= {paciente.celular}
       />
     ));
   }
