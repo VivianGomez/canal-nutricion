@@ -7,21 +7,14 @@ import {
 import {
     check
 } from 'meteor/check';
-import {
-    Match
-} from 'meteor/check';
 
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
-//const cryptr = new Cryptr(process.env.CODE_CRYPTR);
+const cryptr = new Cryptr('1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FAF5F3E0460C9');
 
 export const Pacientes = new Mongo.Collection('pacientes');
 
-
 if (Meteor.isServer) {
-    console. log("ENTRA COMO SERVER", process.env.CODE_CRYPTR);
-    const cryptr = new Cryptr(process.env.CODE_CRYPTR);
-
     Meteor.publish('pacientes', function pacientesPublication(token) {
 
         let usuario = decodificarToken(token);
@@ -70,6 +63,8 @@ Meteor.methods({
             throw new Meteor.Error('No existe un usuario con ese correo.');
         } else {
             if (cryptr.decrypt(paciente.clave) !== clave) {
+                console.log(paciente.clave);
+                console.log(clave);
                 throw new Meteor.Error('La contraseña ingresada no es correcta.');
             }
         }
@@ -101,16 +96,19 @@ Meteor.methods({
         try {
             Pacientes.update({
                 idPaciente: idPaciente
-            }, { $addToSet: { medicamentosAsignados: {
-                id: nuevoMedicamento._id, 
-                medicamento: nuevoMedicamento.medicamento,
-                posologia: nuevoMedicamento.posologia,
-                frecuencia: nuevoMedicamento.frecuencia,
-                cantidad: nuevoMedicamento.cantidad,
-                via: nuevoMedicamento.via,
-                fechaInicio: fecha
-               }}}
-            );
+            }, {
+                $addToSet: {
+                    medicamentosAsignados: {
+                        id: nuevoMedicamento._id,
+                        medicamento: nuevoMedicamento.medicamento,
+                        posologia: nuevoMedicamento.posologia,
+                        frecuencia: nuevoMedicamento.frecuencia,
+                        cantidad: nuevoMedicamento.cantidad,
+                        via: nuevoMedicamento.via,
+                        fechaInicio: fecha
+                    }
+                }
+            });
 
             return "El medicamento " + nuevoMedicamento.nombre + " se actualizó correctamente";
         } catch (error) {

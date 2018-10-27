@@ -7,7 +7,7 @@ import Login from './components/Login.jsx';
 import Footer from './components/Footer.jsx';
 import DashboardDoctor from './doctor/DashboardDoctor.jsx';
 import DetailPaciente from './paciente/DetailPaciente.jsx';
-
+import DashboardPaciente from './paciente/DashboardPaciente.jsx';
 
 class App extends Component {
   render() {
@@ -27,6 +27,11 @@ class App extends Component {
               exact
               path="/doctor/DetailPaciente/:identificacion"
               component={DetailPaciente}
+             />
+            <Route
+              exact
+              path="/paciente/dashboard"
+              component={DashboardPaciente}
             />
 
             <Route exact path="/registro" component={Registro} />
@@ -43,3 +48,4 @@ class App extends Component {
 }
 
 export default App;
+
