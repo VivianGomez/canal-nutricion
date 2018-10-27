@@ -13,6 +13,7 @@ import {
 
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
+//const cryptr = new Cryptr(process.env.CODE_CRYPTR);
 
 export const Pacientes = new Mongo.Collection('pacientes');
 

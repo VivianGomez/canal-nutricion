@@ -19,13 +19,13 @@ class App extends Component {
             <Route exact path="/" component={Inicio} />
             <Route
               exact
-              path="/dashboardDoctor"
+              path="/doctor/dashboardDoctor"
               component={DashboardDoctor}
             />
 
             <Route
               exact
-              path="/DetailPaciente"
+              path="/doctor/DetailPaciente/:identificacion"
               component={DetailPaciente}
             />
 
@@ -43,10 +43,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-//            <Route
-//              exact
-//              path="/dashboardDoctor"
-//              component={Doctor}
-//            />
