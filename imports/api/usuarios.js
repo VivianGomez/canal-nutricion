@@ -13,7 +13,7 @@ import {
 
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
-const cryptr = new Cryptr(process.env.CODE_CRYPTR);
+const cryptr = new Cryptr('1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FAF5F3E0460C9');
 
 export const Usuarios = new Mongo.Collection('usuarios');
 
