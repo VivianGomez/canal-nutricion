@@ -10,6 +10,9 @@ import {
 import {
     Doctores
 } from './doctores';
+import {
+    Nutricionistas
+} from './nutricionistas';
 
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
@@ -54,6 +57,12 @@ Meteor.methods({
                 Doctores.insert(
                     usuario
                 );
+            } else if (rol === 'nutricionista') {
+                usuario.nutricionistas = [];
+
+                Nutricionistas.insert(
+                    usuario
+                );
             }
 
             return true;
@@ -80,6 +89,10 @@ Meteor.methods({
                 });
             } else if (usuario.rol === 'doctor') {
                 nUsuario = Doctores.findOne({
+                    _id: usuario._id
+                });
+            } else if (usuario.rol === 'nutricionista') {
+                nUsuario = Nutricionistas.findOne({
                     _id: usuario._id
                 });
             }

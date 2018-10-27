@@ -53,10 +53,26 @@ class Login extends Component {
           }
         }
       );
+    } else if (this.state.rol === 'nutricionista') {
+      Meteor.call(
+        'nutricionistas.validarNutricionista',
+        {
+          correo: this.correoInput.current.value,
+          clave: this.claveInput.current.value
+        },
+        (err, res) => {
+          if (err) {
+            alert(err.error);
+          } else {
+            localStorage.setItem('foohealliStuff', res);
+            window.location.reload();
+          }
+        }
+      );
     }
   }
 
-  cargarBotonRol() {
+   cargarBotonRol() {
     if (this.state.rol === 'paciente') {
       return (
         <button
@@ -69,6 +85,17 @@ class Login extends Component {
         </button>
       );
     } else if (this.state.rol === 'doctor') {
+      return (
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => this.cambiarRolIngreso('nutricionista')}
+        >
+          <i className="fas fa-user" />
+          &nbsp;Soy nutricionista
+        </button>
+      );
+    } else if (this.state.rol === 'nutricionista') {
       return (
         <button
           type="button"
@@ -124,6 +151,8 @@ class Login extends Component {
                 </span>
               </button>
             </div>
+               Estoy ingresando a foohealli como <b>{this.state.rol}</b> 
+              <hr/>
             <div className="modal-body">
               <form onSubmit={this.handleSubmit.bind(this)}>
                 <div className="form-group">
@@ -173,6 +202,10 @@ class Login extends Component {
                 </span>
               </p>
               <hr />
+
+              <h6 className="text-center">
+              Cambiar mi rol
+              </h6>
               <div className="text-center">{this.cargarBotonRol()}</div>
             </div>
           </div>

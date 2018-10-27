@@ -72,6 +72,20 @@ class Registro extends Component {
                 }
               }
             );
+          } else if (rol === 'nutricionista') {
+            Meteor.call(
+              'nutricionistas.validarNutricionista',
+              { correo, clave },
+              (err, res) => {
+                if (err) {
+                  console.log(err);
+                  alert(err.error);
+                } else {
+                  localStorage.setItem('foohealliStuff', res);
+                  window.location.reload();
+                }
+              }
+            );
           }
         }
       }
@@ -110,6 +124,7 @@ class Registro extends Component {
               >
                 <option value="paciente">Soy un Paciente motivado</option>
                 <option value="doctor">Soy un Doctor excelente</option>
+                <option value="nutricionista">Soy un Nutricionista excelente</option>
               </select>
             </div>
             <div className="form-group">
