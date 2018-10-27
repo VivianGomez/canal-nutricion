@@ -33,6 +33,7 @@ class Login extends Component {
             alert(err.error);
           } else {
             localStorage.setItem('foohealliStuff', res);
+            this.props.history.push('/paciente/dashboard');
             window.location.reload();
           }
         }

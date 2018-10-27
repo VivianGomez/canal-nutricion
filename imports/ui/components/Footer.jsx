@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class Footer extends Component {
   render() {
     return (
-      <footer className="footer raleway f-18 text-white foohealli-footer">
-        <div className="container container-fluid foohealli-footer">
+      <footer className="footer raleway f-18 text-white bg-foohealli">
+        <div className="container container-fluid bg-foohealli">
           <div className="row">
             <div className="col-12" id="desarrollado">
               <p className="text-center font-weight-bold text-light">

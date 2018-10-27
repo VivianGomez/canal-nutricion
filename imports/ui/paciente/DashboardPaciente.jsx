@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
 class DashboardPaciente extends Component {
@@ -34,16 +35,23 @@ class DashboardPaciente extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-12 mt-5" />
+        <div className="col-12 text-center mt-4 mb-4">
+          <h1 className="foohealli-text-yellow">¡Bienvenido!</h1>
+        </div>
         <div className="col-md-2" />
         <div className="col-md-4 mb-3">
-          <div class="card">
-            <img
-              class="card-img-top pointer img-paciente"
-              src="../paciente/logoAlimentosConsumidos.jpeg"
-              alt="Card image cap"
-            />
-          </div>
+          <Link
+            to={'/paciente/alimentosConsumidos'}
+            style={{ textDecoration: 'none' }}
+          >
+            <div class="card">
+              <img
+                class="card-img-top pointer img-paciente"
+                src="../paciente/logoAlimentosConsumidos.jpeg"
+                alt="Card image cap"
+              />
+            </div>
+          </Link>
         </div>
         <div className="col-md-4 mb-3">
           <div class="card">

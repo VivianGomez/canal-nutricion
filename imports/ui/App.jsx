@@ -8,6 +8,7 @@ import Footer from './components/Footer.jsx';
 import DashboardDoctor from './doctor/DashboardDoctor.jsx';
 import DetailPaciente from './paciente/DetailPaciente.jsx';
 import DashboardPaciente from './paciente/DashboardPaciente.jsx';
+import AlimentosConsumidos from './paciente/AlimentosConsumidos.jsx';
 
 class App extends Component {
   render() {
@@ -24,6 +25,11 @@ class App extends Component {
               exact
               path="/paciente/dashboard"
               component={DashboardPaciente}
+            />
+            <Route
+              exact
+              path="/paciente/alimentosConsumidos"
+              component={AlimentosConsumidos}
             />
 
             <Route exact path="/registro" component={Registro} />
