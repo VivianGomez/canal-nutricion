@@ -151,9 +151,9 @@ class Login extends Component {
                 </span>
               </button>
             </div>
-               Estoy ingresando a foohealli como <b>{this.state.rol}</b> 
-              <hr/>
             <div className="modal-body">
+              Estoy ingresando a foohealli como <b>{this.state.rol}</b> 
+              <hr/>
               <form onSubmit={this.handleSubmit.bind(this)}>
                 <div className="form-group">
                   <label htmlFor="loginInputCorreo">
@@ -202,7 +202,8 @@ class Login extends Component {
                 </span>
               </p>
               <hr />
-
+               Estoy ingresando a foohealli como <b>{this.state.rol}</b> 
+              <hr/>
               <h6 className="text-center">
               Cambiar mi rol
               </h6>
