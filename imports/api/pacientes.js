@@ -75,45 +75,79 @@ Meteor.methods({
 
         return token;
     },
-    'pacientes.insertarMedicamentos'({
+    'pacientes.removerMedicamento'({
         idPaciente,
-        nuevoMedicamento,
+        medicamentoNombre,
         usuario
     }) {
         check(idPaciente, String);
-        check(nuevoMedicamento, Object);
+        check(medicamentoNombre, String);
         check(usuario, Object);
 
         verificarPermisos(usuario.rol);
 
         const paciente = Pacientes.findOne({
-            idPaciente: idPaciente
+            identificacion: identificacion
         });
 
         verificarExistenciaPaciente(paciente);
-        let fecha = moment().format('DD/MM/YYYY - h:mm:ss a');
 
         try {
             Pacientes.update({
-                idPaciente: idPaciente
+                identificacion: identificacion
             }, {
-                $addToSet: {
-                    medicamentosAsignados: {
-                        id: nuevoMedicamento._id,
-                        medicamento: nuevoMedicamento.medicamento,
-                        posologia: nuevoMedicamento.posologia,
-                        frecuencia: nuevoMedicamento.frecuencia,
-                        cantidad: nuevoMedicamento.cantidad,
-                        via: nuevoMedicamento.via,
-                        fechaInicio: fecha
-                    }
+                $pull: {
+                    medicamentosAsignados: {medicamento: medicamentoNombre}
                 }
             });
 
-            return "El medicamento " + nuevoMedicamento.nombre + " se actualizó correctamente";
+            return "El medicamento " + medicamentoNombre + " se eliminó correctamente";
         } catch (error) {
-            throw new Meteor.Error(error);
+            throw new Meteor.Error("Se presentó un error eliminando el medicamento " + medicamentoNombre);
         }
+
+    },
+    'pacientes.agregarMedicamento'({
+        identificacionP,
+        medicamentoP,
+        posologiaP,
+        frecuenciaP,
+        cantidadP,
+        viaP,
+        usuario
+    }) {
+        check(identificacionP, String);
+        check(medicamentoP, String);
+        check(posologiaP, String);
+        check(frecuenciaP, String);
+        check(cantidadP, String);
+        check(viaP, String);
+        check(usuario, Object);
+
+        verificarPermisos(usuario.rol);
+
+        try {
+            Pacientes.update({
+                identificacion: identificacionP
+            }, {
+                $addToSet: {
+                    medicamentosAsignados: {
+                        medicamento: medicamentoP,
+                        posologia: posologiaP,
+                        frecuencia: frecuenciaP,
+                        cantidad: cantidadP,
+                        via:viaP,
+                        fechaInicio: moment().format('DD/MM/YYYY - h:mm:ss a')
+                    }
+                }
+            });
+            console.log("AGREGA");
+
+            return "El medicamento " + medicamentoP + " se agregó correctamente";
+        } catch (error) {
+            throw new Meteor.Error("Se presentó un error agregando el medicamento " + medicamentoP +", error: "+ error);
+        }
+
     },
     'pacientes.alimentosConsumidosFecha'({
         correo,
