@@ -76,11 +76,11 @@ Meteor.methods({
         return token;
     },
     'pacientes.removerMedicamento'({
-        idPaciente,
+        identificacion,
         medicamentoNombre,
         usuario
     }) {
-        check(idPaciente, String);
+        check(identificacion, String);
         check(medicamentoNombre, String);
         check(usuario, Object);
 
@@ -148,6 +148,41 @@ Meteor.methods({
             throw new Meteor.Error("Se presentó un error agregando el medicamento " + medicamentoP +", error: "+ error);
         }
 
+    },
+    'pacientes.actualizarMedicamento'({
+        identificacionP,
+        medicamentoP,
+        posologiaP,
+        frecuenciaP,
+        cantidadP,
+        usuario
+    }) {
+        check(identificacionP, String);
+        check(medicamentoP, String);
+        check(posologiaP, String);
+        check(frecuenciaP, String);
+        check(cantidadP, String);
+        check(usuario, Object);
+
+        verificarPermisos(usuario.rol);
+
+        try {
+            Pacientes.updateOne({
+                identificacion: identificacionP,
+                "medicamentosAsignados.medicamento" : medicamentoP 
+            }, {
+                $set: {
+                    
+                    "medicamentosAsignados.$.posologia": posologiaP,
+                    "medicamentosAsignados.$.frecuencia": frecuenciaP,
+                    "medicamentosAsignados.$.cantidad": cantidadP
+                }
+            });
+
+            return "El medicamento " + medicamentoP + " se actualizó correctamente";
+        } catch (error) {
+            throw new Meteor.Error(error);
+        }
     },
     'pacientes.alimentosConsumidosFecha'({
         correo,

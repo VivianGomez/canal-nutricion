@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Medicamento } from './Medicamento.jsx';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Pacientes } from '../../api/pacientes.js';
-import { withRouter } from 'react-router';
+import Med from './Med.jsx';
+
 
 class DetailPaciente extends Component {
   constructor(props) {
@@ -72,26 +70,34 @@ renderMedicamentos() {
       console.log("MEDICAMENTOS", this.state.medicamentos);
       return this.state.medicamentos.map(medicamento => (
         //<Medicamento
-        // key={medicamento._id}
+        //key={medicamento._id}
+        // medicamento={medicamento}
+        // identificacionP={this.state.identificacionP}
+        //           doctor={this.state.doctor}
         //   //   // usuario={this.state.usuario}
-        // medicamento={medicamento.medicamento}
-        //   //   // posologia={medicamento.posologia}
-        //   //   // frecuencia={medicamento.frecuencia}
-        //   //   // cantidad={medicamento.cantidad}
-        //   //   // via={medicamento.via}
         // />
-        <li key={medicamento._id} className="list-group-item">
-         <div className="row">
+      <li key={medicamento._id} className="list-group-item">
+        <div className="row">
           <div className="col-lg-9 col-md-8 col-12">
             <p>
-              {medicamento.medicamento}
+              <i className="fas fa-tablets foohealli-text"></i>
+              &nbsp;&nbsp;{medicamento.medicamento}
               <br />
-              {/* <b>posologia: </b>
-              {this.state.posologia} */}
+              <b>Posologia: </b>
+              {medicamento.posologia}
+              <br />
+              <b>Frecuencia: </b>
+              {medicamento.frecuencia}
+              <br />
+              <b>Cantidad a tomar: </b>
+              {medicamento.cantidad}
+              <br />
+              <b>Via: </b>
+              {medicamento.via}
             </p>
           </div>
-         </div>
-        </li>
+        </div>
+      </li>
       ));
     } else {
       return <h1>Cargando medicamentos...</h1>;
@@ -235,7 +241,7 @@ renderMedicamentos() {
         <button
           key="botonAgregarMedicamento"
           type="button"
-          className="btn btn-foohealli mr-2 mb-2"
+          className="btn btn-foohealli-green mr-2 mb-2"
           onClick={this.toggleFormAgregarMedicamentos}
         >
           <i className="fas fa-plus" />
@@ -254,11 +260,12 @@ renderMedicamentos() {
       <div id="medicamentosPaciente" className="row">
         <div className="col-12">
           <hr/>
-          <div className="bg-foohealli-green text-light">
+          <div className="bg-foohealli text-light">
             <br />
-            <h3 className="text-center font-weight-bold">
+            <h2 className="text-center font-weight-bold">
+              <i class="fas fa-pills"></i>
               &nbsp;Medicamentos asignados&nbsp;
-            </h3>
+            </h2>
             <br />
           </div>
           <hr />
@@ -275,12 +282,4 @@ renderMedicamentos() {
   }
 }
 
-DetailPaciente = withRouter(DetailPaciente);
-
-export default withTracker(() => {
-  console.log("subscribe pacientes");
-  Meteor.subscribe('pacientes', localStorage.getItem('foohealliStuff'));
-  return {
-    pacientes: Pacientes.find({}).fetch()
-  };
-})(DetailPaciente);
+export default (DetailPaciente);

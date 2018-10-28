@@ -5,15 +5,11 @@ class Medicamento extends Component {
     super(props);
 
     this.state = {
-      idPaciente: this.props.idPaciente,
-      // id: this.props.key,
+      identificacionP: this.props.identificacionP,
+      id: this.props.key,
       medicamento: this.props.medicamento,
-      // posologia:this.props.posologia,
-      // frecuencia:this.props.frecuencia,
-      // cantidad:this.props.cantidad,
-      // via:this.props.via,
       usuario: this.props.usuario,
-      //doctor:   this.props.doctor,
+      doctor:   this.props.doctor,
       actualizar: false
     };
 
@@ -27,30 +23,23 @@ class Medicamento extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      idPaciente: nextPropss.idPaciente,
-      // id: nextProps.key,
+      identificacionP: nextPropss.identificacionP,
+      id: nextProps.key,
       medicamento: nextProps.medicamento,
-      // posologia: nextProps.posologia,
-      // frecuencia: nextProps.frecuencia,
-      // cantidad: nextProps.cantidad,
-      // via: nextProps.via
       usuario: nextProps.usuario,
-      //admin: nextProps.admin,
+      doctor: nextProps.doctor,
     });
   }
 
-
-  // Funciones Meteor
-
   eliminarMedicamento() {
-    let confirmar = confirm('¿Está seguro que desea borrar esta asignación?');
+    let confirmar = confirm('¿Está seguro que desea borrar este medicamento?');
     if (confirmar) {
       Meteor.call(
         'pacientes.removerMedicamento',
         {
 
-          idPaciente: this.state.idPaciente,
-          medicamentoNombre: this.state.medicamento,
+          identificacion: this.state.identificacionP,
+          medicamentoNombre: this.state.medicamento.medicamento,
           usuario: this.state.usuario
         },
         (err, res) => {
@@ -64,23 +53,22 @@ class Medicamento extends Component {
     }
   }
 
-  // Manejadores de eventos
   handleActualizarMedicamentoSubmit(event) {
     event.preventDefault();
     const posologia = this.posologiaActualizarInput.current.value;
     const frecuencia = this.frecuenciaActualizarInput.current.value;
     const cantidad= Number(this.cantidadActualizarInput.current.value);
     if (
-      posologia === this.state.posologia &&
-      frecuencia === this.state.frecuencia &&
-      cantidad === this.state.cantidad
+      posologia === this.state.medicamento.posologia &&
+      frecuencia === this.state.medicamento.frecuencia &&
+      cantidad === this.state.medicamento.cantidad
     ) {
       alert('Los valores del medicamento no han cambiado');
     } else {
       Meteor.call(
         'pacientes.actualizarMedicamento',
         {
-          idAsignacion: this.state.asignacion.idAsignacion,
+          identificacion: this.state.identificacionP,
           posologia: posologia,
           frecuencia: frecuencia,
           cantidad: cantidad,
@@ -120,7 +108,7 @@ class Medicamento extends Component {
               <input
                 type="text"
                 className="form-control"
-                id="posologiaInput"
+                id={"posologiaInput"+ this.state.medicamento._id}
                 ref={this.posologiaActualizarInput}
                 minLength="10"
                 required
@@ -132,7 +120,7 @@ class Medicamento extends Component {
               <input
                 type="text"
                 className="form-control"
-                id="frecuenciaInput"
+                id={"frecuenciaInput"+ this.state.medicamento._id}
                 ref={this.frecuenciaActualizarInput}
                 minLength="1"
                 required
@@ -142,7 +130,7 @@ class Medicamento extends Component {
             <div className="form-group">
               <label htmlFor="cantidadInput">Cantidad</label>
               <input
-                id="cantidadInput"
+                id={"cantidadInput"+ this.state.medicamento._id}
                 className="form-control"
                 type="number"
                 ref={this.cantidadActualizarInput}
@@ -178,7 +166,6 @@ class Medicamento extends Component {
           onClick={this.toggleFormActualizarMedicamento.bind(this)}
         >
           <i className="far fa-edit" />
-          &nbsp;Editar medicamento
         </button>
       );
     }
@@ -187,7 +174,7 @@ class Medicamento extends Component {
     opcionesDoctor() {
     let doctor = [];
 
-      admin.push(
+      doctor.push(
         <div
           key="habilidadesEdicionAdmin"
           className="col-md-6 text-right col-12"
@@ -199,12 +186,11 @@ class Medicamento extends Component {
             onClick={this.eliminarMedicamento.bind(this)}
           >
             <i className="fas fa-trash-alt" />
-            &nbsp;Borrar medicamento
           </button>
         </div>
       );
     
-    return admin;
+    return doctor;
   }
 
   render() {

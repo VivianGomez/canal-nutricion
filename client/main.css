@@ -42,11 +42,17 @@ html {
   background-color: #9ff581;
 }
 
+.btn-foohealli-green {
+  color: white;
+  background-color: #9ff581;
+  border-color: #9ff581;
+}
+
 
 .btn-foohealli {
   color: white;
-  background-color: #f45454;
-  border-color: #f45454;
+  background-color: #9ff581;
+  border-color: #9ff581;
 }
 
 .btn-foohealli:hover {
