@@ -115,7 +115,7 @@ export default class Inicio extends Component {
                 ¡Bienvenido a Foohealli!
           </h1>
             <span>Foohealli es una applicación que busca que mejorar la comunicanicación entre médicos, nutricionistas  y  pacientes
-                  con el fin de lograr tratamientos nitricionales exitosos. 
+                  con el fin de lograr tratamientos nutricionales exitosos. 
             </span>
             <center>
 
