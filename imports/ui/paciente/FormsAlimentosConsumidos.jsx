@@ -46,6 +46,9 @@ class FormsAlimentosConsumidos extends Component {
         } else {
           alert(res);
           this.reiniciarValores();
+          this.porcionDeComidaInput.value = '';
+          this.tipoComidaInput.value = '';
+          document.getElementById('formRegistroAlimentos').reset();
           document.getElementById('butonCerrarModalAlimentos').click();
         }
       }
@@ -198,13 +201,17 @@ class FormsAlimentosConsumidos extends Component {
               <p className="small">
                 Al seleccionar una comida podrás registrarla.
               </p>
-              <form onSubmit={this.handleSubmit.bind(this)}>
+              <form
+                id="formRegistroAlimentos"
+                onSubmit={this.handleSubmit.bind(this)}
+              >
                 <div className="form-group">
                   <label htmlFor="tipoComidaInput">
                     <b>Tipo de comida</b>
                   </label>
                   <select
                     type="text"
+                    name="tipoComida"
                     className="form-control"
                     id="tipoComidaInput"
                     ref={this.tipoComidaInput}
@@ -222,6 +229,7 @@ class FormsAlimentosConsumidos extends Component {
                   </label>
                   <input
                     type="number"
+                    name="porcionComida"
                     className="form-control"
                     id="porcionComidaInput"
                     ref={this.porcionDeComidaInput}
