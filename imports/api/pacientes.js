@@ -224,12 +224,18 @@ Meteor.methods({
         identificacion,
         alimento,
         porcion,
-        tipoComida
+        tipoComida,
+        fechaConsumo
     }) {
         check(identificacion, String);
         check(alimento, Object);
         check(porcion, Number);
         check(tipoComida, String);
+
+        let anio = fechaConsumo.getUTCFullYear().toString();
+        fechaConsumo = fechaConsumo.toString();
+        fechaConsumo = fechaConsumo.substring(0, fechaConsumo.indexOf(anio) + anio.length);
+
         try {
             Pacientes.update({
                 identificacion: identificacion
@@ -241,7 +247,7 @@ Meteor.methods({
                         alimento: alimento.name,
                         porcionConsumidaGramos: porcion,
                         tipoComida: tipoComida,
-                        fechaConsumo: moment().format('ddd MMM D YYYY')
+                        fechaConsumo: fechaConsumo
                     }
                 }
             });

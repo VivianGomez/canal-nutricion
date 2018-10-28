@@ -2,43 +2,60 @@ import React, { Component } from 'react';
 import Emoji from 'react-emoji-render';
 import { Meteor } from 'meteor/meteor';
 import axios from 'axios';
+import DatePicker from 'react-date-picker';
 
 class FormsAlimentosConsumidos extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      idPaciente: this.props.idPaciente,
+      fecha: '',
+      paciente: this.props.paciente,
       busqueda: '',
       resultados: [],
       seleccionado: false,
       seleccion: null
     };
 
+    this.handleChange = this.handleChange.bind(this);
+
     this.tipoComidaInput = React.createRef();
     this.porcionDeComidaInput = React.createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeFecha = this.handleChangeFecha.bind(this);
+  }
+
+  handleChangeFecha(event) {
+    if (this.state.fecha !== event) {
+      this.setState({ fecha: event });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      idPaciente: nextProps.idPaciente
+      paciente: nextProps.paciente
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    let fecha = this.state.fecha;
+
+    if (!fecha || fecha === '') {
+      console.log('Entra');
+      fecha = new Date();
+    }
 
     Meteor.call(
       'pacientes.registrarAlimento',
       {
-        identificacion: this.state.idPaciente,
+        identificacion: this.state.paciente.identificacion,
         alimento: this.state.seleccion,
         porcion: Number(this.porcionDeComidaInput.current.value),
-        tipoComida: this.tipoComidaInput.current.value
+        tipoComida: this.tipoComidaInput.current.value,
+        fechaConsumo: fecha
       },
       (err, res) => {
         if (err) {
@@ -46,8 +63,11 @@ class FormsAlimentosConsumidos extends Component {
         } else {
           alert(res);
           this.reiniciarValores();
-          this.porcionDeComidaInput.value = '';
-          this.tipoComidaInput.value = '';
+          this.porcionDeComidaInput.current.value = '';
+          this.tipoComidaInput.current.value = '';
+          this.setState({
+            fecha: new Date()
+          });
           document.getElementById('formRegistroAlimentos').reset();
           document.getElementById('butonCerrarModalAlimentos').click();
         }
@@ -105,6 +125,21 @@ class FormsAlimentosConsumidos extends Component {
           </li>
         );
       }
+    }
+  }
+
+  compararFecha() {
+    let fecha = this.state.fecha;
+    let fechaHoy = new Date();
+
+    if (
+      fechaHoy.getDay() === fecha.getDay() &&
+      fechaHoy.getMonth() === fecha.getMonth() &&
+      fechaHoy.getUTCFullYear() === fecha.getUTCFullYear()
+    ) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -170,6 +205,7 @@ class FormsAlimentosConsumidos extends Component {
   }
 
   render() {
+    console.log(this.state.fecha);
     return (
       <div
         className="modal fade bd-example-modal-lg bg-foohealli-yellow"
@@ -205,6 +241,30 @@ class FormsAlimentosConsumidos extends Component {
                 id="formRegistroAlimentos"
                 onSubmit={this.handleSubmit.bind(this)}
               >
+                <div className="form-group">
+                  <label htmlFor="fechaConsumo">
+                    <b>
+                      Fecha de consumo{' '}
+                      {!this.state.fecha ||
+                      this.state.fecha === '' ||
+                      this.compararFecha()
+                        ? ' (hoy)'
+                        : ''}
+                    </b>
+                  </label>
+                  <br />
+                  <DatePicker
+                    id="fechaConsumo"
+                    onChange={this.handleChangeFecha}
+                    value={this.state.fecha}
+                    minDate={
+                      this.state.paciente
+                        ? new Date(this.state.paciente.fechaRegistro)
+                        : new Date()
+                    }
+                    maxDate={new Date()}
+                  />
+                </div>
                 <div className="form-group">
                   <label htmlFor="tipoComidaInput">
                     <b>Tipo de comida</b>

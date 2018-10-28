@@ -95,9 +95,12 @@ class Navbar extends Component {
           >
             {this.state.nombre}
           </a>
-          <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div
+            className="dropdown-menu foohealli-text"
+            aria-labelledby="navbarDropdown"
+          >
             <a
-              className="dropdown-item pointer"
+              className="dropdown-item pointer foohealli-text"
               onClick={() => this.cerrarSesion()}
             >
               Cerrar sesión
@@ -137,9 +140,7 @@ class Navbar extends Component {
     return (
       <div>
         {this.state.usuario && this.state.usuario.rol === 'paciente' ? (
-          <FormsAlimentosConsumidos
-            idPaciente={this.state.usuario.identificacion}
-          />
+          <FormsAlimentosConsumidos paciente={this.state.usuario} />
         ) : (
           ''
         )}
@@ -164,15 +165,20 @@ class Navbar extends Component {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon vertical-align">
+              <span className="navbar-toggler-icon vertical-align">
                 <i className="text-white fas fa-bars fa-lg" />
               </span>
             </button>
-            <div id="navbarNavDropdown" className="navbar-collapse collapse">
-              <ul className="navbar-nav mx-auto">
+            <div
+              id="navbarNavDropdown"
+              className="navbar-collapse collapse bg-foohealli text-white"
+            >
+              <ul className="navbar-nav mx-auto bg-foohealli text-white">
                 {this.renderFuncionesNavbar()}
               </ul>
-              <ul className="navbar-nav">{this.renderOpcionesNavbar()}</ul>
+              <ul className="navbar-nav bg-foohealli text-white">
+                {this.renderOpcionesNavbar()}
+              </ul>
             </div>
           </div>
         </nav>
