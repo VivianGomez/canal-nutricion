@@ -75,8 +75,16 @@ class DashboardPaciente extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-12 text-center mt-4 mb-3">
-          <h3 className="foohealli-text-yellow">Tu consumo de alimentos</h3>
+        <div className="col-12 text-center mt-4">
+          <div className="bg-foohealli text-light">
+            <br />
+            <h2 className="text-center font-weight-bold">
+              <i className="fas fa-apple-alt" />
+              &nbsp;Alimentos consumidos&nbsp;
+            </h2>
+            <br />
+          </div>
+          <hr />
         </div>
         <div className="col-9 vertical-align-custom">
           <DatePicker

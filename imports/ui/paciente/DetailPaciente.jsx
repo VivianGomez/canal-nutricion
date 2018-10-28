@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import Medicamento from './Medicamento.jsx';
+import Medicamento from '../medicamento/Medicamento.jsx';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Pacientes } from '../../api/pacientes.js';
 import { withRouter } from 'react-router';
-
 
 class DetailPaciente extends Component {
   constructor(props) {
@@ -25,9 +24,10 @@ class DetailPaciente extends Component {
       usuario: null
     };
 
-    this.toggleFormAgregarMedicamentos = this.toggleFormAgregarMedicamentos.bind(this);
+    this.toggleFormAgregarMedicamentos = this.toggleFormAgregarMedicamentos.bind(
+      this
+    );
   }
-
 
   componentDidMount() {
     Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
@@ -47,27 +47,26 @@ class DetailPaciente extends Component {
         }
       }
     });
-  }  
+  }
 
-renderMedicamentos() {
+  renderMedicamentos() {
     if (this.props.paciente) {
-
       let medicamentos = this.props.paciente.medicamentosAsignados;
 
       return medicamentos.map(medicamento => (
         <Medicamento
-        key={medicamento._id}
-        medicamento={medicamento}
-        identificacionP= {this.state.identificacionP}
-        usuario= {this.state.usuario}
-        doctor= {this.state.doctor}      
+          key={medicamento._id}
+          medicamento={medicamento}
+          identificacionP={this.state.identificacionP}
+          usuario={this.state.usuario}
+          doctor={this.state.doctor}
+          opcionesDoctor={true}
         />
       ));
     } else {
       return <h1>Cargando medicamentos...</h1>;
     }
   }
-
 
   handleCrearMedicamentoSubmit(event) {
     event.preventDefault();
@@ -76,9 +75,9 @@ renderMedicamentos() {
       identificacionP: this.state.identificacionP,
       medicamentoP: this.nombreMedInput.current.value,
       posologiaP: this.posologiaInput.current.value,
-      frecuenciaP:this.frecuenciaInput.current.value,
+      frecuenciaP: this.frecuenciaInput.current.value,
       cantidadP: this.cantidadInput.current.value,
-      viaP:this.viaInput.current.value,
+      viaP: this.viaInput.current.value,
       usuario: this.state.usuario
     });
 
@@ -97,7 +96,6 @@ renderMedicamentos() {
     });
   }
 
-
   formCrearMedicamento() {
     if (this.state.formCrearMedicamento && this.state.doctor) {
       return (
@@ -106,16 +104,16 @@ renderMedicamentos() {
           <form onSubmit={this.handleCrearMedicamentoSubmit.bind(this)}>
             <div className="form-group">
               <div className="form-group">
-              <label htmlFor="nombreMed">Nombre del medicamento: </label>
-              <input
-                type="text"
-                className="form-control"
-                id="nombreMedInput"
-                ref={this.nombreMedInput}
-                minLength="5"
-                required
-              />
-            </div>
+                <label htmlFor="nombreMed">Nombre del medicamento: </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="nombreMedInput"
+                  ref={this.nombreMedInput}
+                  minLength="5"
+                  required
+                />
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="posologiaInput">Posología: </label>
@@ -178,21 +176,21 @@ renderMedicamentos() {
               </select>
             </div>
 
-                <center>
-                <button type="submit" className="btn btn-success mr-1">
-                  <i className="far fa-check-circle" />
-                    &nbsp;Asignar medicamento
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger ml-1"
-                  onClick={this.toggleFormAgregarMedicamentos}
-                >
-                  <i className="far fa-times-circle" />
-                    &nbsp;Cancelar
-                </button>  
-                </center>                      
-             </form>
+            <center>
+              <button type="submit" className="btn btn-success mr-1">
+                <i className="far fa-check-circle" />
+                &nbsp;Asignar medicamento
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger ml-1"
+                onClick={this.toggleFormAgregarMedicamentos}
+              >
+                <i className="far fa-times-circle" />
+                &nbsp;Cancelar
+              </button>
+            </center>
+          </form>
         </div>
       );
     }
@@ -219,27 +217,26 @@ renderMedicamentos() {
     return botones;
   }
 
-
   render() {
-    return(
+    return (
       <div id="medicamentosPaciente" className="row">
         <div className="col-12">
-          <hr/>
+          <hr />
           <div className="bg-foohealli text-light">
             <br />
             <h2 className="text-center font-weight-bold">
-              <i className="fas fa-pills"></i>
+              <i className="fas fa-pills" />
               &nbsp;Medicamentos asignados&nbsp;
             </h2>
             <br />
           </div>
           <hr />
         </div>
-        <hr/>
+        <hr />
         <div className="col-12 text-center">{this.botonesDoctor()}</div>
-        <hr/>
+        <hr />
         {this.formCrearMedicamento()}
-        <hr/>
+        <hr />
         <div className="col-12">
           <ul className="list-group">{this.renderMedicamentos()}</ul>
         </div>
@@ -248,12 +245,10 @@ renderMedicamentos() {
   }
 }
 
-
-export default withTracker( props => {
-
-  const identificacionP = "" + props.match.params.identificacion;
+export default withTracker(props => {
+  const identificacionP = '' + props.match.params.identificacion;
   Meteor.subscribe('pacientes.identificacion', identificacionP);
   return {
-    paciente: Pacientes.findOne({ identificacion:identificacionP })
+    paciente: Pacientes.findOne({ identificacion: identificacionP })
   };
 })(DetailPaciente);
