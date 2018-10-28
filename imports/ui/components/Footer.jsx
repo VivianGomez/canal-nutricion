@@ -6,7 +6,7 @@ class Footer extends Component {
       <footer className="footer raleway f-18 text-white bg-foohealli">
         <div className="container container-fluid bg-foohealli">
           <div className="row">
-            <div className="col-12" id="desarrollado">
+            <div className="col-12 mt-4" id="desarrollado">
               <p className="text-center font-weight-bold text-light">
                 Desarrollado por Gabriel Pinto & Vivian Gómez
               </p>

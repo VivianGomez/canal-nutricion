@@ -27,12 +27,13 @@ if (Meteor.isServer) {
                     }, ],
                 });
             } else {
-                return pacientes.find();
+                return Pacientes.find();
             }
         } else {
             throw new Meteor.Error("Debes haber iniciado sesión para acceder a esta funcionalidad.");
         }
     });
+
 }
 
 Meteor.methods({
@@ -116,18 +117,28 @@ Meteor.methods({
         }
     },
     'pacientes.alimentosConsumidosFecha'({
-        correo,
+        identificacion,
         fecha
     }) {
-        check(correo, String);
+
+        check(identificacion, String);
         check(fecha, String);
 
-        return Pacientes.find({
+
+        const paciente = Pacientes.findOne({
             identificacion: identificacion,
-            "alimentosConsumidos": {
-                fechaConsumo: fecha
-            }
         });
+
+        let alimentosConsumidosFecha = [];
+
+        if (paciente) {
+            alimentosConsumidosFecha = paciente.alimentosConsumidos.filter(obj => {
+                return obj.fecha === fecha
+            });
+        }
+
+        return alimentosConsumidosFecha;
+
     }
 });
 

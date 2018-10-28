@@ -13,20 +13,56 @@ class DashboardPaciente extends Component {
     this.state = {
       token: localStorage.getItem('foohealliStuff'),
       paciente: null,
-      date: new Date(),
+      fecha: new Date(),
       alimentosConsumidos: []
     };
-
-    this.cargarConsumidosFecha(this.state.date);
 
     this.handleChange = this.handleChange.bind(this);
   }
 
-  cargarConsumidosFecha(fecha) {}
+  cargarConsumidosFecha() {
+    Meteor.call(
+      'pacientes.alimentosConsumidosFecha',
+      {
+        identificacion: this.state.paciente.identificacion,
+        fecha: this.state.fecha.toString()
+      },
+      (err, res) => {
+        if (err) {
+          alert(err.error);
+        } else if (res) {
+          console.log(res);
+          this.setState({
+            alimentosConsumidos: res
+          });
+        }
+      }
+    );
+  }
+
+  componentDidMount() {
+    Meteor.call(
+      'usuarios.decodificar',
+      this.state.token,
+      (err, res) => {
+        if (err) {
+          alert(err.error);
+        } else if (res) {
+          if (res.rol === 'paciente') {
+            this.setState({
+              paciente: res
+            });
+          } else {
+            this.props.history.push('/');
+          }
+        }
+      },
+      this.cargarConsumidosFecha()
+    );
+  }
 
   handleChange(event) {
-    this.setState({ date: event });
-    console.log(event);
+    this.setState({ fecha: event }, this.cargarConsumidosFecha());
   }
 
   componentDidMount() {
@@ -52,7 +88,7 @@ class DashboardPaciente extends Component {
           <h2>Alimentos consumidos</h2>
           <DatePicker
             onChange={this.handleChange}
-            value={this.state.date}
+            value={this.state.fecha}
             maxDate={new Date()}
           />
         </div>

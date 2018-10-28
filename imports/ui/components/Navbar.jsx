@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withRouter, Link } from 'react-router-dom';
 import Login from './Login.jsx';
+import FormsAlimentosConsumidos from '../paciente/FormsAlimentosConsumidos.jsx';
 
 class Navbar extends Component {
   constructor(props) {
@@ -43,6 +44,39 @@ class Navbar extends Component {
       nombre: null
     });
     window.location.reload();
+  }
+
+  renderFuncionesNavbar() {
+    let funciones = [];
+
+    if (this.state.usuario && this.state.usuario.rol === 'paciente') {
+      funciones.push(
+        <li key="dashboardPaciente" className="nav-item">
+          <a
+            id="botonDashboardPaciente"
+            className="nav-link pointer"
+            onClick={() => this.props.history.push('/paciente/dashboard')}
+          >
+            Dashboard
+          </a>
+        </li>
+      );
+      funciones.push(
+        <li key="alimentosConsumidosPaciente" className="nav-item">
+          <a
+            id="botonAlimentosConsumidosPaciente"
+            className="nav-link pointer"
+            onClick={() =>
+              this.props.history.push('/paciente/alimentosConsumidos')
+            }
+          >
+            Alimentos consumidos
+          </a>
+        </li>
+      );
+    }
+
+    return funciones;
   }
 
   renderOpcionesNavbar() {
@@ -101,7 +135,8 @@ class Navbar extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-md navbar-dark bg-foohealli py-md-2">
+        <FormsAlimentosConsumidos />
+        <nav className="navbar navbar-expand-md text-white navbar-inverse bg-foohealli py-md-2">
           <div className="container">
             <Link to={'/'} style={{ textDecoration: 'none' }}>
               <div className="navbar-brand">
@@ -114,7 +149,7 @@ class Navbar extends Component {
               </div>
             </Link>
             <button
-              className="navbar-toggler custom-toggler"
+              className="navbar-toggler custom-toggler text-white"
               type="button"
               data-toggle="collapse"
               data-target="#navbarNavDropdown"
@@ -122,10 +157,14 @@ class Navbar extends Component {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span className="navbar-toggler-icon" />
+              <span class="navbar-toggler-icon vertical-align">
+                <i className="text-white fas fa-bars fa-lg" />
+              </span>
             </button>
             <div id="navbarNavDropdown" className="navbar-collapse collapse">
-              <ul className="navbar-nav mx-auto" />
+              <ul className="navbar-nav mx-auto">
+                {this.renderFuncionesNavbar()}
+              </ul>
               <ul className="navbar-nav">{this.renderOpcionesNavbar()}</ul>
             </div>
           </div>
