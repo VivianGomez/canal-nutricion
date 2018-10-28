@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import Medicamento from './Medicamento.jsx';
+import Medicamento from '../medicamento/Medicamento.jsx';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Pacientes } from '../../api/pacientes.js';
 import { withRouter } from 'react-router';
