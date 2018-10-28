@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import Med from './Med.jsx';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Pacientes } from '../../api/pacientes.js';
+import { withRouter } from 'react-router';
 
 
 class DetailPaciente extends Component {
@@ -282,4 +285,11 @@ renderMedicamentos() {
   }
 }
 
-export default (DetailPaciente);
+DetailPaciente = withRouter(DetailPaciente);
+
+export default withTracker(() => {
+  Meteor.subscribe('pacientes', localStorage.getItem('foohealliStuff'));
+  return {
+    paciente: Pacientes.findOne({identificacion:props.match.params.identificacion})
+  };
+})(DetailPaciente);

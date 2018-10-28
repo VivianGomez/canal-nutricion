@@ -73,7 +73,7 @@ class Login extends Component {
     }
   }
 
-   cargarBotonRol() {
+  cargarBotonRol() {
     if (this.state.rol === 'paciente') {
       return (
         <button
@@ -89,10 +89,10 @@ class Login extends Component {
       return (
         <button
           type="button"
-          className="btn btn-success"
+          className="btn btn-info"
           onClick={() => this.cambiarRolIngreso('nutricionista')}
         >
-          <i className="fas fa-user" />
+          <i className="fas fa-user-plus" />
           &nbsp;Soy nutricionista
         </button>
       );
@@ -136,7 +136,7 @@ class Login extends Component {
           role="document"
         >
           <div className="modal-content">
-            <div className="modal-header bg-dark text-light">
+            <div className="modal-header bg-foohealli text-light">
               <h5 className="modal-title" id="exampleModalLabel">
                 ¡Bienvenido de vuelta!
               </h5>
@@ -153,8 +153,10 @@ class Login extends Component {
               </button>
             </div>
             <div className="modal-body">
-              Estoy ingresando a foohealli como <b>{this.state.rol}</b> 
-              <hr/>
+              <span className="small">
+                Estás ingresando a Foohealli como <b>{this.state.rol}</b>
+              </span>
+              <hr />
               <form onSubmit={this.handleSubmit.bind(this)}>
                 <div className="form-group">
                   <label htmlFor="loginInputCorreo">
@@ -190,24 +192,20 @@ class Login extends Component {
                     Iniciar sesión
                   </button>
                 </center>
-                <br />
               </form>
+              <hr />
               <p className="text-center">
                 ¿No tienes cuenta en Foohealli?
                 <br />
                 <span
-                  className="text-uniandes font-weight-bold pointer"
+                  className="foohealli-text font-weight-bold pointer"
                   onClick={this.irARegistro.bind(this)}
                 >
                   Regístrate
                 </span>
               </p>
               <hr />
-               Estoy ingresando a foohealli como <b>{this.state.rol}</b> 
-              <hr/>
-              <h6 className="text-center">
-              Cambiar mi rol
-              </h6>
+              <h6 className="text-center">Cambiar mi rol</h6>
               <div className="text-center">{this.cargarBotonRol()}</div>
             </div>
           </div>

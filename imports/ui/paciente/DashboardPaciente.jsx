@@ -35,8 +35,20 @@ class DashboardPaciente extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-12 text-center mt-4 mb-4">
+        <div className="col-12 text-center mt-4 mb-3">
           <h1 className="foohealli-text-yellow">¡Bienvenido!</h1>
+        </div>
+        <div className="col-12 mb-3 text-center">
+          <button
+            id="botonAgregarConsumo"
+            type="button"
+            data-toggle="modal"
+            data-target=".bd-example-modal-lg"
+            className="btn btn-foohealli"
+          >
+            <i className="fas fa-apple-alt" />
+            &nbsp;Registrar una comida
+          </button>
         </div>
         <div className="col-md-2" />
         <div className="col-md-4 mb-3">

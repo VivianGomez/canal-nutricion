@@ -48,6 +48,10 @@ html {
   border-color: #9ff581;
 }
 
+.bg-foohealli-yellow {
+  background-color: #f7b4242a;
+}
+
 
 .btn-foohealli {
   color: white;
@@ -133,9 +137,25 @@ html {
 }
 
 #mainContainer {
-  min-height: 600px;
+  min-height: 580px;
 }
 
 .img-paciente:hover {
   opacity: 0.7;
+}
+
+.text-white {
+  color: white;
+}
+
+.vertical-align {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+}
+
+.banner-inicio {
+  max-height: 340px;
+  width: 100%;
 }

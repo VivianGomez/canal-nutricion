@@ -42,7 +42,6 @@ export default class Inicio extends Component {
     });
   }
 
-
   mostrarOpciones() {
     let opciones = [];
 
@@ -61,46 +60,46 @@ export default class Inicio extends Component {
         </div>
       );
     } else {
-      opciones.push(
-        <div>
-        </div>
-      );
+      opciones.push(<div />);
     }
 
     return opciones;
   }
 
-
-verInicio() {
+  verInicio() {
     if (!this.state.logueado) {
-      <h3 id="transbox" className="text-options">Para comenzar inicia sesión</h3>
-    } else{
+      <h3 id="transbox" className="text-options">
+        Para comenzar inicia sesión
+      </h3>;
+    } else {
       return (
-        <h3 id="transbox" className="text-options">Elige una opción</h3>
+        <h3 id="transbox" className="text-options">
+          Elige una opción
+        </h3>
       );
     }
   }
 
   render() {
-      return (
-        <div >
-            <header id="homeR">
-              <div className="container-fluid">
-                <center>
-                  <h1 >¡Bienvenido a Foohealli!</h1>
-                  {this.verInicio()}
-                </center>
-                <img
-                    src="fondo.jpg"
-                    className="img-fluid"
-                    alt="banner foohealli"
-                  />
-              </div>
-            </header>
-            <div className="row">{this.mostrarOpciones()}</div>
-        </div>
-      );
+    return (
+      <div>
+        <header id="homeR">
+          <div className="container-fluid">
+            <center>
+              <h1 className="foohealli-text-yellow mt-3 mb-3">
+                ¡Bienvenido a Foohealli!
+              </h1>
+              {this.verInicio()}
+            </center>
+            <img
+              src="fondo.jpg"
+              className="img-fluid banner-inicio"
+              alt="banner foohealli"
+            />
+          </div>
+        </header>
+        <div className="row">{this.mostrarOpciones()}</div>
+      </div>
+    );
   }
 }
-
-
