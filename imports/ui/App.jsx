@@ -7,6 +7,7 @@ import Login from './components/Login.jsx';
 import Footer from './components/Footer.jsx';
 import DashboardDoctor from './doctor/DashboardDoctor.jsx';
 import DetailPaciente from './paciente/DetailPaciente.jsx';
+import DashboardNutricionista from './nutricionista/DashboardNutricionista.jsx';
 import DashboardPaciente from './paciente/DashboardPaciente.jsx';
 import AlimentosConsumidos from './paciente/AlimentosConsumidos.jsx';
 
@@ -23,10 +24,19 @@ class App extends Component {
               path="/doctor/dashboardDoctor"
               component={DashboardDoctor}
             />
-
+            <Route
+              exact
+              path="/nutricionista/dashboardNutricionista"
+              component={DashboardNutricionista}
+            />
             <Route
               exact
               path="/doctor/detailPaciente/:identificacion"
+              component={DetailPaciente}
+            />
+            <Route
+              exact
+              path="/nutricionista/detailPaciente/:identificacion"
               component={DetailPaciente}
             />
             <Route

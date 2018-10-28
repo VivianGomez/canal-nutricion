@@ -1,31 +1,30 @@
 import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
 
 class Medicamento extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      identificacionP: this.props.identificacionP,
-      id: this.props.key,
       medicamento: this.props.medicamento,
+      identificacionP: this.props.identificacionP,
       usuario: this.props.usuario,
       doctor:   this.props.doctor,
       actualizar: false
     };
 
+
     this.toggleFormActualizarMedicamento = this.toggleFormActualizarMedicamento.bind(this);
 
     this.posologiaActualizarInput = React.createRef();
     this.frecuenciaActualizarInput = React.createRef();
-    this.cantidadActualizarInput = React.createRef();
+    this.cantidadActualizarInput = React.createRef();    
   }
 
-
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      identificacionP: nextPropss.identificacionP,
-      id: nextProps.key,
+      this.setState({
       medicamento: nextProps.medicamento,
+      identificacionP: nextProps.identificacionP,
       usuario: nextProps.usuario,
       doctor: nextProps.doctor,
     });
@@ -57,7 +56,7 @@ class Medicamento extends Component {
     event.preventDefault();
     const posologia = this.posologiaActualizarInput.current.value;
     const frecuencia = this.frecuenciaActualizarInput.current.value;
-    const cantidad= Number(this.cantidadActualizarInput.current.value);
+    const cantidad= this.cantidadActualizarInput.current.value;
     if (
       posologia === this.state.medicamento.posologia &&
       frecuencia === this.state.medicamento.frecuencia &&
@@ -69,6 +68,7 @@ class Medicamento extends Component {
         'pacientes.actualizarMedicamento',
         {
           identificacion: this.state.identificacionP,
+          medicamento:this.state.medicamento.medicamento,
           posologia: posologia,
           frecuencia: frecuencia,
           cantidad: cantidad,
@@ -86,7 +86,6 @@ class Medicamento extends Component {
     }
   }
 
-  // Toggles
 
   toggleFormActualizarMedicamento() {
     this.setState({
@@ -94,14 +93,13 @@ class Medicamento extends Component {
     });
   }
 
-  // Forms
 
   formActualizarMedicamento() {
     if (this.state.actualizar) {
       return (
         <div className="col-12">
           <hr />
-          <h5>Actualizar medicamento</h5>
+          <h5>Actualizar medicamento  {this.state.medicamento.medicamento} </h5>
           <form onSubmit={this.handleActualizarMedicamentoSubmit.bind(this)}>
             <div className="form-group">
               <label htmlFor="posologiaInput">Posología: </label>
@@ -109,8 +107,9 @@ class Medicamento extends Component {
                 type="text"
                 className="form-control"
                 id={"posologiaInput"+ this.state.medicamento._id}
+                defaultValue={this.state.medicamento.posologia}
                 ref={this.posologiaActualizarInput}
-                minLength="10"
+                minLength="1"
                 required
               />
             </div>
@@ -121,6 +120,7 @@ class Medicamento extends Component {
                 type="text"
                 className="form-control"
                 id={"frecuenciaInput"+ this.state.medicamento._id}
+                defaultValue={this.state.medicamento.frecuencia}
                 ref={this.frecuenciaActualizarInput}
                 minLength="1"
                 required
@@ -134,12 +134,13 @@ class Medicamento extends Component {
                 className="form-control"
                 type="number"
                 ref={this.cantidadActualizarInput}
+                defaultValue={this.state.medicamento.cantidad}
                 min="0"
                 pattern="\d+"
                 required
               />
             </div>
-            <button type="submit" className="btn btn-outline-warning mr-1">
+            <button type="submit" className="btn btn-foohealli-yellow mr-1">
               <i className="far fa-edit" />
               &nbsp;Enviar
             </button>
@@ -177,7 +178,7 @@ class Medicamento extends Component {
       doctor.push(
         <div
           key="habilidadesEdicionAdmin"
-          className="col-md-6 text-right col-12"
+          className="col-md-3 col-12  text-right"
         >
           {this.botonEdicion()}
           <button
@@ -192,20 +193,31 @@ class Medicamento extends Component {
     
     return doctor;
   }
-
   render() {
     return (
       <li className="list-group-item">
         <div className="row">
           <div className="col-lg-9 col-md-8 col-12">
             <p>
-              {this.state.medicamento} <br />
-              <b>Cantidad: </b>
-              {this.state.cantidad}
+              <i className="fas fa-tablets foohealli-text"></i>
+              &nbsp;&nbsp;{this.state.medicamento.medicamento}
+              <br />
+              <b>Posologia: </b>
+              {this.state.medicamento.posologia}
+              <br />
+              <b>Frecuencia: </b>
+              {this.state.medicamento.frecuencia}
+              <br />
+              <b>Cantidad a tomar: </b>
+              {this.state.medicamento.cantidad}
+              <br />
+              <b>Via: </b>
+              {this.state.medicamento.via}
             </p>
           </div>
+               {this.opcionesDoctor()}
+          <hr/>
           {this.formActualizarMedicamento()}
-          {this.opcionesDoctor()}
         </div>
       </li>
     );

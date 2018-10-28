@@ -9,13 +9,15 @@ export default class Inicio extends Component {
     this.state = {
       token: localStorage.getItem('foohealliStuff'),
       doctor: false,
+      nutricionista: false,
       usuario: null,
       logueado: false,
       cargando: true
     };
   }
 
-  componentDidMount() {
+
+ componentDidMount() {
     Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
       if (err) {
         alert(err.error);
@@ -27,7 +29,16 @@ export default class Inicio extends Component {
             logueado: true,
             cargando: false
           });
-        } else {
+        } else if (res.rol === 'nutricionista') {
+          this.setState({
+            nutricionista: true,
+            usuario: res,
+            logueado: true,
+            cargando: false
+          });
+        }
+
+        else {
           this.setState({
             usuario: res,
             logueado: true,
@@ -42,6 +53,7 @@ export default class Inicio extends Component {
     });
   }
 
+
   mostrarOpciones() {
     let opciones = [];
 
@@ -53,6 +65,20 @@ export default class Inicio extends Component {
         >
           <Link
             to={'/doctor/dashboardDoctor'}
+            style={{ textDecoration: 'none' }}
+          >
+            <h5 className="mt-2 text-dark">Ver Pacientes</h5>
+          </Link>
+        </div>
+      );
+    }else if (this.state.nutricionista) {
+      opciones.push(
+        <div
+          key="elementoDashboardNutricionista"
+          className="col-md-6 col-12 text-center mt-5"
+        >
+          <Link
+            to={'/nutricionista/dashboardNutricionista'}
             style={{ textDecoration: 'none' }}
           >
             <h5 className="mt-2 text-dark">Ver Pacientes</h5>

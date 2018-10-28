@@ -1,11 +1,14 @@
 import {
-    Meteor
+  Meteor
 } from 'meteor/meteor';
 import {
-    Mongo
+  Mongo
 } from 'meteor/mongo';
 import {
-    check
+  check
+} from 'meteor/check';
+import {
+  Match
 } from 'meteor/check';
 
 const jwt = require('jsonwebtoken');
@@ -33,6 +36,13 @@ if (Meteor.isServer) {
             throw new Meteor.Error("Debes haber iniciado sesión para acceder a esta funcionalidad.");
         }
     });
+
+ Meteor.publish('pacientes.identificacion', function pacientesPublic(identificacion) {
+    check(identificacion, String);
+    return Pacientes.find({
+      identificacion: identificacion
+    });
+  });
 
 }
 
@@ -142,7 +152,6 @@ Meteor.methods({
                     }
                 }
             });
-            console.log("AGREGA");
 
             return "El medicamento " + medicamentoP + " se agregó correctamente";
         } catch (error) {
@@ -151,36 +160,36 @@ Meteor.methods({
 
     },
     'pacientes.actualizarMedicamento'({
-        identificacionP,
-        medicamentoP,
-        posologiaP,
-        frecuenciaP,
-        cantidadP,
+        identificacion,
+        medicamento,
+        posologia,
+        frecuencia,
+        cantidad,
         usuario
     }) {
-        check(identificacionP, String);
-        check(medicamentoP, String);
-        check(posologiaP, String);
-        check(frecuenciaP, String);
-        check(cantidadP, String);
+        check(identificacion, String);
+        check(medicamento, String);
+        check(posologia, String);
+        check(frecuencia, String);
+        check(cantidad, String);
         check(usuario, Object);
 
         verificarPermisos(usuario.rol);
 
         try {
-            Pacientes.updateOne({
-                identificacion: identificacionP,
-                "medicamentosAsignados.medicamento" : medicamentoP 
+            Pacientes.update({
+                identificacion: identificacion,
+                "medicamentosAsignados.medicamento" : medicamento 
             }, {
                 $set: {
                     
-                    "medicamentosAsignados.$.posologia": posologiaP,
-                    "medicamentosAsignados.$.frecuencia": frecuenciaP,
-                    "medicamentosAsignados.$.cantidad": cantidadP
+                    "medicamentosAsignados.$.posologia": posologia,
+                    "medicamentosAsignados.$.frecuencia": frecuencia,
+                    "medicamentosAsignados.$.cantidad": cantidad
                 }
             });
 
-            return "El medicamento " + medicamentoP + " se actualizó correctamente";
+            return "El medicamento " + medicamento + " se actualizó correctamente";
         } catch (error) {
             throw new Meteor.Error(error);
         }
