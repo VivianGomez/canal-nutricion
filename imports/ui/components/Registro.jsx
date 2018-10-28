@@ -54,6 +54,7 @@ class Registro extends Component {
                   alert(err.error);
                 } else {
                   localStorage.setItem('foohealliStuff', res);
+                  this.props.history.push('/paciente/dashboard');
                   window.location.reload();
                 }
               }
@@ -124,7 +125,9 @@ class Registro extends Component {
               >
                 <option value="paciente">Soy un Paciente motivado</option>
                 <option value="doctor">Soy un Doctor excelente</option>
-                <option value="nutricionista">Soy un Nutricionista excelente</option>
+                <option value="nutricionista">
+                  Soy un Nutricionista excelente
+                </option>
               </select>
             </div>
             <div className="form-group">

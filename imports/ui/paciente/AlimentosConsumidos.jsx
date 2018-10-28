@@ -62,13 +62,19 @@ class DashboardPaciente extends Component {
   }
 
   handleChange(event) {
-    this.setState({ fecha: event }, this.cargarConsumidosFecha());
+    console.log(event);
+    console.log(event === this.state.fecha);
+    if (this.state.fecha !== event) {
+      console.log('Yes');
+      this.setState({ fecha: event }, this.cargarConsumidosFecha());
+    }
   }
 
   componentDidMount() {
     Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
       if (err) {
-        alert(err.error);
+        alert(err);
+        this.props.history.push('/');
       } else if (res) {
         if (res.rol === 'paciente') {
           this.setState({
@@ -83,14 +89,32 @@ class DashboardPaciente extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-12 text-left mt-5">
-          <h2>Alimentos consumidos</h2>
+      <div className="row vertical-align">
+        <div className="col-12 text-center mt-4 mb-3">
+          <h3 className="foohealli-text-yellow">Tu consumo de alimentos</h3>
+        </div>
+        <div className="col-8">
           <DatePicker
             onChange={this.handleChange}
             value={this.state.fecha}
+            minDate={
+              this.state.paciente
+                ? new Date(this.state.paciente.fechaRegistro)
+                : new Date()
+            }
             maxDate={new Date()}
           />
+        </div>
+        <div className="col-4 text-right">
+          <button
+            id="botonAgregarConsumo"
+            type="button"
+            data-toggle="modal"
+            data-target=".bd-example-modal-lg"
+            className="btn btn-foohealli"
+          >
+            <i className="fas fa-plus fa-lg" />
+          </button>
         </div>
       </div>
     );

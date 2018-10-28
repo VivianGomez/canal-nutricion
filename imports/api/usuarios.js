@@ -36,7 +36,8 @@ Meteor.methods({
             correo: correo,
             celular: celular,
             clave: cryptr.encrypt(clave),
-            rol: rol
+            rol: rol,
+            fechaRegistro: moment().format('ddd MMM D YYYY')
         };
 
         try {
