@@ -10,6 +10,7 @@ import DetailPaciente from './paciente/DetailPaciente.jsx';
 import DashboardNutricionista from './nutricionista/DashboardNutricionista.jsx';
 import DashboardPaciente from './paciente/DashboardPaciente.jsx';
 import AlimentosConsumidos from './paciente/AlimentosConsumidos.jsx';
+import DetailPacienteNutricionista from './paciente/DetailPacienteNutricionista.jsx';
 
 class App extends Component {
   render() {
@@ -37,7 +38,7 @@ class App extends Component {
             <Route
               exact
               path="/nutricionista/detailPaciente/:identificacion"
-              component={DetailPaciente}
+              component={DetailPacienteNutricionista}
             />
             <Route
               exact
