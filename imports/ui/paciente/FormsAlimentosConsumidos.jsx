@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Emoji from 'react-emoji-render';
+import { Meteor } from 'meteor/meteor';
 import axios from 'axios';
 
 class FormsAlimentosConsumidos extends Component {
@@ -7,6 +8,7 @@ class FormsAlimentosConsumidos extends Component {
     super(props);
 
     this.state = {
+      idPaciente: this.props.idPaciente,
       busqueda: '',
       resultados: [],
       seleccionado: false,
@@ -14,17 +16,43 @@ class FormsAlimentosConsumidos extends Component {
     };
 
     this.tipoComidaInput = React.createRef();
+    this.porcionDeComidaInput = React.createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      idPaciente: nextProps.idPaciente
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
 
-    alert('Tu comida ha sido registrada exitosamente.');
-    document.getElementById('butonCerrarModalAlimentos').click();
+    Meteor.call(
+      'pacientes.registrarAlimento',
+      {
+        identificacion: this.state.idPaciente,
+        alimento: this.state.seleccion,
+        porcion: Number(this.porcionDeComidaInput.current.value),
+        tipoComida: this.tipoComidaInput.current.value
+      },
+      (err, res) => {
+        if (err) {
+          alert(err);
+        } else {
+          alert(res);
+          this.reiniciarValores();
+          this.porcionDeComidaInput.value = '';
+          this.tipoComidaInput.value = '';
+          document.getElementById('formRegistroAlimentos').reset();
+          document.getElementById('butonCerrarModalAlimentos').click();
+        }
+      }
+    );
   }
 
   reiniciarValores() {
@@ -171,15 +199,19 @@ class FormsAlimentosConsumidos extends Component {
             </div>
             <div className="modal-body">
               <p className="small">
-                Al llenar los valores podrás registrar tu comida.
+                Al seleccionar una comida podrás registrarla.
               </p>
-              <form onSubmit={this.handleSubmit.bind(this)}>
+              <form
+                id="formRegistroAlimentos"
+                onSubmit={this.handleSubmit.bind(this)}
+              >
                 <div className="form-group">
                   <label htmlFor="tipoComidaInput">
                     <b>Tipo de comida</b>
                   </label>
                   <select
                     type="text"
+                    name="tipoComida"
                     className="form-control"
                     id="tipoComidaInput"
                     ref={this.tipoComidaInput}
@@ -197,6 +229,7 @@ class FormsAlimentosConsumidos extends Component {
                   </label>
                   <input
                     type="number"
+                    name="porcionComida"
                     className="form-control"
                     id="porcionComidaInput"
                     ref={this.porcionDeComidaInput}

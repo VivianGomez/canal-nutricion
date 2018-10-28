@@ -1,14 +1,14 @@
 import {
-  Meteor
+    Meteor
 } from 'meteor/meteor';
 import {
-  Mongo
+    Mongo
 } from 'meteor/mongo';
 import {
-  check
+    check
 } from 'meteor/check';
 import {
-  Match
+    Match
 } from 'meteor/check';
 import {
     Nutricionistas
@@ -46,12 +46,12 @@ if (Meteor.isServer) {
         }
     });
 
- Meteor.publish('pacientes.identificacion', function pacientesPublic(identificacion) {
-    check(identificacion, String);
-    return Pacientes.find({
-      identificacion: identificacion
+    Meteor.publish('pacientes.identificacion', function pacientesPublic(identificacion) {
+        check(identificacion, String);
+        return Pacientes.find({
+            identificacion: identificacion
+        });
     });
-  });
 
 }
 
@@ -117,7 +117,9 @@ Meteor.methods({
                 identificacion: identificacion
             }, {
                 $pull: {
-                    medicamentosAsignados: {medicamento: medicamentoNombre}
+                    medicamentosAsignados: {
+                        medicamento: medicamentoNombre
+                    }
                 }
             });
 
@@ -166,7 +168,7 @@ Meteor.methods({
 
             return "El medicamento " + medicamentoP + " se agregó correctamente";
         } catch (error) {
-            throw new Meteor.Error("Se presentó un error agregando el medicamento " + medicamentoP +", error: "+ error);
+            throw new Meteor.Error("Se presentó un error agregando el medicamento " + medicamentoP + ", error: " + error);
         }
 
     },
@@ -192,10 +194,10 @@ Meteor.methods({
         try {
             Pacientes.update({
                 identificacion: identificacion,
-                "medicamentosAsignados.medicamento" : medicamento 
+                "medicamentosAsignados.medicamento": medicamento
             }, {
                 $set: {
-                    
+
                     "medicamentosAsignados.$.posologia": posologia,
                     "medicamentosAsignados.$.frecuencia": frecuencia,
                     "medicamentosAsignados.$.cantidad": cantidad,
@@ -265,6 +267,37 @@ Meteor.methods({
             return "El paciente " + paciente.nombre + " fue asignado al nutricionista "+ nutricionista.nombre +" correctamente";
         } catch (error) {
             throw new Meteor.Error(error);
+        }
+    },
+    'pacientes.registrarAlimento'({
+        identificacion,
+        alimento,
+        porcion,
+        tipoComida
+    }) {
+        check(identificacion, String);
+        check(alimento, Object);
+        check(porcion, Number);
+        check(tipoComida, String);
+        try {
+            Pacientes.update({
+                identificacion: identificacion
+            }, {
+                $addToSet: {
+                    alimentosConsumidos: {
+                        idAlimento: alimento.ndbno,
+                        categoria: alimento.group,
+                        alimento: alimento.name,
+                        porcionConsumidaGramos: porcion,
+                        tipoComida: tipoComida,
+                        fechaConsumo: moment().format('ddd MMM D YYYY')
+                    }
+                }
+            });
+
+            return "Tu comida ha sido registrada exitosamente.";
+        } catch (error) {
+            throw new Meteor.Error("Se presentó un error registrando tu comida");
         }
     }
 });

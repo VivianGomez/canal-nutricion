@@ -10,6 +10,7 @@ class Navbar extends Component {
     this.state = {
       token: localStorage.getItem('foohealliStuff'),
       nombre: null,
+      usuario: null,
       doctor: false
     };
   }
@@ -135,7 +136,13 @@ class Navbar extends Component {
   render() {
     return (
       <div>
-        <FormsAlimentosConsumidos />
+        {this.state.usuario && this.state.usuario.rol === 'paciente' ? (
+          <FormsAlimentosConsumidos
+            idPaciente={this.state.usuario.identificacion}
+          />
+        ) : (
+          ''
+        )}
         <nav className="navbar navbar-expand-md text-white navbar-inverse bg-foohealli py-md-2">
           <div className="container">
             <Link to={'/'} style={{ textDecoration: 'none' }}>
