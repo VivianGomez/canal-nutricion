@@ -177,7 +177,7 @@ renderMedicamentos() {
                 </option>
               </select>
             </div>
-            
+
                 <center>
                 <button type="submit" className="btn btn-success mr-1">
                   <i className="far fa-check-circle" />
@@ -200,7 +200,7 @@ renderMedicamentos() {
 
   botonesDoctor() {
     let botones = [];
-
+    console.log(this.state.doctor);
     if (this.state.botonAgregarMedicamento && this.state.doctor) {
       botones.push(
         <button

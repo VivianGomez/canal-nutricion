@@ -108,24 +108,21 @@ export default class Inicio extends Component {
 
   render() {
     return (
-      <div>
-        <header id="homeR">
-          <div className="container-fluid">
-            <center>
-              <h1 className="foohealli-text-yellow mt-3 mb-3">
+      <div id="fondo" class="container">
+        <div  class="navbar-header">
+          <div id="descripcion">
+            <h1 className="foohealli-text-yellow mt-3 mb-3">
                 ¡Bienvenido a Foohealli!
-              </h1>
-              {this.verInicio()}
+          </h1>
+            <span>Foohealli es una applicación que busca que mejorar la comunicanicación entre médicos, nutricionistas  y  pacientes
+                  con el fin de lograr tratamientos nitricionales exitosos. 
+            </span>
+            <center>
+
             </center>
-            <img
-              src="fondo.jpg"
-              className="img-fluid banner-inicio"
-              alt="banner foohealli"
-            />
-          </div>
-        </header>
-        <div className="row">{this.mostrarOpciones()}</div>
-      </div>
+           </div>
+        </div>
+      </div> 
     );
   }
 }

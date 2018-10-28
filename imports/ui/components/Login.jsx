@@ -50,6 +50,7 @@ class Login extends Component {
             alert(err.error);
           } else {
             localStorage.setItem('foohealliStuff', res);
+            this.props.history.push('/doctor/dashboardDoctor');
             window.location.reload();
           }
         }
@@ -66,6 +67,7 @@ class Login extends Component {
             alert(err.error);
           } else {
             localStorage.setItem('foohealliStuff', res);
+            this.props.history.push('/nutricionista/dashboardNutricionista');
             window.location.reload();
           }
         }

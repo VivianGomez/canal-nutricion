@@ -198,7 +198,7 @@ class Medicamento extends Component {
 
     opcionesDoctor() {
     let doctor = [];
-    if (this.state.doctoe) { 
+    if (this.state.doctor) { 
       doctor.push(
         <div
           key="habilidadesEdicionAdmin"
