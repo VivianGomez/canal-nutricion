@@ -148,3 +148,8 @@ html {
   justify-content: center;
   height: 50px;
 }
+
+.banner-inicio {
+  max-height: 340px;
+  width: 100%;
+}
