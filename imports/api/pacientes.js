@@ -7,9 +7,6 @@ import {
 import {
     check
 } from 'meteor/check';
-import {
-    Match
-} from 'meteor/check';
 
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
@@ -74,8 +71,6 @@ Meteor.methods({
             throw new Meteor.Error('No existe un usuario con ese correo.');
         } else {
             if (cryptr.decrypt(paciente.clave) !== clave) {
-                console.log(paciente.clave);
-                console.log(clave);
                 throw new Meteor.Error('La contraseña ingresada no es correcta.');
             }
         }
@@ -202,18 +197,20 @@ Meteor.methods({
     }) {
 
         check(identificacion, String);
-        check(fecha, String);
-
 
         const paciente = Pacientes.findOne({
             identificacion: identificacion,
         });
 
+
         let alimentosConsumidosFecha = [];
 
+        fecha = procesarFecha(fecha);
+
         if (paciente) {
-            alimentosConsumidosFecha = paciente.alimentosConsumidos.filter(obj => {
-                return obj.fecha === fecha
+            let alimentosConsumidos = paciente.alimentosConsumidos;
+            alimentosConsumidosFecha = alimentosConsumidos.filter(alimento => {
+                return alimento.fechaConsumo === fecha
             });
         }
 
@@ -232,10 +229,6 @@ Meteor.methods({
         check(porcion, Number);
         check(tipoComida, String);
 
-        let anio = fechaConsumo.getUTCFullYear().toString();
-        fechaConsumo = fechaConsumo.toString();
-        fechaConsumo = fechaConsumo.substring(0, fechaConsumo.indexOf(anio) + anio.length);
-
         try {
             Pacientes.update({
                 identificacion: identificacion
@@ -247,7 +240,7 @@ Meteor.methods({
                         alimento: alimento.name,
                         porcionConsumidaGramos: porcion,
                         tipoComida: tipoComida,
-                        fechaConsumo: fechaConsumo
+                        fechaConsumo: procesarFecha(fechaConsumo)
                     }
                 }
             });
@@ -273,4 +266,12 @@ function verificarExistenciaPaciente(paciente) {
     if (!paciente) {
         throw new Meteor.Error('No se encuentra el paciente.');
     }
+}
+
+function procesarFecha(fechaConsumo) {
+    let anio = fechaConsumo.getUTCFullYear().toString();
+    fechaConsumo = fechaConsumo.toString();
+    fechaConsumo = fechaConsumo.substring(0, fechaConsumo.indexOf(anio) + anio.length);
+
+    return fechaConsumo;
 }

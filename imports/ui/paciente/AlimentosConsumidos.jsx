@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import DatePicker from 'react-date-picker';
+import Alimento from '../alimento/Alimento.jsx';
 
 class DashboardPaciente extends Component {
   constructor(props) {
@@ -20,18 +21,17 @@ class DashboardPaciente extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  cargarConsumidosFecha() {
+  cargarConsumidosFecha(fecha) {
     Meteor.call(
       'pacientes.alimentosConsumidosFecha',
       {
         identificacion: this.state.paciente.identificacion,
-        fecha: this.state.fecha.toString()
+        fecha: fecha
       },
       (err, res) => {
         if (err) {
           alert(err.error);
         } else if (res) {
-          console.log(res);
           this.setState({
             alimentosConsumidos: res
           });
@@ -40,34 +40,14 @@ class DashboardPaciente extends Component {
     );
   }
 
-  componentDidMount() {
-    Meteor.call(
-      'usuarios.decodificar',
-      this.state.token,
-      (err, res) => {
-        if (err) {
-          alert(err.error);
-        } else if (res) {
-          if (res.rol === 'paciente') {
-            this.setState({
-              paciente: res
-            });
-          } else {
-            this.props.history.push('/');
-          }
-        }
-      },
-      this.cargarConsumidosFecha()
-    );
+  handleChange(event) {
+    this.setState({ fecha: event }, this.cargarConsumidosFecha(event));
   }
 
-  handleChange(event) {
-    console.log(event);
-    console.log(event === this.state.fecha);
-    if (this.state.fecha !== event) {
-      console.log('Yes');
-      this.setState({ fecha: event }, this.cargarConsumidosFecha());
-    }
+  renderAlimentos(alimentos) {
+    return alimentos.map(alimento => (
+      <Alimento key={alimento.idAlimento} alimento={alimento} />
+    ));
   }
 
   componentDidMount() {
@@ -77,9 +57,14 @@ class DashboardPaciente extends Component {
         this.props.history.push('/');
       } else if (res) {
         if (res.rol === 'paciente') {
-          this.setState({
-            paciente: res
-          });
+          this.setState(
+            {
+              paciente: res
+            },
+            () => {
+              this.cargarConsumidosFecha(new Date());
+            }
+          );
         } else {
           this.props.history.push('/');
         }
@@ -89,11 +74,11 @@ class DashboardPaciente extends Component {
 
   render() {
     return (
-      <div className="row vertical-align">
+      <div className="row">
         <div className="col-12 text-center mt-4 mb-3">
           <h3 className="foohealli-text-yellow">Tu consumo de alimentos</h3>
         </div>
-        <div className="col-8">
+        <div className="col-9 vertical-align-custom">
           <DatePicker
             onChange={this.handleChange}
             value={this.state.fecha}
@@ -105,16 +90,28 @@ class DashboardPaciente extends Component {
             maxDate={new Date()}
           />
         </div>
-        <div className="col-4 text-right">
+        <div className="col-3 text-center vertical-align-custom">
           <button
             id="botonAgregarConsumo"
             type="button"
             data-toggle="modal"
             data-target=".bd-example-modal-lg"
-            className="btn btn-foohealli"
+            className="btn btn-foohealli mr-auto"
           >
             <i className="fas fa-plus fa-lg" />
           </button>
+        </div>
+        <div className="col-12">
+          <hr />
+        </div>
+        <div className="col-12">
+          {this.state.alimentosConsumidos.length === 0 ? (
+            <p>No hay reportes de tu consumo para este día.</p>
+          ) : (
+            <ul className="list-group">
+              {this.renderAlimentos(this.state.alimentosConsumidos)}
+            </ul>
+          )}
         </div>
       </div>
     );

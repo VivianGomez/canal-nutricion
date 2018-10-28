@@ -37,17 +37,16 @@ class DashboardDoctor extends Component {
     });
   }
 
-
   renderPacientes() {
     let pacientes = this.props.pacientes;
     return pacientes.map(paciente => (
       <InfoPaciente
         key={paciente._id}
         paciente={paciente}
-        nombre= {paciente.nombre}
-        identificacion= {paciente.identificacion}
-        correo= {paciente.correo}
-        celular= {paciente.celular}
+        nombre={paciente.nombre}
+        identificacion={paciente.identificacion}
+        correo={paciente.correo}
+        celular={paciente.celular}
       />
     ));
   }
@@ -76,10 +75,8 @@ class DashboardDoctor extends Component {
 DashboardDoctor = withRouter(DashboardDoctor);
 
 export default withTracker(() => {
-  console.log("subscribe pacientes");
   Meteor.subscribe('pacientes', localStorage.getItem('foohealliStuff'));
   return {
     pacientes: Pacientes.find({}).fetch()
   };
 })(DashboardDoctor);
-

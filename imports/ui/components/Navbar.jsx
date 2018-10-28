@@ -165,7 +165,7 @@ class Navbar extends Component {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span className="navbar-toggler-icon vertical-align">
+              <span className="navbar-toggler-icon vertical-align-custom">
                 <i className="text-white fas fa-bars fa-lg" />
               </span>
             </button>

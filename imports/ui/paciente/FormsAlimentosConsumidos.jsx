@@ -28,9 +28,7 @@ class FormsAlimentosConsumidos extends Component {
   }
 
   handleChangeFecha(event) {
-    if (this.state.fecha !== event) {
-      this.setState({ fecha: event });
-    }
+    this.setState({ fecha: event });
   }
 
   componentWillReceiveProps(nextProps) {
