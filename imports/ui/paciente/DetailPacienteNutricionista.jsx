@@ -5,7 +5,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Pacientes } from '../../api/pacientes.js';
 import { withRouter } from 'react-router';
 
-class DetailPaciente extends Component {
+
+class DetailPacienteNutricionista extends Component {
   constructor(props) {
     super(props);
     this.nombreMedInput = React.createRef();
@@ -20,24 +21,23 @@ class DetailPaciente extends Component {
       paciente: this.props.paciente,
       botonAgregarMedicamento: false,
       formCrearMedicamento: false,
-      doctor: false,
+      nutricionista: false,
       usuario: null
     };
 
-    this.toggleFormAgregarMedicamentos = this.toggleFormAgregarMedicamentos.bind(
-      this
-    );
+    this.toggleFormAgregarMedicamentos = this.toggleFormAgregarMedicamentos.bind(this);
   }
+
 
   componentDidMount() {
     Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
       if (err) {
         alert(err.error);
       } else if (res) {
-        if (res.rol === 'doctor') {
+        if (res.rol === 'nutricionista') {
           this.setState({
             botonAgregarMedicamento: true,
-            doctor: true,
+            nutricionista: true,
             usuario: res
           });
         } else {
@@ -47,26 +47,27 @@ class DetailPaciente extends Component {
         }
       }
     });
-  }
+  }  
 
-  renderMedicamentos() {
+renderMedicamentos() {
     if (this.props.paciente) {
+
       let medicamentos = this.props.paciente.medicamentosAsignados;
 
       return medicamentos.map(medicamento => (
         <Medicamento
-          key={medicamento._id}
-          medicamento={medicamento}
-          identificacionP={this.state.identificacionP}
-          usuario={this.state.usuario}
-          doctor={this.state.doctor}
-          opcionesDoctor={true}
+        key={medicamento._id}
+        medicamento={medicamento}
+        identificacionP= {this.state.identificacionP}
+        usuario= {this.state.usuario}
+        nutricionista= {this.state.nutricionista}      
         />
       ));
     } else {
       return <h1>Cargando medicamentos...</h1>;
     }
   }
+
 
   handleCrearMedicamentoSubmit(event) {
     event.preventDefault();
@@ -75,9 +76,9 @@ class DetailPaciente extends Component {
       identificacionP: this.state.identificacionP,
       medicamentoP: this.nombreMedInput.current.value,
       posologiaP: this.posologiaInput.current.value,
-      frecuenciaP: this.frecuenciaInput.current.value,
+      frecuenciaP:this.frecuenciaInput.current.value,
       cantidadP: this.cantidadInput.current.value,
-      viaP: this.viaInput.current.value,
+      viaP:this.viaInput.current.value,
       usuario: this.state.usuario
     });
 
@@ -96,24 +97,25 @@ class DetailPaciente extends Component {
     });
   }
 
+
   formCrearMedicamento() {
-    if (this.state.formCrearMedicamento && this.state.doctor) {
+    if (this.state.formCrearMedicamento && this.state.nutricionista) {
       return (
         <div className="col-12">
           <h5>Agregar un medicamento</h5>
           <form onSubmit={this.handleCrearMedicamentoSubmit.bind(this)}>
             <div className="form-group">
               <div className="form-group">
-                <label htmlFor="nombreMed">Nombre del medicamento: </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="nombreMedInput"
-                  ref={this.nombreMedInput}
-                  minLength="5"
-                  required
-                />
-              </div>
+              <label htmlFor="nombreMed">Nombre del medicamento: </label>
+              <input
+                type="text"
+                className="form-control"
+                id="nombreMedInput"
+                ref={this.nombreMedInput}
+                minLength="5"
+                required
+              />
+            </div>
             </div>
             <div className="form-group">
               <label htmlFor="posologiaInput">Posología: </label>
@@ -176,21 +178,21 @@ class DetailPaciente extends Component {
               </select>
             </div>
 
-            <center>
-              <button type="submit" className="btn btn-success mr-1">
-                <i className="far fa-check-circle" />
-                &nbsp;Asignar medicamento
-              </button>
-              <button
-                type="button"
-                className="btn btn-danger ml-1"
-                onClick={this.toggleFormAgregarMedicamentos}
-              >
-                <i className="far fa-times-circle" />
-                &nbsp;Cancelar
-              </button>
-            </center>
-          </form>
+                <center>
+                <button type="submit" className="btn btn-success mr-1">
+                  <i className="far fa-check-circle" />
+                    &nbsp;Asignar medicamento
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger ml-1"
+                  onClick={this.toggleFormAgregarMedicamentos}
+                >
+                  <i className="far fa-times-circle" />
+                    &nbsp;Cancelar
+                </button>  
+                </center>                      
+             </form>
         </div>
       );
     }
@@ -198,8 +200,8 @@ class DetailPaciente extends Component {
 
   botonesDoctor() {
     let botones = [];
-    console.log(this.state.doctor);
-    if (this.state.botonAgregarMedicamento && this.state.doctor) {
+    console.log(this.state.nutricionista);
+    if (this.state.botonAgregarMedicamento && this.state.nutricionista) {
       botones.push(
         <button
           key="botonAgregarMedicamento"
@@ -217,26 +219,46 @@ class DetailPaciente extends Component {
     return botones;
   }
 
+
   render() {
-    return (
+    return(
       <div id="medicamentosPaciente" className="row">
         <div className="col-12">
-          <hr />
+          <div className="col-12 text-center mt-4 mb-3">
+            <h1 className="foohealli-text-yellow">Paciente {this.props.paciente.nombre}</h1>
+          </div>
+          <div>
+              <p>
+              <b>Identificación: </b>
+              {this.props.paciente.identificacion}
+              <br />
+              <b>Activo desde: </b>
+              {this.props.paciente.fechaRegistro}
+              <br />
+              <b>Correo: </b>
+              {this.props.paciente.correo}
+              <br />
+              <b>Celular: </b>
+              {this.props.paciente.celular}
+              <br />
+              </p> 
+          </div>
+          <hr/>
           <div className="bg-foohealli text-light">
             <br />
             <h2 className="text-center font-weight-bold">
-              <i className="fas fa-pills" />
+              <i className="fas fa-pills"></i>
               &nbsp;Medicamentos asignados&nbsp;
             </h2>
             <br />
           </div>
           <hr />
         </div>
-        <hr />
+        <hr/>
         <div className="col-12 text-center">{this.botonesDoctor()}</div>
-        <hr />
+        <hr/>
         {this.formCrearMedicamento()}
-        <hr />
+        <hr/>
         <div className="col-12">
           <ul className="list-group">{this.renderMedicamentos()}</ul>
         </div>
@@ -245,10 +267,12 @@ class DetailPaciente extends Component {
   }
 }
 
-export default withTracker(props => {
-  const identificacionP = '' + props.match.params.identificacion;
+
+export default withTracker( props => {
+
+  const identificacionP = "" + props.match.params.identificacion;
   Meteor.subscribe('pacientes.identificacion', identificacionP);
   return {
-    paciente: Pacientes.findOne({ identificacion: identificacionP })
+    paciente: Pacientes.findOne({ identificacion:identificacionP })
   };
-})(DetailPaciente);
+})(DetailPacienteNutricionista);
