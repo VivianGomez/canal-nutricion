@@ -9,6 +9,7 @@ class DashboardNutricionista
  extends Component {
   constructor(props) {
     super(props);
+    this.pacienteAAsignarInput = React.createRef();
 
     if (!localStorage.getItem('foohealliStuff')) {
       this.props.history.push('/');
@@ -17,8 +18,12 @@ class DashboardNutricionista
     this.state = {
       token: localStorage.getItem('foohealliStuff'),
       nutricionista: false, 
-      usuario: null
+      usuario: null,
+      botonAgregarPaciente: false,
+      formCrearPaciente: false
     };
+
+    this.toggleFormAgregarPacientes = this.toggleFormAgregarPacientes.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +33,7 @@ class DashboardNutricionista
       } else if (res) {
         if (res.rol === 'nutricionista') {
           this.setState({
+            botonAgregarPaciente: true,
             nutricionista: true,
             usuario: res
           });
@@ -53,11 +59,97 @@ class DashboardNutricionista
     ));
   }
 
+
+
+handleAgregarPacienteSubmit(event) {
+    event.preventDefault();
+
+    Meteor.call('pacientes.asignarNutricionista', {
+      identificacionPaciente: this.pacienteAAsignarInput.current.value,
+      identificacionNutricionista: this.state.usuario.identificacion
+    });
+
+    this.pacienteAAsignarInput.current.value = '';
+    this.toggleFormAgregarPacientes();
+  }
+
+  toggleFormAgregarPacientes() {
+    this.setState({
+      botonAgregarPaciente: !this.state.botonAgregarPaciente,
+      formCrearPaciente: !this.state.formCrearPaciente
+    });
+  }
+
+
+  formCrearPaciente() {
+    if (this.state.formCrearPaciente && this.state.nutricionista) {
+      return (
+        <div className="col-12">
+          <h5>Agregar nuevo paciente</h5>
+          <form onSubmit={this.handleAgregarPacienteSubmit.bind(this)}>
+            <div className="form-group">
+              <div className="form-group">
+              <label htmlFor="pacienteAAsignarInput">Identificación del paciente a asignar: </label>
+              <input
+                type="text"
+                className="form-control"
+                id="pacienteAAsignarInput"
+                ref={this.pacienteAAsignarInput}
+                minLength="5"
+                required
+              />
+            </div>
+            </div>          
+                <center>
+                <button type="submit" className="btn btn-success mr-1">
+                  <i className="far fa-check-circle" />
+                    &nbsp;Agregar
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger ml-1"
+                  onClick={this.toggleFormAgregarPacientes}
+                >
+                  <i className="far fa-times-circle" />
+                    &nbsp;Cancelar
+                </button>  
+                </center>                      
+             </form>
+        </div>
+      );
+    }
+  }
+
+  botonesDoctor() {
+    let botones = [];
+
+    if (this.state.botonAgregarPaciente && this.state.nutricionista) {
+      botones.push(
+        <button
+          key="botonAgregarPaciente"
+          type="button"
+          className="btn btn-foohealli-yellow mr-2 mb-2"
+          onClick={this.toggleFormAgregarPacientes}
+        >
+          <i className="fas fa-user-plus"></i>
+          &nbsp;Agregar paciente
+        </button>
+      );
+      botones.push(<hr key="separadorBotones" />);
+    }
+
+    return botones;
+  }
+
+
+
   render() {
     return (
       <div id="pacientes-nutricionista" className="row">
+        <br/>
         <div className="col-12">
-          <div className="bg-foohealli-green text-light">
+          <br />
+          <div className="bg-foohealli text-light">
             <br />
             <h3 className="text-center font-weight-bold">
               &nbsp;Tus Pacientes&nbsp;
@@ -66,6 +158,11 @@ class DashboardNutricionista
           </div>
           <hr />
         </div>
+        <hr/>
+        <div className="col-12 text-center">{this.botonesDoctor()}</div>
+        <hr/>
+        {this.formCrearPaciente()}
+        <hr/>
         <div className="col-12">
           <ul className="list-group">{this.renderPacientes()}</ul>
         </div>

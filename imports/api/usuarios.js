@@ -43,7 +43,8 @@ Meteor.methods({
 
             if (rol === 'paciente') {
 
-                usuario.doctor = {};
+                usuario.doctor = "";
+                usuario.nutricionista = "";
                 usuario.alimentosConsumidos = [];
                 usuario.examenesMedicos = [];
                 usuario.medicamentosAsignados = [];
@@ -107,9 +108,63 @@ Meteor.methods({
         } else {
             return null;
         }
+    },
+    'usuarios.asignarNutricionista'({
+        identificacionPaciente,
+        identificacionNutricionista
+    }) {
+        check(identificacionPaciente, String);
+        check(identificacionNutricionista, String);
+
+        verificarPermisos(usuario.rol);
+
+        const paciente = Pacientes.findOne({
+            identificacion: identificacionPaciente,
+        });
+
+        verificarExistenciaPaciente(paciente);
+
+        const nutricionista = Nutricionistas.findOne({
+            identificacion: identificacionNutricionista,
+        });
+
+        verificarExistenciaNutricionista(nutricionista);
+
+
+        try {
+            Pacientes.update({
+                identificacion: identificacionPaciente
+            }, {
+                $set: {
+                    nutricionista: identificacionNutricionista
+                }
+            });
+
+            return "El paciente " + paciente.nombre + " fue asignado al nutricionista "+ nutricionista.nombre +" correctamente";
+        } catch (error) {
+            throw new Meteor.Error(error);
+        }
     }
 });
 
 function decodificarToken(token) {
     return token ? jwt.verify(token, process.env.CODE_TOKEN) : null;
+}
+
+function verificarPermisos(rol) {
+    if (rol === "paciente") {
+        throw new Meteor.Error('No se encuentra autorizado para realizar esta acción');
+    }
+}
+
+function verificarExistenciaPaciente(paciente) {
+    if (!paciente) {
+        throw new Meteor.Error('No se encuentra el paciente.');
+    }
+}
+
+function verificarExistenciaNutricionista(nutricionista) {
+    if (!nutricionista) {
+        throw new Meteor.Error('No se encuentra el nutricionista.');
+    }
 }

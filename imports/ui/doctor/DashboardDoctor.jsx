@@ -55,8 +55,9 @@ class DashboardDoctor extends Component {
   render() {
     return (
       <div id="pacientes-doctor" className="row">
+        <br/>
         <div className="col-12">
-          <div className="bg-foohealli-green text-light">
+          <div className="bg-foohealli-yellow text-light">
             <br />
             <h3 className="text-center font-weight-bold">
               &nbsp;Tus Pacientes&nbsp;

@@ -10,6 +10,9 @@ import {
 import {
   Match
 } from 'meteor/check';
+import {
+    Nutricionistas
+} from './nutricionistas';
 
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
@@ -29,7 +32,13 @@ if (Meteor.isServer) {
                         doctor: usuario.identificacion
                     }, ],
                 });
-            } else {
+            }if (usuario.rol === "nutricionista") {
+                return Pacientes.find({
+                    $or: [{
+                        nutricionista: usuario.identificacion
+                    }, ],
+                });
+            }else {
                 return Pacientes.find();
             }
         } else {
@@ -148,7 +157,9 @@ Meteor.methods({
                         frecuencia: frecuenciaP,
                         cantidad: cantidadP,
                         via:viaP,
-                        fechaInicio: moment().format('DD/MM/YYYY - h:mm:ss a')
+                        estado:"Activo",
+                        fechaInicio: moment().format('DD/MM/YYYY'),
+                        fechaFin: " "
                     }
                 }
             });
@@ -165,6 +176,7 @@ Meteor.methods({
         posologia,
         frecuencia,
         cantidad,
+        estado,
         usuario
     }) {
         check(identificacion, String);
@@ -172,6 +184,7 @@ Meteor.methods({
         check(posologia, String);
         check(frecuencia, String);
         check(cantidad, String);
+        check(estado, String);
         check(usuario, Object);
 
         verificarPermisos(usuario.rol);
@@ -185,7 +198,9 @@ Meteor.methods({
                     
                     "medicamentosAsignados.$.posologia": posologia,
                     "medicamentosAsignados.$.frecuencia": frecuencia,
-                    "medicamentosAsignados.$.cantidad": cantidad
+                    "medicamentosAsignados.$.cantidad": cantidad,
+                    "medicamentosAsignados.$.estado": estado,
+                    "medicamentosAsignados.$.fechaFin":verificarEstadoMedicamento(estado)
                 }
             });
 
@@ -217,6 +232,40 @@ Meteor.methods({
 
         return alimentosConsumidosFecha;
 
+    },
+    'pacientes.asignarNutricionista'({
+        identificacionPaciente,
+        identificacionNutricionista
+    }) {
+        check(identificacionPaciente, String);
+        check(identificacionNutricionista, String);
+
+        const paciente = Pacientes.findOne({
+            identificacion: identificacionPaciente,
+        });
+
+        verificarExistenciaPaciente(paciente);
+
+        const nutricionista = Nutricionistas.findOne({
+            identificacion: identificacionNutricionista,
+        });
+
+        verificarExistenciaNutricionista(nutricionista);
+
+
+        try {
+            Pacientes.update({
+                identificacion: identificacionPaciente
+            }, {
+                $set: {
+                    nutricionista: identificacionNutricionista
+                }
+            });
+
+            return "El paciente " + paciente.nombre + " fue asignado al nutricionista "+ nutricionista.nombre +" correctamente";
+        } catch (error) {
+            throw new Meteor.Error(error);
+        }
     }
 });
 
@@ -225,7 +274,7 @@ function decodificarToken(token) {
 }
 
 function verificarPermisos(rol) {
-    if (rol !== "doctor") {
+    if (rol === "paciente") {
         throw new Meteor.Error('No se encuentra autorizado para realizar esta acción');
     }
 }
@@ -234,4 +283,18 @@ function verificarExistenciaPaciente(paciente) {
     if (!paciente) {
         throw new Meteor.Error('No se encuentra el paciente.');
     }
+}
+
+function verificarExistenciaNutricionista(nutricionista) {
+    if (!nutricionista) {
+        throw new Meteor.Error('No se encuentra el nutricionista.');
+    }
+}
+
+function verificarEstadoMedicamento(estado) {
+    let fechaFin="";
+    if (estado==="Inactivo") {
+        fechaFin = moment().format('DD/MM/YYYY - h:mm:ss a');
+    }
+    return fechaFin;
 }

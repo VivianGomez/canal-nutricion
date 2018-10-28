@@ -177,6 +177,7 @@ renderMedicamentos() {
                 </option>
               </select>
             </div>
+            
                 <center>
                 <button type="submit" className="btn btn-success mr-1">
                   <i className="far fa-check-circle" />
@@ -234,6 +235,7 @@ renderMedicamentos() {
           </div>
           <hr />
         </div>
+        <hr/>
         <div className="col-12 text-center">{this.botonesDoctor()}</div>
         <hr/>
         {this.formCrearMedicamento()}

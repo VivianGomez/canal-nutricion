@@ -18,7 +18,10 @@ class Medicamento extends Component {
 
     this.posologiaActualizarInput = React.createRef();
     this.frecuenciaActualizarInput = React.createRef();
-    this.cantidadActualizarInput = React.createRef();    
+    this.cantidadActualizarInput = React.createRef();  
+    this.estadoActualizarInput = React.createRef();  
+
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,10 +60,12 @@ class Medicamento extends Component {
     const posologia = this.posologiaActualizarInput.current.value;
     const frecuencia = this.frecuenciaActualizarInput.current.value;
     const cantidad= this.cantidadActualizarInput.current.value;
+    const estado= this.estadoActualizarInput.current.value;
     if (
       posologia === this.state.medicamento.posologia &&
       frecuencia === this.state.medicamento.frecuencia &&
-      cantidad === this.state.medicamento.cantidad
+      cantidad === this.state.medicamento.cantidad &&
+      estado === this.state.medicamento.estado
     ) {
       alert('Los valores del medicamento no han cambiado');
     } else {
@@ -72,6 +77,7 @@ class Medicamento extends Component {
           posologia: posologia,
           frecuencia: frecuencia,
           cantidad: cantidad,
+          estado: estado,
           usuario: this.state.usuario
         },
         (err, res) => {
@@ -140,6 +146,24 @@ class Medicamento extends Component {
                 required
               />
             </div>
+
+            <div className="form-group">
+              <label htmlFor="estadoActualizarInput">Estado actual</label>
+              (¿Sigue haciendo parte del tratamiento del usuario o no?)
+              <select
+                id="estadoActualizarInput"
+                className="form-control"
+                ref={this.estadoActualizarInput}
+              >
+                <option key="Activo" value="Activo">
+                  Activo
+                </option>
+                <option key="Inactivo" value="Inactivo">
+                  Inactivo
+                </option>
+              </select>
+            </div>
+
             <button type="submit" className="btn btn-foohealli-yellow mr-1">
               <i className="far fa-edit" />
               &nbsp;Enviar
@@ -174,7 +198,7 @@ class Medicamento extends Component {
 
     opcionesDoctor() {
     let doctor = [];
-
+    if (this.state.doctoe) { 
       doctor.push(
         <div
           key="habilidadesEdicionAdmin"
@@ -190,7 +214,7 @@ class Medicamento extends Component {
           </button>
         </div>
       );
-    
+    }
     return doctor;
   }
   render() {
@@ -213,8 +237,14 @@ class Medicamento extends Component {
               <br />
               <b>Via: </b>
               {this.state.medicamento.via}
-            </p>
-          </div>
+              <br />
+              <b>Tomado desde: </b>
+              {this.state.medicamento.fechaInicio}
+              <br />
+              <b>Estado actual: </b>
+              {this.state.medicamento.estado}
+              </p>         
+            </div>
                {this.opcionesDoctor()}
           <hr/>
           {this.formActualizarMedicamento()}
