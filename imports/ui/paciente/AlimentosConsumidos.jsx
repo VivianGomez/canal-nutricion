@@ -45,9 +45,49 @@ class DashboardPaciente extends Component {
   }
 
   renderAlimentos(alimentos) {
-    return alimentos.map(alimento => (
-      <Alimento key={alimento.idAlimento} alimento={alimento} />
-    ));
+    let desayuno = [];
+    let almuerzo = [];
+    let cena = [];
+    let onces = [];
+
+    alimentos.map(alimento => {
+      let alimentoListo = (
+        <Alimento key={alimento.idAlimento} alimento={alimento} />
+      );
+      switch (alimento.tipoComida) {
+        case 'desayuno':
+          desayuno.push(alimentoListo);
+          break;
+        case 'almuerzo':
+          almuerzo.push(alimentoListo);
+          break;
+        case 'cena':
+          cena.push(alimentoListo);
+          break;
+        case 'onces':
+          onces.push(alimentoListo);
+          break;
+      }
+    });
+
+    return (
+      <div>
+        {desayuno.length > 0 ? this.listaAlimento('Desayuno', desayuno) : ''}
+        {almuerzo.length > 0 ? this.listaAlimento('Almuerzo', almuerzo) : ''}
+        {cena.length > 0 ? this.listaAlimento('Cena', cena) : ''}
+        {onces.length > 0 ? this.listaAlimento('Onces', onces) : ''}
+      </div>
+    );
+  }
+
+  listaAlimento(tipo, alimentos) {
+    return (
+      <div>
+        <h5 className="text-center">{tipo}</h5>
+        <ul className="list-group">{alimentos}</ul>
+        <hr />
+      </div>
+    );
   }
 
   componentDidMount() {
@@ -116,9 +156,7 @@ class DashboardPaciente extends Component {
           {this.state.alimentosConsumidos.length === 0 ? (
             <p>No hay reportes de tu consumo para este día.</p>
           ) : (
-            <ul className="list-group">
-              {this.renderAlimentos(this.state.alimentosConsumidos)}
-            </ul>
+            this.renderAlimentos(this.state.alimentosConsumidos)
           )}
         </div>
       </div>

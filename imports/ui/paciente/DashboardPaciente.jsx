@@ -66,13 +66,18 @@ class DashboardPaciente extends Component {
           </Link>
         </div>
         <div className="col-md-4 mb-3">
-          <div class="card">
-            <img
-              class="card-img-top pointer img-paciente"
-              src="../paciente/logoMedicamentos.jpeg"
-              alt="Card image cap"
-            />
-          </div>
+          <Link
+            to={'/paciente/medicamentos'}
+            style={{ textDecoration: 'none' }}
+          >
+            <div class="card">
+              <img
+                class="card-img-top pointer img-paciente"
+                src="../paciente/logoMedicamentos.jpeg"
+                alt="Card image cap"
+              />
+            </div>
+          </Link>
         </div>
       </div>
     );

@@ -46,6 +46,11 @@ class App extends Component {
             />
             <Route
               exact
+              path="/paciente/medicamentos"
+              component={DetailPaciente}
+            />
+            <Route
+              exact
               path="/paciente/alimentosConsumidos"
               component={AlimentosConsumidos}
             />

@@ -17,7 +17,20 @@ class Alimento extends Component {
 
   render() {
     let alimento = this.state.alimento;
-    return <li className="list-group-item">{alimento.alimento}</li>;
+    return (
+      <li className="list-group-item">
+        <div className="row">
+          <div className="col-md-8 col-12">
+            {alimento.alimento}
+            <br />
+            <b>Porción: </b> {alimento.porcionConsumidaGramos} gr
+          </div>
+          <div className="col-md-4 col-12">
+            <b>Categoría: </b> {alimento.categoria}
+          </div>
+        </div>
+      </li>
+    );
   }
 }
 
