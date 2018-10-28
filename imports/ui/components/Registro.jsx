@@ -50,8 +50,7 @@ class Registro extends Component {
               { correo, clave },
               (err, res) => {
                 if (err) {
-                  console.log(err);
-                  alert(err.error);
+                  alert(err);
                 } else {
                   localStorage.setItem('foohealliStuff', res);
                   this.props.history.push('/paciente/dashboard');
@@ -65,7 +64,6 @@ class Registro extends Component {
               { correo, clave },
               (err, res) => {
                 if (err) {
-                  console.log(err);
                   alert(err.error);
                 } else {
                   localStorage.setItem('foohealliStuff', res);
@@ -79,7 +77,6 @@ class Registro extends Component {
               { correo, clave },
               (err, res) => {
                 if (err) {
-                  console.log(err);
                   alert(err.error);
                 } else {
                   localStorage.setItem('foohealliStuff', res);
