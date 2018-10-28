@@ -10,12 +10,10 @@ class FormsAlimentosConsumidos extends Component {
       busqueda: '',
       resultados: [],
       seleccionado: false,
-      seleccion: null,
-      aMostrar: ''
+      seleccion: null
     };
 
     this.tipoComidaInput = React.createRef();
-    this.porcionDeComidaInput = React.createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -24,6 +22,7 @@ class FormsAlimentosConsumidos extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     alert('Tu comida ha sido registrada exitosamente.');
     document.getElementById('butonCerrarModalAlimentos').click();
   }
@@ -33,14 +32,11 @@ class FormsAlimentosConsumidos extends Component {
       busqueda: '',
       resultados: [],
       seleccionado: false,
-      seleccion: null,
-      aMostrar: ''
+      seleccion: null
     });
   }
 
   handleChange(event) {
-    console.log(this.state.resultados);
-    console.log(event.target.value);
     this.setState(
       {
         busqueda: event.target.value
@@ -53,7 +49,6 @@ class FormsAlimentosConsumidos extends Component {
   }
 
   seleccionar(alimento) {
-    console.log(alimento);
     this.setState({
       seleccionado: true,
       seleccion: alimento,
@@ -69,7 +64,7 @@ class FormsAlimentosConsumidos extends Component {
         return resultados.map(resultado => (
           <li
             key={resultado.ndbno}
-            class="list-group-item"
+            className="list-group-item"
             onClick={() => this.seleccionar(resultado)}
           >
             {resultado.name}
@@ -77,7 +72,7 @@ class FormsAlimentosConsumidos extends Component {
         ));
       } else {
         return (
-          <li class="list-group-item">
+          <li className="list-group-item">
             <Emoji text="No hay resultados 😪" />
           </li>
         );
@@ -149,32 +144,32 @@ class FormsAlimentosConsumidos extends Component {
   render() {
     return (
       <div
-        class="modal fade bd-example-modal-lg bg-foohealli-yellow"
+        className="modal fade bd-example-modal-lg bg-foohealli-yellow"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="myLargeModalLabel"
         aria-hidden="true"
       >
         <div
-          class="modal-dialog modal-dialog-centered modal-lg"
+          className="modal-dialog modal-dialog-centered modal-lg"
           role="document"
         >
-          <div class="modal-content bg-foohealli">
-            <div class="modal-header bg-foohealli text-light">
-              <h5 class="modal-title" id="exampleModalLabel">
+          <div className="modal-content bg-foohealli">
+            <div className="modal-header bg-foohealli text-light">
+              <h5 className="modal-title" id="exampleModalLabel">
                 <Emoji text="Dinos qué comiste 😋" />
               </h5>
               <button
                 id="butonCerrarModalAlimentos"
                 type="button"
-                class="close text-light"
+                className="close text-light"
                 data-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <p className="small">
                 Al llenar los valores podrás registrar tu comida.
               </p>
@@ -185,7 +180,7 @@ class FormsAlimentosConsumidos extends Component {
                   </label>
                   <select
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="tipoComidaInput"
                     ref={this.tipoComidaInput}
                   >
@@ -206,7 +201,7 @@ class FormsAlimentosConsumidos extends Component {
                     id="porcionComidaInput"
                     ref={this.porcionDeComidaInput}
                     min="0"
-                    placeholder="100"
+                    placeholder="Ej: 200"
                     required
                   />
                 </div>
