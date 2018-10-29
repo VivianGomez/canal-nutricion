@@ -1,35 +1,39 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
+import { withRouter } from 'react-router';
 
 class Medicamento extends Component {
   constructor(props) {
     super(props);
 
+    if (!localStorage.getItem('foohealliStuff')) {
+      this.props.history.push('/');
+    }
+
     this.state = {
       medicamento: this.props.medicamento,
       identificacionP: this.props.identificacionP,
       usuario: this.props.usuario,
-      doctor:   this.props.doctor,
+      doctor: this.props.doctor,
       actualizar: false
     };
 
-
-    this.toggleFormActualizarMedicamento = this.toggleFormActualizarMedicamento.bind(this);
+    this.toggleFormActualizarMedicamento = this.toggleFormActualizarMedicamento.bind(
+      this
+    );
 
     this.posologiaActualizarInput = React.createRef();
     this.frecuenciaActualizarInput = React.createRef();
-    this.cantidadActualizarInput = React.createRef();  
-    this.estadoActualizarInput = React.createRef();  
-
-
+    this.cantidadActualizarInput = React.createRef();
+    this.estadoActualizarInput = React.createRef();
   }
 
   componentWillReceiveProps(nextProps) {
-      this.setState({
+    this.setState({
       medicamento: nextProps.medicamento,
       identificacionP: nextProps.identificacionP,
       usuario: nextProps.usuario,
-      doctor: nextProps.doctor,
+      doctor: nextProps.doctor
     });
   }
 
@@ -39,7 +43,6 @@ class Medicamento extends Component {
       Meteor.call(
         'pacientes.removerMedicamento',
         {
-
           identificacion: this.state.identificacionP,
           medicamentoNombre: this.state.medicamento.medicamento,
           usuario: this.state.usuario
@@ -59,8 +62,8 @@ class Medicamento extends Component {
     event.preventDefault();
     const posologia = this.posologiaActualizarInput.current.value;
     const frecuencia = this.frecuenciaActualizarInput.current.value;
-    const cantidad= this.cantidadActualizarInput.current.value;
-    const estado= this.estadoActualizarInput.current.value;
+    const cantidad = this.cantidadActualizarInput.current.value;
+    const estado = this.estadoActualizarInput.current.value;
     if (
       posologia === this.state.medicamento.posologia &&
       frecuencia === this.state.medicamento.frecuencia &&
@@ -73,7 +76,7 @@ class Medicamento extends Component {
         'pacientes.actualizarMedicamento',
         {
           identificacion: this.state.identificacionP,
-          medicamento:this.state.medicamento.medicamento,
+          medicamento: this.state.medicamento.medicamento,
           posologia: posologia,
           frecuencia: frecuencia,
           cantidad: cantidad,
@@ -92,27 +95,25 @@ class Medicamento extends Component {
     }
   }
 
-
   toggleFormActualizarMedicamento() {
     this.setState({
       actualizar: !this.state.actualizar
     });
   }
 
-
   formActualizarMedicamento() {
     if (this.state.actualizar) {
       return (
         <div className="col-12">
           <hr />
-          <h5>Actualizar medicamento  {this.state.medicamento.medicamento} </h5>
+          <h5>Actualizar medicamento {this.state.medicamento.medicamento} </h5>
           <form onSubmit={this.handleActualizarMedicamentoSubmit.bind(this)}>
             <div className="form-group">
               <label htmlFor="posologiaInput">Posología: </label>
               <input
                 type="text"
                 className="form-control"
-                id={"posologiaInput"+ this.state.medicamento._id}
+                id={'posologiaInput' + this.state.medicamento._id}
                 defaultValue={this.state.medicamento.posologia}
                 ref={this.posologiaActualizarInput}
                 minLength="1"
@@ -125,7 +126,7 @@ class Medicamento extends Component {
               <input
                 type="text"
                 className="form-control"
-                id={"frecuenciaInput"+ this.state.medicamento._id}
+                id={'frecuenciaInput' + this.state.medicamento._id}
                 defaultValue={this.state.medicamento.frecuencia}
                 ref={this.frecuenciaActualizarInput}
                 minLength="1"
@@ -136,7 +137,7 @@ class Medicamento extends Component {
             <div className="form-group">
               <label htmlFor="cantidadInput">Cantidad</label>
               <input
-                id={"cantidadInput"+ this.state.medicamento._id}
+                id={'cantidadInput' + this.state.medicamento._id}
                 className="form-control"
                 type="number"
                 ref={this.cantidadActualizarInput}
@@ -196,9 +197,9 @@ class Medicamento extends Component {
     }
   }
 
-    opcionesDoctor() {
+  opcionesDoctor() {
     let doctor = [];
-    if (this.state.doctor) { 
+    if (this.state.doctor) {
       doctor.push(
         <div
           key="habilidadesEdicionAdmin"
@@ -218,15 +219,15 @@ class Medicamento extends Component {
     return doctor;
   }
 
-  mostrarFechaFinMedicamento(){
-    if(this.state.medicamento.estado==="Inactivo"){
+  mostrarFechaFinMedicamento() {
+    if (this.state.medicamento.estado === 'Inactivo') {
       return (
         <p>
-        <br />
+          <br />
           <b>Fecha en que se dejó de usar: </b>
           {this.state.medicamento.fechaFin}
         </p>
-        )
+      );
     }
   }
 
@@ -236,8 +237,9 @@ class Medicamento extends Component {
         <div className="row">
           <div className="col-lg-9 col-md-8 col-12">
             <p>
-              <i className="fas fa-tablets foohealli-text"></i>
-              &nbsp;&nbsp;{this.state.medicamento.medicamento}
+              <i className="fas fa-tablets foohealli-text" />
+              &nbsp;&nbsp;
+              {this.state.medicamento.medicamento}
               <br />
               <b>Posologia: </b>
               {this.state.medicamento.posologia}
@@ -256,11 +258,11 @@ class Medicamento extends Component {
               <br />
               <b>Estado actual: </b>
               {this.state.medicamento.estado}
-              </p> 
-              {this.mostrarFechaFinMedicamento}        
-            </div>
-               {this.opcionesDoctor()}
-          <hr/>
+            </p>
+            {this.mostrarFechaFinMedicamento}
+          </div>
+          {this.opcionesDoctor()}
+          <hr />
           {this.formActualizarMedicamento()}
         </div>
       </li>

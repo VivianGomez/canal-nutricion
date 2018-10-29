@@ -205,7 +205,9 @@ class DashboardPaciente extends Component {
         </div>
         <div className="col-12">
           {this.state.alimentosConsumidos.length === 0 ? (
-            <p>No hay reportes de tu consumo para este día.</p>
+            <li className="list-group-item">
+              No hay reportes de consumo para este día.
+            </li>
           ) : (
             this.renderAlimentos(this.state.alimentosConsumidos)
           )}

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
-import DetailPaciente from './DetailPaciente.jsx';
+import { withRouter } from 'react-router';
 
 class InfoPaciente extends Component {
   constructor(props) {
     super(props);
+
+    if (!localStorage.getItem('foohealliStuff')) {
+      this.props.history.push('/');
+    }
 
     this.state = {
       paciente: this.props.paciente,
@@ -97,4 +100,4 @@ class InfoPaciente extends Component {
   }
 }
 
-export default InfoPaciente;
+export default withRouter(InfoPaciente);

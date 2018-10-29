@@ -8,6 +8,11 @@ import { withRouter } from 'react-router';
 class DetailPaciente extends Component {
   constructor(props) {
     super(props);
+
+    if (!localStorage.getItem('foohealliStuff')) {
+      this.props.history.push('/');
+    }
+
     this.nombreMedInput = React.createRef();
     this.posologiaInput = React.createRef();
     this.frecuenciaInput = React.createRef();
@@ -64,6 +69,12 @@ class DetailPaciente extends Component {
         });
       }
 
+      if (medicamentos.length === 0) {
+        return (
+          <li className="list-group-item">No hay medicamentos asignados</li>
+        );
+      }
+
       return medicamentos.map(medicamento => (
         <Medicamento
           key={medicamento._id}
@@ -74,7 +85,7 @@ class DetailPaciente extends Component {
         />
       ));
     } else {
-      return <h1>Cargando medicamentos...</h1>;
+      return <li className="list-group-item">No hay medicamentos asignados</li>;
     }
   }
 
@@ -313,13 +324,13 @@ class DetailPaciente extends Component {
           )}
           <hr />
         </div>
-        <br/>
+        <br />
         {this.state.doctor ? (
           <div className="col-12 text-center">{this.botonesDoctor()}</div>
         ) : (
           ''
         )}
-        <br/>
+        <br />
         {this.state.doctor ? this.formCrearMedicamento() : ''}
         <div className="col-12">
           <ul className="list-group">{this.renderMedicamentos()}</ul>
@@ -328,6 +339,8 @@ class DetailPaciente extends Component {
     );
   }
 }
+
+DetailPaciente = withRouter(DetailPaciente);
 
 export default withTracker(props => {
   const identificacionP = '' + props.match.params.identificacion;
