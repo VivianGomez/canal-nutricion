@@ -101,7 +101,7 @@ renderInfoPaciente() {
               <b>Correo: </b>
                 <a href={'mailto:' + correo}>{correo}</a>
               <br />
-              <i class="fas fa-envelope-open foohealli-text"></i>
+              <i class="fas fa-calendar-alt foohealli-text"></i>
               <b>En tratamiento desde : </b>
                 {fechaR}
               <br />
@@ -266,7 +266,11 @@ renderInfoPaciente() {
   render() {
     return (
       <div id="medicamentosPaciente" className="row">
-        {this.renderInfoPaciente()}
+       {this.state.doctor ? (
+          <div className="col-12">{this.renderInfoPaciente()}</div>
+        ) : (
+          ''
+        )}        
         <div className="col-12">
           <hr />
           <center>
