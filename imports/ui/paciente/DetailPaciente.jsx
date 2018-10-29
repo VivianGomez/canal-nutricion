@@ -242,7 +242,7 @@ renderInfoPaciente() {
             </div>
 
             <center>
-              <button type="submit" className="btn btn-success mr-1">
+              <button type="submit" className="btn btn-foohealli mr-1">
                 <i className="far fa-check-circle" />
                 &nbsp;Asignar medicamento
               </button>
@@ -301,11 +301,13 @@ renderInfoPaciente() {
             <br />
           <hr />
         </div>
+        <br/>
         {this.state.doctor ? (
           <div className="col-12 text-center">{this.botonesDoctor()}</div>
         ) : (
           ''
         )}
+        <br/>
         {this.state.doctor ? this.formCrearMedicamento() : ''}
         <div className="col-12">
           <ul className="list-group">{this.renderMedicamentos()}</ul>
