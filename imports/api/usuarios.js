@@ -101,6 +101,7 @@ Meteor.methods({
 
 
             if (nUsuario) {
+                delete nUsuario.alimentosConsumidos
                 delete nUsuario.clave;
                 return nUsuario;
             } else {
@@ -141,7 +142,7 @@ Meteor.methods({
                 }
             });
 
-            return "El paciente " + paciente.nombre + " fue asignado al nutricionista "+ nutricionista.nombre +" correctamente";
+            return "El paciente " + paciente.nombre + " fue asignado al nutricionista " + nutricionista.nombre + " correctamente";
         } catch (error) {
             throw new Meteor.Error(error);
         }

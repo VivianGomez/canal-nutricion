@@ -55,7 +55,12 @@ class DashboardPaciente extends Component {
 
     alimentos.map(alimento => {
       let alimentoListo = (
-        <Alimento key={alimento.idAlimento} alimento={alimento} />
+        <Alimento
+          key={alimento.idAlimento}
+          alimento={alimento}
+          nutricionista={this.state.nutricionista}
+          identificacion={this.state.paciente.identificacion}
+        />
       );
       switch (alimento.tipoComida) {
         case 'desayuno':

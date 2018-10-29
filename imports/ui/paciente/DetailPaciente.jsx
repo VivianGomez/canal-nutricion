@@ -58,6 +58,12 @@ class DetailPaciente extends Component {
         ? this.props.paciente.medicamentosAsignados
         : this.state.usuario.medicamentosAsignados;
 
+      if (!this.state.doctor) {
+        medicamentos = medicamentos.filter(medicamento => {
+          return medicamento.estado === 'Activo';
+        });
+      }
+
       return medicamentos.map(medicamento => (
         <Medicamento
           key={medicamento._id}
@@ -91,43 +97,40 @@ class DetailPaciente extends Component {
             </h2>
             <br />
           </div>
-          <hr />
           <br />
-          <h5>
-            <i className="fas fa-id-card foohealli-text" />
-            &nbsp;
-            <b>Identificación : </b>
-            {identificacion}
-          </h5>
-          <br />
-
-          <h5>
-            <i className="fas fa-phone-volume foohealli-text" />
-            &nbsp;
-            <b>Celular: </b>
-            <a href={'tel:' + celular}> {celular} &nbsp;</a>
-          </h5>
-          <br />
-
-          <h5>
-            <i className="fas fa-envelope-open foohealli-text" />
-            &nbsp;
-            <b>Correo: </b>
-            <a href={'mailto:' + correo}>{correo}</a>
-          </h5>
-          <br />
-
-          <h5>
-            <i className="fas fa-calendar-alt foohealli-text" />
-            &nbsp;
-            <b>En tratamiento desde : </b>
-            {fechaR}
-          </h5>
-          <br />
+          <div className="row">
+            <div className="col-lg-2 " />
+            <div className="col-lg-4  col-12">
+              <i className="fas fa-id-card foohealli-text" />
+              &nbsp;
+              <b>Identificación : </b>
+              {identificacion}
+            </div>
+            <div className="col-lg-4  col-12">
+              <i className="fas fa-calendar-alt foohealli-text" />
+              &nbsp;
+              <b>En tratamiento desde : </b>
+              {fechaR}
+            </div>
+            <div className="col-lg-2" />
+            <div className="col-lg-2 " />
+            <div className="col-lg-4  col-12">
+              <i className="fas fa-phone-volume foohealli-text" />
+              &nbsp;
+              <b>Celular: </b>
+              <a href={'tel:' + celular}> {celular} &nbsp;</a>
+            </div>
+            <div className="col-lg-6 col-12">
+              <i className="fas fa-envelope-open foohealli-text" />
+              &nbsp;
+              <b>Correo: </b>
+              <a href={'mailto:' + correo}>{correo}</a>
+            </div>
+          </div>
         </div>
       );
     } else {
-      return <h1>Cargando info...</h1>;
+      return <h1>...</h1>;
     }
   }
 
@@ -163,7 +166,7 @@ class DetailPaciente extends Component {
     if (this.state.formCrearMedicamento && this.state.doctor) {
       return (
         <div className="col-12">
-          <h5>Agregar un medicamento</h5>
+          <h5>Asignar un medicamento</h5>
           <form onSubmit={this.handleCrearMedicamentoSubmit.bind(this)}>
             <div className="form-group">
               <div className="form-group">
@@ -254,6 +257,7 @@ class DetailPaciente extends Component {
               </button>
             </center>
           </form>
+          <hr />
         </div>
       );
     }

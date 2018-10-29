@@ -71,6 +71,7 @@ class DetailPacienteNutricionista extends Component {
 
   renderInfoPaciente() {
     if (this.props.paciente) {
+      let identificacion = this.props.paciente.identificacion;
       let nombre = this.props.paciente.nombre;
       let correo = this.props.paciente.correo;
       let celular = this.props.paciente.celular;
@@ -87,26 +88,40 @@ class DetailPacienteNutricionista extends Component {
             </h2>
             <br />
           </div>
-          <hr />
           <br />
-          <p>
-            <i class="fas fa-phone-volume foohealli-text" />
-            <b>Celular: </b>
-            <a href={'tel:' + celular}> {celular} &nbsp;</a>
-            <br />
-            <i class="fas fa-envelope-open foohealli-text" />
-            <b>Correo: </b>
-            <a href={'mailto:' + correo}>{correo}</a>
-            <br />
-            <i class="fas fa-calendar-alt foohealli-text" />
-            <b>En tratamiento desde : </b>
-            {fechaR}
-            <br />
-          </p>
+          <div className="row">
+            <div className="col-lg-2 " />
+            <div className="col-lg-4  col-12">
+              <i className="fas fa-id-card foohealli-text" />
+              &nbsp;
+              <b>Identificación : </b>
+              {identificacion}
+            </div>
+            <div className="col-lg-4  col-12">
+              <i className="fas fa-calendar-alt foohealli-text" />
+              &nbsp;
+              <b>En tratamiento desde : </b>
+              {fechaR}
+            </div>
+            <div className="col-lg-2" />
+            <div className="col-lg-2 " />
+            <div className="col-lg-4  col-12">
+              <i className="fas fa-phone-volume foohealli-text" />
+              &nbsp;
+              <b>Celular: </b>
+              <a href={'tel:' + celular}> {celular} &nbsp;</a>
+            </div>
+            <div className="col-lg-6 col-12">
+              <i className="fas fa-envelope-open foohealli-text" />
+              &nbsp;
+              <b>Correo: </b>
+              <a href={'mailto:' + correo}>{correo}</a>
+            </div>
+          </div>
         </div>
       );
     } else {
-      return <h1>Cargando info...</h1>;
+      return <h1>...</h1>;
     }
   }
 
@@ -123,7 +138,7 @@ class DetailPacienteNutricionista extends Component {
               <ul className="nav nav-pills nav-fill" id="myTab" role="tablist">
                 <li className="nav-item ">
                   <a
-                    className="nav-link text-warning active"
+                    className="nav-link  bg-foohealli-yellow-dark text-text-white active"
                     id="tab-gratuitos"
                     data-toggle="tab"
                     href="#gratuitos"
@@ -135,7 +150,7 @@ class DetailPacienteNutricionista extends Component {
                 </li>
                 <li className="nav-item">
                   <a
-                    className="nav-link text-warning"
+                    className="nav-link bg-foohealli-yellow-dark text-text-white"
                     id="tab-bronce"
                     data-toggle="tab"
                     href="#bronce"

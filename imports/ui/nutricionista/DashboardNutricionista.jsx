@@ -115,6 +115,7 @@ class DashboardNutricionista extends Component {
               </button>
             </center>
           </form>
+          <hr />
         </div>
       );
     }
@@ -156,11 +157,8 @@ class DashboardNutricionista extends Component {
           </div>
           <hr />
         </div>
-        <hr />
         <div className="col-12 text-center">{this.botonesDoctor()}</div>
-        <hr />
         {this.formCrearPaciente()}
-        <hr />
         <div className="col-12">
           <ul className="list-group">{this.renderPacientes()}</ul>
         </div>

@@ -32,13 +32,14 @@ if (Meteor.isServer) {
                         doctor: usuario.identificacion
                     }, ],
                 });
-            }if (usuario.rol === "nutricionista") {
+            }
+            if (usuario.rol === "nutricionista") {
                 return Pacientes.find({
                     $or: [{
                         nutricionista: usuario.identificacion
                     }, ],
                 });
-            }else {
+            } else {
                 return Pacientes.find();
             }
         } else {
@@ -156,8 +157,8 @@ Meteor.methods({
                         posologia: posologiaP,
                         frecuencia: frecuenciaP,
                         cantidad: cantidadP,
-                        via:viaP,
-                        estado:"Activo",
+                        via: viaP,
+                        estado: "Activo",
                         fechaInicio: moment().format('DD/MM/YYYY'),
                         fechaFin: " "
                     }
@@ -200,7 +201,7 @@ Meteor.methods({
                     "medicamentosAsignados.$.frecuencia": frecuencia,
                     "medicamentosAsignados.$.cantidad": cantidad,
                     "medicamentosAsignados.$.estado": estado,
-                    "medicamentosAsignados.$.fechaFin":verificarEstadoMedicamento(estado)
+                    "medicamentosAsignados.$.fechaFin": verificarEstadoMedicamento(estado)
                 }
             });
 
@@ -264,7 +265,7 @@ Meteor.methods({
                 }
             });
 
-            return "El paciente " + paciente.nombre + " fue asignado al nutricionista "+ nutricionista.nombre +" correctamente";
+            return "El paciente " + paciente.nombre + " fue asignado al nutricionista " + nutricionista.nombre + " correctamente";
         } catch (error) {
             throw new Meteor.Error(error);
         }
@@ -301,7 +302,40 @@ Meteor.methods({
         } catch (error) {
             throw new Meteor.Error("Se presentó un error registrando tu comida");
         }
-    }
+    },
+    'pacientes.removerAlimento'({
+        identificacion,
+        alimento
+    }) {
+        check(identificacion, String);
+        check(alimento, Object);
+
+        const paciente = Pacientes.findOne({
+            identificacion: identificacion
+        });
+
+        verificarExistenciaPaciente(paciente);
+
+        try {
+            Pacientes.update({
+                identificacion: identificacion
+            }, {
+                $pull: {
+                    alimentosConsumidos: {
+                        fechaConsumo: alimento.fechaConsumo,
+                        idAlimento: alimento.idAlimento,
+                        tipoComida: alimento.tipoComida,
+                        porcionConsumidaGramos: alimento.porcionConsumidaGramos
+                    }
+                }
+            });
+
+            return "El alimento se eliminó correctamente";
+        } catch (error) {
+            throw new Meteor.Error("Se presentó un error eliminando el alimento");
+        }
+
+    },
 });
 
 function decodificarToken(token) {
@@ -327,8 +361,8 @@ function verificarExistenciaNutricionista(nutricionista) {
 }
 
 function verificarEstadoMedicamento(estado) {
-    let fechaFin="";
-    if (estado==="Inactivo") {
+    let fechaFin = "";
+    if (estado === "Inactivo") {
         fechaFin = moment().format('DD/MM/YYYY - h:mm:ss a');
     }
     return fechaFin;

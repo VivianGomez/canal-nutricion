@@ -53,22 +53,38 @@ class InfoPaciente extends Component {
             : '/doctor/detailPaciente/') + this.state.identificacion
         }
         style={{ textDecoration: 'none' }}
+        className="text-dark"
       >
         <li className="list-group-item">
           <div className="row">
-            <div className="col-md-9 col-12">
+            <div className="col-md-7 col-12">
               <p>
                 <b>Paciente: </b>
                 &nbsp;
                 {this.state.nombre}
               </p>
+            </div>
+            <div className="col-md-5 col-12">
               <p>
                 <b>Identificacion: </b>
                 &nbsp;
                 {this.state.identificacion}
               </p>
-              <b className="foohealli-text">Contacto: </b>
-              {this.mostrarContactoUsuario()}
+            </div>
+            <div className="col-md-7 col-12">
+              <p>
+                <b>Correo: </b>
+                <a href={'mailto:' + this.state.correo}>{this.state.correo}</a>
+              </p>
+            </div>
+            <div className="col-md-5 col-12">
+              <p>
+                <b>Celular: </b>
+                <a href={'tel:' + this.state.celular}>
+                  {this.state.celular}
+                  &nbsp;
+                </a>
+              </p>
             </div>
           </div>
         </li>
