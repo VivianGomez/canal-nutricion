@@ -15,13 +15,15 @@ class DashboardPaciente extends Component {
       token: localStorage.getItem('foohealliStuff'),
       paciente: null,
       fecha: new Date(),
-      alimentosConsumidos: []
+      alimentosConsumidos: [],
+      nutricionista: this.props.nutricionista
     };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
   cargarConsumidosFecha(fecha) {
+    console.log(this.state.paciente);
     Meteor.call(
       'pacientes.alimentosConsumidosFecha',
       {
@@ -90,40 +92,71 @@ class DashboardPaciente extends Component {
     );
   }
 
-  componentDidMount() {
-    Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
-      if (err) {
-        alert(err);
-        this.props.history.push('/');
-      } else if (res) {
-        if (res.rol === 'paciente') {
-          this.setState(
-            {
-              paciente: res
-            },
-            () => {
-              this.cargarConsumidosFecha(new Date());
-            }
-          );
-        } else {
-          this.props.history.push('/');
-        }
+  componentWillReceiveProps(nextProps) {
+    this.setState(
+      {
+        paciente: nextProps.paciente
+      },
+      () => {
+        this.cargarConsumidosFecha(new Date());
       }
-    });
+    );
+  }
+
+  componentDidMount() {
+    if (this.state.nutricionista) {
+      this.setState(
+        {
+          paciente: this.props.paciente
+        },
+        () => {
+          this.cargarConsumidosFecha(new Date());
+        }
+      );
+    } else {
+      Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
+        if (err) {
+          alert(err);
+          this.props.history.push('/');
+        } else if (res) {
+          if (res.rol === 'paciente') {
+            this.setState(
+              {
+                paciente: res
+              },
+              () => {
+                this.cargarConsumidosFecha(new Date());
+              }
+            );
+          } else {
+            this.props.history.push('/');
+          }
+        }
+      });
+    }
   }
 
   render() {
     return (
       <div className="row">
-        <div className="col-12 text-center mt-4">
-          <div className="bg-foohealli text-light">
-            <br />
-            <h2 className="text-center font-weight-bold">
-              <i className="fas fa-apple-alt" />
-              &nbsp;Alimentos consumidos&nbsp;
-            </h2>
-            <br />
-          </div>
+        <div className="col-12 text-center">
+          {this.state.nutricionista ? (
+            <center>
+              <h2 className="foohealli-text-yellow font-weight-bold">
+                <i className="fas fa-apple-alt foohealli-text-yellow" />
+                &nbsp;Alimentos consumidos&nbsp;
+              </h2>
+            </center>
+          ) : (
+            <div className="bg-foohealli text-light mt-4">
+              <br />
+              <h2 className="text-center font-weight-bold">
+                <i className="fas fa-apple-alt" />
+                &nbsp;Alimentos consumidos&nbsp;
+              </h2>
+              <br />
+            </div>
+          )}
           <hr />
         </div>
         <div className="col-8 vertical-align-custom">
@@ -138,25 +171,29 @@ class DashboardPaciente extends Component {
             maxDate={new Date()}
           />
         </div>
-        <div className="col-4 vertical-align-custom">
-          <button
-            id="botonActualizarConsumo"
-            type="button"
-            className="btn btn-info mr-1 float-right"
-            onClick={() => this.cargarConsumidosFecha(this.state.fecha)}
-          >
-            <i className="fas fa-sync-alt fa-lg" />
-          </button>
-          <button
-            id="botonAgregarConsumo"
-            type="button"
-            data-toggle="modal"
-            data-target=".bd-example-modal-lg"
-            className="btn btn-foohealli ml-1 float-right"
-          >
-            <i className="fas fa-plus fa-lg" />
-          </button>
-        </div>
+        {this.state.nutricionista ? (
+          ''
+        ) : (
+          <div className="col-4 vertical-align-custom">
+            <button
+              id="botonActualizarConsumo"
+              type="button"
+              className="btn btn-info mr-1 float-right"
+              onClick={() => this.cargarConsumidosFecha(this.state.fecha)}
+            >
+              <i className="fas fa-sync-alt fa-lg" />
+            </button>
+            <button
+              id="botonAgregarConsumo"
+              type="button"
+              data-toggle="modal"
+              data-target=".bd-example-modal-lg"
+              className="btn btn-foohealli ml-1 float-right"
+            >
+              <i className="fas fa-plus fa-lg" />
+            </button>
+          </div>
+        )}
         <div className="col-12">
           <hr />
         </div>
