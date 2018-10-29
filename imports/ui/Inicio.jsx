@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
-export default class Inicio extends Component {
+class Inicio extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -175,8 +175,38 @@ export default class Inicio extends Component {
           <div className="col-12">
             <br />
           </div>
+          <div className="col-12 text-center">
+            <hr />
+            <h6>
+              ¿No tienes una cuenta?{' '}
+              <span
+                className="foohealli-text font-weight-bold pointer"
+                onClick={() => this.props.history.push('/registro')}
+              >
+                Regístrate
+              </span>
+            </h6>
+            <h6>
+              ¿Ya haces parte de Foohealli?{' '}
+              <span
+                className="foohealli-text-yellow font-weight-bold pointer"
+                onClick={() =>
+                  document.getElementById('botonParaIniciarSesion').click()
+                }
+              >
+                Inicia sesión
+              </span>
+            </h6>
+          </div>
+          <div className="col-12">
+            <br />
+          </div>
         </div>
       </div>
     );
   }
 }
+
+Inicio = withRouter(Inicio);
+
+export default Inicio;
