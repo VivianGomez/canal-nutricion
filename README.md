@@ -24,9 +24,12 @@ Foohealli es una plataforma en la cual las personas que quieren y/o necesitan ll
 -Queremos ayudar a los médicos y nutricionistas a poder diagnosticar y tratar mejor a sus pacientes, al permitirles ver el día a día de los mismos mediante la plataforma
 
 ## Screenshots
+
+- Vista del dashboard de un paciente
 ![Screenshot de la página](https://raw.githubusercontent.com/VivianGomez/canal-nutricion/master/public/dashboardPaciente.PNG?style=centerme)
 ##
 
+- Vista de un Doctor sobre la información de un Paciente
 ![Screenshot de la página](https://raw.githubusercontent.com/VivianGomez/canal-nutricion/master/public/medicamentosPaciente.PNG?style=centerme)
 
 ## Tecnologías utilizadas
