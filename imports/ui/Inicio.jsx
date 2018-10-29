@@ -16,8 +16,7 @@ export default class Inicio extends Component {
     };
   }
 
-
- componentDidMount() {
+  componentDidMount() {
     Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
       if (err) {
         alert(err.error);
@@ -36,9 +35,7 @@ export default class Inicio extends Component {
             logueado: true,
             cargando: false
           });
-        }
-
-        else {
+        } else {
           this.setState({
             usuario: res,
             logueado: true,
@@ -52,7 +49,6 @@ export default class Inicio extends Component {
       }
     });
   }
-
 
   mostrarOpciones() {
     let opciones = [];
@@ -71,7 +67,7 @@ export default class Inicio extends Component {
           </Link>
         </div>
       );
-    }else if (this.state.nutricionista) {
+    } else if (this.state.nutricionista) {
       opciones.push(
         <div
           key="elementoDashboardNutricionista"
@@ -109,64 +105,78 @@ export default class Inicio extends Component {
   render() {
     return (
       <div id="fondo" class="container">
-        <div  className="row">
-          <div id="descripcion" className="col-12">
+        <div className="row mb-3">
+          <div id="descripcion" className="col-12 text-center mt-3">
             <center>
-            <h1 className="foohealli-text-yellow mt-3 mb-3">
+              <div className="s-400-px mx-auto text-center rounded-circle d-flex">
+                <img
+                  className="mt-2 mb-2 text-center mx-auto justify-content-center align-self-center pointer"
+                  src="./foohealli500x500.png"
+                  alt="logo foohealli"
+                  width="400px"
+                />
+              </div>
+            </center>
+            <center>
+              <h1 className="foohealli-text-yellow mt-3 mb-3">
                 ¡Bienvenido a Foohealli!
-            </h1>
+              </h1>
             </center>
-            <span>Foohealli es una applicación que busca que mejorar la comunicanicación entre médicos, nutricionistas  y  pacientes
-                  con el fin de lograr tratamientos nutricionales exitosos. 
-            </span>
-            <center>
-           <div className="s-400-px mx-auto text-center rounded-circle d-flex">
-            <img
-              className="mt-2 mb-2 text-center mx-auto justify-content-center align-self-center pointer"
-              src="./foohealli500x500.png"
-              alt="logo foohealli"
-              width="400px"
-            />
-           </div>
-            </center>
+            <h5 className="mt-3 mb-3">
+              Foohealli es una aplicación que busca mejorar la comunicanicación
+              entre médicos, nutricionistas y pacientes con el fin de lograr
+              tratamientos nutricionales exitosos.
+            </h5>
           </div>
         </div>
-        <div className="row">
-         <div className="col-md-4 col-sm-12">
-         <center>
-         <span class="fa-stack fa-4x">
-           <i class="fas fa-circle fa-stack-2x foohealli-text-light-green"></i>
-           <i class="fas fa-user-md fa-stack-1x fa-inverse"></i>
-         </span>
-         </center>
-         <br/>
-          Como <b className="foohealli-text">médico</b> puedes conocer la información de tu paciente, como va su tratamiento en términos de medicamentos y dieta.
-          Puedes controlar sus medicamentos en tiempo real y facilitarle dicho tratamiento.
-         </div>
-         <div className="col-md-4 col-sm-12">
-         <center>
-         <span class="fa-stack fa-4x">
-           <i class="fas fa-circle fa-stack-2x foohealli-text-light-green"></i>
-           <i class="fas fa-users fa-stack-1x fa-inverse"></i>
-         </span>
-         </center>
-         <br/>
-          Como <b className="foohealli-text">paciente</b>, usando foohealli podrás registrar como llevas el tratamiento recomendado por tu médico y nutricionista, quienes podrán verlo en tiempo real 
-          y entender como ayudarte además de darte una retroalimentación, diagnósticos y tratamientos más acertados. Así lograrás vivir tranquilo, saludable y con menos preocupaciones.
-         </div>
-         <div className="col-md-4 col-sm-12">
-         <center>
-         <span class="fa-stack fa-4x">
-           <i class="fas fa-circle fa-stack-2x foohealli-text-light-green"></i>
-           <i class="fas fa-diagnoses fa-stack-1x fa-inverse"></i>
-         </span>
-         </center>
-          <br/>
-          Como <b className="foohealli-text">nutricionista</b> puedes conocer la información de tu paciente, ver como va su dieta en tiempo real. Conocerás sus alimentos consumidos para
-          las diferentes comidas del día durante el tiempo antes del control y así podrás hacer un mejor diagnóstico, ayudar a tu paciente y lograr el éxito esperado.
+        <div className="row text-center mt-5">
+          <div className="col-md-4 col-sm-12">
+            <center>
+              <span class="fa-stack fa-4x">
+                <i class="fas fa-circle fa-stack-2x text-primary" />
+                <i class="fas fa-user-md fa-stack-1x fa-inverse" />
+              </span>
+            </center>
+            <br />
+            Como <b className="foohealli-text">médico</b> puedes conocer la
+            información de tu paciente, como va su tratamiento en términos de
+            medicamentos y dieta. Puedes controlar sus medicamentos en tiempo
+            real y facilitarle dicho tratamiento.
           </div>
-      </div> 
-    </div> 
+          <div className="col-md-4 col-sm-12">
+            <center>
+              <span class="fa-stack fa-4x">
+                <i class="fas fa-circle fa-stack-2x foohealli-text-light-green" />
+                <i class="fas fa-users fa-stack-1x fa-inverse" />
+              </span>
+            </center>
+            <br />
+            Como <b className="foohealli-text">paciente</b>, usando foohealli
+            podrás registrar como llevas el tratamiento recomendado por tu
+            médico y nutricionista, quienes podrán verlo en tiempo real y
+            entender como ayudarte además de darte una retroalimentación,
+            diagnósticos y tratamientos más acertados. Así lograrás vivir
+            tranquilo, saludable y con menos preocupaciones.
+          </div>
+          <div className="col-md-4 col-sm-12">
+            <center>
+              <span class="fa-stack fa-4x">
+                <i class="fas fa-circle fa-stack-2x text-info" />
+                <i class="fas fa-diagnoses fa-stack-1x fa-inverse" />
+              </span>
+            </center>
+            <br />
+            Como <b className="foohealli-text">nutricionista</b> puedes conocer
+            la información de tu paciente, ver como va su dieta en tiempo real.
+            Conocerás sus alimentos consumidos para las diferentes comidas del
+            día durante el tiempo antes del control y así podrás hacer un mejor
+            diagnóstico, ayudar a tu paciente y lograr el éxito esperado.
+          </div>
+          <div className="col-12">
+            <br />
+          </div>
+        </div>
+      </div>
     );
   }
 }

@@ -94,7 +94,7 @@ class Login extends Component {
           className="btn btn-info"
           onClick={() => this.cambiarRolIngreso('nutricionista')}
         >
-          <i className="fas fa-user-plus" />
+          <i className="fas fa-diagnoses" />
           &nbsp;Soy nutricionista
         </button>
       );
