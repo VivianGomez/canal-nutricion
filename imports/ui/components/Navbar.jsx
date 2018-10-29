@@ -84,7 +84,20 @@ class Navbar extends Component {
             className="nav-link pointer"
             onClick={() => this.props.history.push('/doctor/dashboardDoctor')}
           >
-            Dashboard
+            Mis Pacientes
+          </a>
+        </li>
+      ); 
+    }
+    else if (this.state.usuario && this.state.usuario.rol === 'nutricionista') {
+      funciones.push(
+        <li key="botonDashboardNutricionista" className="nav-item">
+          <a
+            id="botonDashboardNutricionista"
+            className="nav-link pointer"
+            onClick={() => this.props.history.push('/nutricionista/dashboardNutricionista')}
+          >
+            Mis Pacientes
           </a>
         </li>
       ); 

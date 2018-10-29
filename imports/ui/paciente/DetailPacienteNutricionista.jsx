@@ -9,11 +9,6 @@ import { withRouter } from 'react-router';
 class DetailPacienteNutricionista extends Component {
   constructor(props) {
     super(props);
-    this.nombreMedInput = React.createRef();
-    this.posologiaInput = React.createRef();
-    this.frecuenciaInput = React.createRef();
-    this.cantidadInput = React.createRef();
-    this.viaInput = React.createRef();
 
     this.state = {
       token: localStorage.getItem('foohealliStuff'),
@@ -198,7 +193,6 @@ class DetailPacienteNutricionista extends Component {
 
 export default withTracker(props => {
   const identificacionP = '' + props.match.params.identificacion;
-  console.log(identificacionP);
   Meteor.subscribe('pacientes.identificacion', identificacionP);
   return {
     paciente: Pacientes.findOne({ identificacion: identificacionP })

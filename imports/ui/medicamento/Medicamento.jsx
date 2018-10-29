@@ -217,6 +217,19 @@ class Medicamento extends Component {
     }
     return doctor;
   }
+
+  mostrarFechaFinMedicamento(){
+    if(this.state.medicamento.estado==="Inactivo"){
+      return (
+        <p>
+        <br />
+          <b>Fecha en que se dejó de usar: </b>
+          {this.state.medicamento.fechaFin}
+        </p>
+        )
+    }
+  }
+
   render() {
     return (
       <li className="list-group-item">
@@ -243,7 +256,8 @@ class Medicamento extends Component {
               <br />
               <b>Estado actual: </b>
               {this.state.medicamento.estado}
-              </p>         
+              </p> 
+              {this.mostrarFechaFinMedicamento}        
             </div>
                {this.opcionesDoctor()}
           <hr/>
