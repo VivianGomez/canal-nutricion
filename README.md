@@ -23,8 +23,9 @@ Foohealli es una plataforma en la cual las personas que quieren y/o necesitan ll
 -Buscamos permitir a las personas con enfermedades crónicas mejorar su calidad de vida al poder llevar un tratamiento correcto.
 -Queremos ayudar a los médicos y nutricionistas a poder diagnosticar y tratar mejor a sus pacientes, al permitirles ver el día a día de los mismos mediante la plataforma
 
-## Screenshot
+## Screenshots
 ![Screenshot de la página](https://raw.githubusercontent.com/VivianGomez/canal-nutricion/master/public/dashboardPaciente.PNG?style=centerme)
+##
 
 ![Screenshot de la página](https://raw.githubusercontent.com/VivianGomez/canal-nutricion/master/public/medicamentosPaciente.PNG?style=centerme)
 
