@@ -76,7 +76,19 @@ class Navbar extends Component {
         </li>
       );
     }
-
+   else if (this.state.usuario && this.state.usuario.rol === 'doctor') {
+      funciones.push(
+        <li key="botonDashboardDoctor" className="nav-item">
+          <a
+            id="botonDashboardDoctor"
+            className="nav-link pointer"
+            onClick={() => this.props.history.push('/doctor/dashboardDoctor')}
+          >
+            Dashboard
+          </a>
+        </li>
+      ); 
+    }
     return funciones;
   }
 

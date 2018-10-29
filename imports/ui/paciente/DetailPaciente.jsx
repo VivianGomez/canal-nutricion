@@ -68,6 +68,48 @@ class DetailPaciente extends Component {
     }
   }
 
+
+renderInfoPaciente() {
+    if (this.props.paciente) {
+      let nombre = this.props.paciente.nombre;
+      let correo = this.props.paciente.correo;
+      let celular = this.props.paciente.celular;
+      let fechaR = this.props.paciente.fechaRegistro;
+
+      return  (
+        <div className="col-12">
+          <hr />
+          <div className="bg-foohealli text-light">
+            <br />
+            <h2 className="text-center font-weight-bold">
+              &nbsp;Información paciente {nombre}&nbsp;
+            </h2>
+            <br />
+          </div>
+          <hr />
+            <br />
+            <p>
+              <i class="fas fa-phone-volume foohealli-text"></i>
+              <b>Celular: </b>
+                <a href={'tel:' + celular}> {celular} &nbsp;</a>
+              <br />
+              <i class="fas fa-envelope-open foohealli-text"></i>
+              <b>Correo: </b>
+                <a href={'mailto:' + correo}>{correo}</a>
+              <br />
+              <i class="fas fa-envelope-open foohealli-text"></i>
+              <b>En tratamiento desde : </b>
+                {fechaR}
+              <br />
+            </p>
+        </div>
+      );
+    } else {
+      return <h1>Cargando info...</h1>;
+    }
+  }
+
+
   handleCrearMedicamentoSubmit(event) {
     event.preventDefault();
 
@@ -220,16 +262,16 @@ class DetailPaciente extends Component {
   render() {
     return (
       <div id="medicamentosPaciente" className="row">
+        {this.renderInfoPaciente()}
         <div className="col-12">
           <hr />
-          <div className="bg-foohealli text-light">
-            <br />
-            <h2 className="text-center font-weight-bold">
-              <i className="fas fa-pills" />
+          <center>
+            <h2 className="foohealli-text-yellow font-weight-bold">
+              <i className="fas fa-pills foohealli-text-yellow" />
               &nbsp;Medicamentos asignados&nbsp;
             </h2>
+          </center>
             <br />
-          </div>
           <hr />
         </div>
         <hr />
