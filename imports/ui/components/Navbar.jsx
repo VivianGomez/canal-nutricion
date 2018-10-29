@@ -75,8 +75,18 @@ class Navbar extends Component {
           </a>
         </li>
       );
-    }
-   else if (this.state.usuario && this.state.usuario.rol === 'doctor') {
+      funciones.push(
+        <li key="medicamentosAsignadosPaciente" className="nav-item">
+          <a
+            id="botonMedicamentosAsignadosPaciente"
+            className="nav-link pointer"
+            onClick={() => this.props.history.push('/paciente/medicamentos')}
+          >
+            Medicamentos asignados
+          </a>
+        </li>
+      );
+    } else if (this.state.usuario && this.state.usuario.rol === 'doctor') {
       funciones.push(
         <li key="botonDashboardDoctor" className="nav-item">
           <a
@@ -87,20 +97,24 @@ class Navbar extends Component {
             Mis Pacientes
           </a>
         </li>
-      ); 
-    }
-    else if (this.state.usuario && this.state.usuario.rol === 'nutricionista') {
+      );
+    } else if (
+      this.state.usuario &&
+      this.state.usuario.rol === 'nutricionista'
+    ) {
       funciones.push(
         <li key="botonDashboardNutricionista" className="nav-item">
           <a
             id="botonDashboardNutricionista"
             className="nav-link pointer"
-            onClick={() => this.props.history.push('/nutricionista/dashboardNutricionista')}
+            onClick={() =>
+              this.props.history.push('/nutricionista/dashboardNutricionista')
+            }
           >
             Mis Pacientes
           </a>
         </li>
-      ); 
+      );
     }
     return funciones;
   }

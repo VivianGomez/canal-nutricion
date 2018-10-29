@@ -23,23 +23,24 @@ class DashboardPaciente extends Component {
   }
 
   cargarConsumidosFecha(fecha) {
-    console.log(this.state.paciente);
-    Meteor.call(
-      'pacientes.alimentosConsumidosFecha',
-      {
-        identificacion: this.state.paciente.identificacion,
-        fecha: fecha
-      },
-      (err, res) => {
-        if (err) {
-          alert(err.error);
-        } else if (res) {
-          this.setState({
-            alimentosConsumidos: res
-          });
+    if (this.state.paciente) {
+      Meteor.call(
+        'pacientes.alimentosConsumidosFecha',
+        {
+          identificacion: this.state.paciente.identificacion,
+          fecha: fecha
+        },
+        (err, res) => {
+          if (err) {
+            alert(err.error);
+          } else if (res) {
+            this.setState({
+              alimentosConsumidos: res
+            });
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   handleChange(event) {
@@ -159,7 +160,7 @@ class DashboardPaciente extends Component {
           )}
           <hr />
         </div>
-        <div className="col-8 vertical-align-custom">
+        <div className="col-md-10 col-8 vertical-align-custom">
           <DatePicker
             onChange={this.handleChange}
             value={this.state.fecha}
@@ -171,18 +172,18 @@ class DashboardPaciente extends Component {
             maxDate={new Date()}
           />
         </div>
-        {this.state.nutricionista ? (
-          ''
-        ) : (
-          <div className="col-4 vertical-align-custom">
-            <button
-              id="botonActualizarConsumo"
-              type="button"
-              className="btn btn-info mr-1 float-right"
-              onClick={() => this.cargarConsumidosFecha(this.state.fecha)}
-            >
-              <i className="fas fa-sync-alt fa-lg" />
-            </button>
+        <div className="col-md-2 col-4 vertical-align-custom">
+          <button
+            id="botonActualizarConsumo"
+            type="button"
+            className="btn btn-info mr-1 float-right"
+            onClick={() => this.cargarConsumidosFecha(this.state.fecha)}
+          >
+            <i className="fas fa-sync-alt fa-lg" />
+          </button>
+          {this.state.nutricionista ? (
+            ''
+          ) : (
             <button
               id="botonAgregarConsumo"
               type="button"
@@ -192,8 +193,8 @@ class DashboardPaciente extends Component {
             >
               <i className="fas fa-plus fa-lg" />
             </button>
-          </div>
-        )}
+          )}
+        </div>
         <div className="col-12">
           <hr />
         </div>
