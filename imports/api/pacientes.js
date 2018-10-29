@@ -236,10 +236,10 @@ Meteor.methods({
         return alimentosConsumidosFecha;
 
     },
-    'pacientes.asignarNutricionista'({
+    'pacientes.asignarNutricionista'(
         identificacionPaciente,
         identificacionNutricionista
-    }) {
+    ) {
         check(identificacionPaciente, String);
         check(identificacionNutricionista, String);
 
@@ -254,7 +254,7 @@ Meteor.methods({
         });
 
         verificarExistenciaNutricionista(nutricionista);
-
+        yaTieneNutricionista(paciente.nutricionista);
 
         try {
             Pacientes.update({
@@ -351,6 +351,12 @@ function verificarPermisos(rol) {
 function verificarExistenciaPaciente(paciente) {
     if (!paciente) {
         throw new Meteor.Error('No se encuentra el paciente.');
+    }
+}
+
+function yaTieneNutricionista(nutricionista) {
+    if (nutricionista!=="") {
+        throw new Meteor.Error('El paciente ya tiene un nutricionista asignado.');
     }
 }
 

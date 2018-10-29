@@ -63,10 +63,15 @@ class DashboardNutricionista extends Component {
   handleAgregarPacienteSubmit(event) {
     event.preventDefault();
 
-    Meteor.call('pacientes.asignarNutricionista', {
-      identificacionPaciente: this.pacienteAAsignarInput.current.value,
-      identificacionNutricionista: this.state.usuario.identificacion
-    });
+    Meteor.call('pacientes.asignarNutricionista', 
+      this.pacienteAAsignarInput.current.value,
+      this.state.usuario.identificacion,
+      (err) => {
+      if (err) {
+        alert(err.error);
+      } 
+    }
+    );
 
     this.pacienteAAsignarInput.current.value = '';
     this.toggleFormAgregarPacientes();
