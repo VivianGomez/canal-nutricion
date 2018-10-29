@@ -72,8 +72,7 @@ class DetailPaciente extends Component {
     }
   }
 
-
-renderInfoPaciente() {
+  renderInfoPaciente() {
     if (this.props.paciente) {
       let identificacion = this.props.paciente.identificacion;
       let nombre = this.props.paciente.nombre;
@@ -81,57 +80,56 @@ renderInfoPaciente() {
       let celular = this.props.paciente.celular;
       let fechaR = this.props.paciente.fechaRegistro;
 
-      return  (
+      return (
         <div className="col-12">
           <hr />
           <div className="bg-foohealli text-light">
             <br />
             <h2 className="text-center font-weight-bold">
-              &nbsp;Información paciente {nombre}&nbsp;
+              &nbsp;Información paciente {nombre}
+              &nbsp;
             </h2>
             <br />
           </div>
           <hr />
-            <br />
-              <h5>
-             <i className="fas fa-id-card foohealli-text"></i>
-              &nbsp;
-              <b>Identificación : </b>
-                {identificacion}
-              </h5>
-              <br />
+          <br />
+          <h5>
+            <i className="fas fa-id-card foohealli-text" />
+            &nbsp;
+            <b>Identificación : </b>
+            {identificacion}
+          </h5>
+          <br />
 
-              <h5>
-              <i className="fas fa-phone-volume foohealli-text"></i>
-              &nbsp;
-              <b>Celular: </b>
-                <a href={'tel:' + celular}> {celular} &nbsp;</a>
-              </h5>
-              <br />
+          <h5>
+            <i className="fas fa-phone-volume foohealli-text" />
+            &nbsp;
+            <b>Celular: </b>
+            <a href={'tel:' + celular}> {celular} &nbsp;</a>
+          </h5>
+          <br />
 
-              <h5>
-              <i className="fas fa-envelope-open foohealli-text"></i>
-              &nbsp;
-              <b>Correo: </b>
-                <a href={'mailto:' + correo}>{correo}</a>
-              </h5>
-              <br />
+          <h5>
+            <i className="fas fa-envelope-open foohealli-text" />
+            &nbsp;
+            <b>Correo: </b>
+            <a href={'mailto:' + correo}>{correo}</a>
+          </h5>
+          <br />
 
-              <h5>
-              <i className="fas fa-calendar-alt foohealli-text"></i>
-              &nbsp;
-              <b>En tratamiento desde : </b>
-                {fechaR}
-              </h5>
-              <br />
-            
+          <h5>
+            <i className="fas fa-calendar-alt foohealli-text" />
+            &nbsp;
+            <b>En tratamiento desde : </b>
+            {fechaR}
+          </h5>
+          <br />
         </div>
       );
     } else {
       return <h1>Cargando info...</h1>;
     }
   }
-
 
   handleCrearMedicamentoSubmit(event) {
     event.preventDefault();
@@ -285,20 +283,30 @@ renderInfoPaciente() {
   render() {
     return (
       <div id="medicamentosPaciente" className="row">
-       {this.state.doctor ? (
+        {this.state.doctor ? (
           <div className="col-12">{this.renderInfoPaciente()}</div>
         ) : (
           ''
-        )}        
+        )}
         <div className="col-12">
-          <hr />
-          <center>
-            <h2 className="foohealli-text-yellow font-weight-bold">
-              <i className="fas fa-pills foohealli-text-yellow" />
-              &nbsp;Medicamentos asignados&nbsp;
-            </h2>
-          </center>
-            <br />
+          {this.state.doctor ? (
+            <center>
+              <hr />
+              <h2 className="foohealli-text-yellow font-weight-bold">
+                <i className="fas fa-pills foohealli-text-yellow" />
+                &nbsp;Medicamentos asignados&nbsp;
+              </h2>
+            </center>
+          ) : (
+            <div className="bg-foohealli text-light mt-4">
+              <br />
+              <h2 className="text-center font-weight-bold">
+                <i className="fas fa-pills" />
+                &nbsp;Medicamentos asignados&nbsp;
+              </h2>
+              <br />
+            </div>
+          )}
           <hr />
         </div>
         <br/>

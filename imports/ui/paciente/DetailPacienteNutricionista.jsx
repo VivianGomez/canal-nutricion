@@ -130,7 +130,7 @@ class DetailPacienteNutricionista extends Component {
                     role="tab"
                     aria-controls="beneficios-gratuitos"
                   >
-                    Beneficios gratuitos
+                    Alimentos consumidos
                   </a>
                 </li>
                 <li className="nav-item">
@@ -142,7 +142,7 @@ class DetailPacienteNutricionista extends Component {
                     role="tab"
                     aria-controls="beneficios-bronce"
                   >
-                    Beneficios bronce
+                    Medicamentos asignados
                   </a>
                 </li>
               </ul>
