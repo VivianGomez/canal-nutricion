@@ -14,7 +14,8 @@ class InfoPaciente extends Component {
       correo: this.props.correo,
       celular: this.props.celular,
       usuarioLogueado: this.props.usuarioLogueado,
-      actualizar: false
+      actualizar: false,
+      nutricionista: this.props.nutricionista
     };
   }
 
@@ -24,7 +25,8 @@ class InfoPaciente extends Component {
       nombre: nextProps.nombre,
       identificacion: nextProps.identificacion,
       correo: nextProps.correo,
-      celular: nextProps.celular
+      celular: nextProps.celular,
+      nutricionista: nextProps.nutricionista
     });
   }
 
@@ -45,7 +47,11 @@ class InfoPaciente extends Component {
   mostrarContenidoUsuario() {
     return (
       <Link
-        to={'/doctor/detailPaciente/' + this.state.identificacion}
+        to={
+          (this.state.nutricionista
+            ? '/nutricionista/detailPaciente/'
+            : '/doctor/detailPaciente/') + this.state.identificacion
+        }
         style={{ textDecoration: 'none' }}
       >
         <li className="list-group-item">

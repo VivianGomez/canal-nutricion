@@ -50,8 +50,13 @@ class DetailPaciente extends Component {
   }
 
   renderMedicamentos() {
-    if (this.props.paciente) {
-      let medicamentos = this.props.paciente.medicamentosAsignados;
+    if (
+      this.props.paciente ||
+      (this.state.usuario && this.state.usuario.rol === 'paciente')
+    ) {
+      let medicamentos = this.props.paciente
+        ? this.props.paciente.medicamentosAsignados
+        : this.state.usuario.medicamentosAsignados;
 
       return medicamentos.map(medicamento => (
         <Medicamento
@@ -60,7 +65,6 @@ class DetailPaciente extends Component {
           identificacionP={this.state.identificacionP}
           usuario={this.state.usuario}
           doctor={this.state.doctor}
-          opcionesDoctor={true}
         />
       ));
     } else {
@@ -274,11 +278,12 @@ renderInfoPaciente() {
             <br />
           <hr />
         </div>
-        <hr />
-        <div className="col-12 text-center">{this.botonesDoctor()}</div>
-        <hr />
-        {this.formCrearMedicamento()}
-        <hr />
+        {this.state.doctor ? (
+          <div className="col-12 text-center">{this.botonesDoctor()}</div>
+        ) : (
+          ''
+        )}
+        {this.state.doctor ? this.formCrearMedicamento() : ''}
         <div className="col-12">
           <ul className="list-group">{this.renderMedicamentos()}</ul>
         </div>

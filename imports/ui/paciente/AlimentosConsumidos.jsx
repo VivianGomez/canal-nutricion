@@ -126,7 +126,7 @@ class DashboardPaciente extends Component {
           </div>
           <hr />
         </div>
-        <div className="col-9 vertical-align-custom">
+        <div className="col-8 vertical-align-custom">
           <DatePicker
             onChange={this.handleChange}
             value={this.state.fecha}
@@ -138,13 +138,21 @@ class DashboardPaciente extends Component {
             maxDate={new Date()}
           />
         </div>
-        <div className="col-3 text-center vertical-align-custom">
+        <div className="col-4 vertical-align-custom">
+          <button
+            id="botonActualizarConsumo"
+            type="button"
+            className="btn btn-info mr-1 float-right"
+            onClick={() => this.cargarConsumidosFecha(this.state.fecha)}
+          >
+            <i className="fas fa-sync-alt fa-lg" />
+          </button>
           <button
             id="botonAgregarConsumo"
             type="button"
             data-toggle="modal"
             data-target=".bd-example-modal-lg"
-            className="btn btn-foohealli mr-auto"
+            className="btn btn-foohealli ml-1 float-right"
           >
             <i className="fas fa-plus fa-lg" />
           </button>

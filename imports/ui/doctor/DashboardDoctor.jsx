@@ -47,6 +47,7 @@ class DashboardDoctor extends Component {
         identificacion={paciente.identificacion}
         correo={paciente.correo}
         celular={paciente.celular}
+        nutricionista={false}
       />
     ));
   }
@@ -54,7 +55,7 @@ class DashboardDoctor extends Component {
   render() {
     return (
       <div id="pacientes-nutricionista" className="row">
-        <br/>
+        <br />
         <div className="col-12">
           <br />
           <div className="bg-foohealli text-light">
