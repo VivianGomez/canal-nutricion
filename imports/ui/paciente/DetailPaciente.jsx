@@ -75,6 +75,7 @@ class DetailPaciente extends Component {
 
 renderInfoPaciente() {
     if (this.props.paciente) {
+      let identificacion = this.props.paciente.identificacion;
       let nombre = this.props.paciente.nombre;
       let correo = this.props.paciente.correo;
       let celular = this.props.paciente.celular;
@@ -92,20 +93,38 @@ renderInfoPaciente() {
           </div>
           <hr />
             <br />
-            <p>
-              <i class="fas fa-phone-volume foohealli-text"></i>
+              <h5>
+             <i className="fas fa-id-card foohealli-text"></i>
+              &nbsp;
+              <b>Identificación : </b>
+                {identificacion}
+              </h5>
+              <br />
+
+              <h5>
+              <i className="fas fa-phone-volume foohealli-text"></i>
+              &nbsp;
               <b>Celular: </b>
                 <a href={'tel:' + celular}> {celular} &nbsp;</a>
+              </h5>
               <br />
-              <i class="fas fa-envelope-open foohealli-text"></i>
+
+              <h5>
+              <i className="fas fa-envelope-open foohealli-text"></i>
+              &nbsp;
               <b>Correo: </b>
                 <a href={'mailto:' + correo}>{correo}</a>
+              </h5>
               <br />
-              <i class="fas fa-calendar-alt foohealli-text"></i>
+
+              <h5>
+              <i className="fas fa-calendar-alt foohealli-text"></i>
+              &nbsp;
               <b>En tratamiento desde : </b>
                 {fechaR}
+              </h5>
               <br />
-            </p>
+            
         </div>
       );
     } else {
