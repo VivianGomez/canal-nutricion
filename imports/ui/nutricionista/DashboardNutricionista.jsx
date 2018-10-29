@@ -63,14 +63,15 @@ class DashboardNutricionista extends Component {
   handleAgregarPacienteSubmit(event) {
     event.preventDefault();
 
-    Meteor.call('pacientes.asignarNutricionista', 
+    Meteor.call(
+      'pacientes.asignarNutricionista',
       this.pacienteAAsignarInput.current.value,
       this.state.usuario.identificacion,
-      (err) => {
-      if (err) {
-        alert(err.error);
-      } 
-    }
+      err => {
+        if (err) {
+          alert(err.error);
+        }
+      }
     );
 
     this.pacienteAAsignarInput.current.value = '';
@@ -175,7 +176,6 @@ class DashboardNutricionista extends Component {
 DashboardNutricionista = withRouter(DashboardNutricionista);
 
 export default withTracker(() => {
-  console.log('subscribe pacientes');
   Meteor.subscribe('pacientes', localStorage.getItem('foohealliStuff'));
   return {
     pacientes: Pacientes.find({}).fetch()

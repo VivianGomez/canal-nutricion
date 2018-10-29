@@ -34,16 +34,15 @@ class Inicio extends Component {
 
   render() {
     return (
-      <div id="fondo" class="container">
+      <div id="fondo" className="container">
         <div className="row mb-3">
           <div id="descripcion" className="col-12 text-center mt-3">
             <center>
               <div className="s-400-px mx-auto text-center rounded-circle d-flex">
                 <img
-                  className="mt-2 mb-2 text-center mx-auto justify-content-center align-self-center pointer"
+                  className="mt-2 mb-2 text-center mx-auto justify-content-center align-self-center pointer imagen-inicio"
                   src="./foohealli500x500.png"
                   alt="logo foohealli"
-                  width="400px"
                 />
               </div>
             </center>
@@ -62,9 +61,9 @@ class Inicio extends Component {
         <div className="row text-center mt-5">
           <div className="col-md-4 col-sm-12">
             <center>
-              <span class="fa-stack fa-4x">
-                <i class="fas fa-circle fa-stack-2x text-primary" />
-                <i class="fas fa-user-md fa-stack-1x fa-inverse" />
+              <span className="fa-stack fa-4x">
+                <i className="fas fa-circle fa-stack-2x text-primary" />
+                <i className="fas fa-user-md fa-stack-1x fa-inverse" />
               </span>
             </center>
             <br />
@@ -75,9 +74,9 @@ class Inicio extends Component {
           </div>
           <div className="col-md-4 col-sm-12">
             <center>
-              <span class="fa-stack fa-4x">
-                <i class="fas fa-circle fa-stack-2x foohealli-text-light-green" />
-                <i class="fas fa-users fa-stack-1x fa-inverse" />
+              <span className="fa-stack fa-4x">
+                <i className="fas fa-circle fa-stack-2x foohealli-text-light-green" />
+                <i className="fas fa-users fa-stack-1x fa-inverse" />
               </span>
             </center>
             <br />
@@ -90,9 +89,9 @@ class Inicio extends Component {
           </div>
           <div className="col-md-4 col-sm-12">
             <center>
-              <span class="fa-stack fa-4x">
-                <i class="fas fa-circle fa-stack-2x text-info" />
-                <i class="fas fa-diagnoses fa-stack-1x fa-inverse" />
+              <span className="fa-stack fa-4x">
+                <i className="fas fa-circle fa-stack-2x text-info" />
+                <i className="fas fa-diagnoses fa-stack-1x fa-inverse" />
               </span>
             </center>
             <br />

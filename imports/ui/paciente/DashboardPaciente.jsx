@@ -56,9 +56,9 @@ class DashboardPaciente extends Component {
             to={'/paciente/alimentosConsumidos'}
             style={{ textDecoration: 'none' }}
           >
-            <div class="card">
+            <div className="card">
               <img
-                class="card-img-top pointer img-paciente"
+                className="card-img-top pointer img-paciente"
                 src="../paciente/logoAlimentosConsumidos.jpeg"
                 alt="Card image cap"
               />
@@ -70,9 +70,9 @@ class DashboardPaciente extends Component {
             to={'/paciente/medicamentos'}
             style={{ textDecoration: 'none' }}
           >
-            <div class="card">
+            <div className="card">
               <img
-                class="card-img-top pointer img-paciente"
+                className="card-img-top pointer img-paciente"
                 src="../paciente/logoMedicamentos.jpeg"
                 alt="Card image cap"
               />

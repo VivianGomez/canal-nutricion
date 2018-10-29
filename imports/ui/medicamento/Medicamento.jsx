@@ -180,6 +180,8 @@ class Medicamento extends Component {
           </form>
         </div>
       );
+    } else {
+      return '';
     }
   }
 
@@ -209,7 +211,7 @@ class Medicamento extends Component {
           <button
             type="button"
             className="btn btn-danger ml-1 mb-2"
-            onClick={this.eliminarMedicamento.bind(this)}
+            onClick={() => this.eliminarMedicamento()}
           >
             <i className="fas fa-trash-alt" />
           </button>
@@ -259,7 +261,7 @@ class Medicamento extends Component {
               <b>Estado actual: </b>
               {this.state.medicamento.estado}
             </p>
-            {this.mostrarFechaFinMedicamento}
+            {this.mostrarFechaFinMedicamento()}
           </div>
           {this.opcionesDoctor()}
           <hr />

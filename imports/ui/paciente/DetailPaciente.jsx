@@ -21,7 +21,7 @@ class DetailPaciente extends Component {
 
     this.state = {
       token: localStorage.getItem('foohealliStuff'),
-      identificacionP: props.match.params.identificacion,
+      identificacionP: this.props.match.params.identificacion,
       paciente: this.props.paciente,
       botonAgregarMedicamento: false,
       formCrearMedicamento: false,
@@ -40,15 +40,25 @@ class DetailPaciente extends Component {
         alert(err.error);
       } else if (res) {
         if (res.rol === 'doctor') {
-          this.setState({
-            botonAgregarMedicamento: true,
-            doctor: true,
-            usuario: res
-          });
+          if (!this.props.match.params.identificacion) {
+            this.props.history.push('/');
+          } else {
+            this.setState({
+              botonAgregarMedicamento: true,
+              doctor: true,
+              usuario: res
+            });
+          }
+        } else if (res.rol === 'paciente') {
+          if (this.props.match.params.identificacion) {
+            this.props.history.push('/');
+          } else {
+            this.setState({
+              usuario: res
+            });
+          }
         } else {
-          this.setState({
-            usuario: res
-          });
+          this.props.history.push('/');
         }
       }
     });
@@ -71,13 +81,15 @@ class DetailPaciente extends Component {
 
       if (medicamentos.length === 0) {
         return (
-          <li className="list-group-item">No hay medicamentos asignados</li>
+          <li key="noMedicamentosVacio" className="list-group-item">
+            No hay medicamentos asignados
+          </li>
         );
       }
 
       return medicamentos.map(medicamento => (
         <Medicamento
-          key={medicamento._id}
+          key={medicamento.medicamento}
           medicamento={medicamento}
           identificacionP={this.state.identificacionP}
           usuario={this.state.usuario}
@@ -85,7 +97,11 @@ class DetailPaciente extends Component {
         />
       ));
     } else {
-      return <li className="list-group-item">No hay medicamentos asignados</li>;
+      return (
+        <li key="noMedicamentos" className="list-group-item">
+          No hay medicamentos asignados
+        </li>
+      );
     }
   }
 
@@ -276,7 +292,6 @@ class DetailPaciente extends Component {
 
   botonesDoctor() {
     let botones = [];
-    console.log(this.state.doctor);
     if (this.state.botonAgregarMedicamento && this.state.doctor) {
       botones.push(
         <button

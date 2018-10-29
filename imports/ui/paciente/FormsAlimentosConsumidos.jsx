@@ -42,7 +42,6 @@ class FormsAlimentosConsumidos extends Component {
     let fecha = this.state.fecha;
 
     if (!fecha || fecha === '') {
-      console.log('Entra');
       fecha = new Date();
     }
 
@@ -66,6 +65,10 @@ class FormsAlimentosConsumidos extends Component {
           this.setState({
             fecha: new Date()
           });
+          let actualizar = document.getElementById('botonActualizarConsumo');
+          if (actualizar) {
+            actualizar.click();
+          }
           document.getElementById('formRegistroAlimentos').reset();
           document.getElementById('butonCerrarModalAlimentos').click();
         }
@@ -203,7 +206,6 @@ class FormsAlimentosConsumidos extends Component {
   }
 
   render() {
-    console.log(this.state.fecha);
     return (
       <div
         className="modal fade bd-example-modal-lg bg-foohealli-yellow"
