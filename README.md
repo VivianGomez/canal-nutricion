@@ -72,15 +72,15 @@ Es necesario tenerlo para correr la aplicación localmente. Se puede descargar d
 
 ### Pasos para ejecutar
 
-1) Abrir la carpeta raíz en un CMD.
-2) Ejecutar "npm install" para instalar todas las dependencias necesarias.
-3) Generar 2 hash diferentes usando alguna página para esto tal como https://passwordsgenerator.net/sha256-hash-generator/. 
-3.1) Definir una variable de entorno de esta forma (windows): SET CODE_CRYPTR={HASH1}
-3.2) Definir una variable de entorno de esta forma (windows): SET CODE_TOKEN={HASH2}
-4) Ejecutar "meteor", que despliega el cliente y el servidor en los puertos 3000 y 3001, respectivamente
-4.1) Tener en cuenta que la base de datos que corre Meteor es su propia base de datos de Mongo, la corre localmente y
+1. Abrir la carpeta raíz en un CMD.
+2. Ejecutar "npm install" para instalar todas las dependencias necesarias.
+3. Generar 2 hash diferentes usando alguna página para esto tal como https://passwordsgenerator.net/sha256-hash-generator/. 
+3.1. Definir una variable de entorno de esta forma (windows): SET CODE_CRYPTR={HASH1}
+3.2. Definir una variable de entorno de esta forma (windows): SET CODE_TOKEN={HASH2}
+4. Ejecutar "meteor", que despliega el cliente y el servidor en los puertos 3000 y 3001, respectivamente
+4.1. Tener en cuenta que la base de datos que corre Meteor es su propia base de datos de Mongo, la corre localmente y
 no es la base de datos real.
-4) La aplicación será abierta de forma automática en http://localhost:3000/
+5. La aplicación será abierta de forma automática en http://localhost:3000/
 
 
 Esta página fue desarrollada por Gabriel Pinto Pineda y Vivian Gómez Cubillos y está listada bajo la licencia del MIT (ver archivo [LICENSE](https://github.com/VivianGomez/canal-nutricion/blob/master/LICENSE) )
