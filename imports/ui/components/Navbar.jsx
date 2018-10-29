@@ -188,10 +188,10 @@ class Navbar extends Component {
             <Link to={'/'} style={{ textDecoration: 'none' }}>
               <div className="navbar-brand">
                 <img
-                  src="/logoFoohealli.png"
+                  src="/foohealli500x500.png"
                   className="d-inline-block align-top"
                   alt="Logo Foohealli"
-                  width="60px"
+                  width="80px"
                 />
               </div>
             </Link>

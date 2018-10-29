@@ -151,9 +151,9 @@ export default class Inicio extends Component {
          </span>
          </center>
          <br/>
-          Como <b className="foohealli-text">nutricionista</b> puedes conocer la información de tu paciente, ver como va su dieta en tiempo real. Conocerás sus alimentos consumidos para
-          las diferentes comidas del día durante el tiempo antes del control y así podrás hacer un mejor diagnóstico, ayudar a tu paciente y lograr el éxito esperado.
-          </div>
+          Como <b className="foohealli-text">paciente</b>, usando foohealli podrás registrar como llevas el tratamiento recomendado por tu médico y nutricionista, quienes podrán verlo en tiempo real 
+          y entender como ayudarte además de darte una retroalimentación, diagnósticos y tratamientos más acertados. Así lograrás vivir tranquilo, saludable y con menos preocupaciones.
+         </div>
          <div className="col-md-4 col-sm-12">
          <center>
          <span class="fa-stack fa-4x">
@@ -161,11 +161,10 @@ export default class Inicio extends Component {
            <i class="fas fa-diagnoses fa-stack-1x fa-inverse"></i>
          </span>
          </center>
-         <br/>
-          ¿Cansado de llegar a los controles con tus médicos y nutricionistas y no entender porqué emperoraste en tu enfermedad o problema médico?
-          Como <b className="foohealli-text">paciente</b>, usando foohealli podrás registrar como llevas el tratamiento recomendado, ellos podrán verlo en tiempo real 
-          y entender como ayudarte además de darte una retroalimentación, diagnósticos y tratamientos más acertados. Así lograrás vivir tranquilo, saludable y con menos preocupaciones.
-         </div>
+          <br/>
+          Como <b className="foohealli-text">nutricionista</b> puedes conocer la información de tu paciente, ver como va su dieta en tiempo real. Conocerás sus alimentos consumidos para
+          las diferentes comidas del día durante el tiempo antes del control y así podrás hacer un mejor diagnóstico, ayudar a tu paciente y lograr el éxito esperado.
+          </div>
       </div> 
     </div> 
     );
