@@ -4,7 +4,7 @@ Esta aplicación busca crear un canal de comunicación entre médicos, nutricion
 ## Integrantes del equipo
 - Gabriel Pinto
 
-  **Página personal:** https://glpinto10.github.io/gabriel-pinto-pineda/
+  **Página personal:** https://gabrielpinto.me
 
 - Vivian Gómez
 
