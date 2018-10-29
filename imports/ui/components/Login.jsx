@@ -50,7 +50,7 @@ class Login extends Component {
             alert(err.error);
           } else {
             localStorage.setItem('foohealliStuff', res);
-            this.props.history.push('/doctor/dashboardDoctor');
+            this.props.history.push('/doctor/dashboard');
             window.location.reload();
           }
         }
@@ -67,7 +67,7 @@ class Login extends Component {
             alert(err.error);
           } else {
             localStorage.setItem('foohealliStuff', res);
-            this.props.history.push('/nutricionista/dashboardNutricionista');
+            this.props.history.push('/nutricionista/dashboard');
             window.location.reload();
           }
         }
@@ -94,7 +94,7 @@ class Login extends Component {
           className="btn btn-info"
           onClick={() => this.cambiarRolIngreso('nutricionista')}
         >
-          <i className="fas fa-user-plus" />
+          <i className="fas fa-diagnoses" />
           &nbsp;Soy nutricionista
         </button>
       );

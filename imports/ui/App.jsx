@@ -20,14 +20,10 @@ class App extends Component {
         <div id="mainContainer" className="container container-fluid">
           <Switch>
             <Route exact path="/" component={Inicio} />
+            <Route exact path="/doctor/dashboard" component={DashboardDoctor} />
             <Route
               exact
-              path="/doctor/dashboardDoctor"
-              component={DashboardDoctor}
-            />
-            <Route
-              exact
-              path="/nutricionista/dashboardNutricionista"
+              path="/nutricionista/dashboard"
               component={DashboardNutricionista}
             />
             <Route

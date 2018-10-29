@@ -92,7 +92,7 @@ class Navbar extends Component {
           <a
             id="botonDashboardDoctor"
             className="nav-link pointer"
-            onClick={() => this.props.history.push('/doctor/dashboardDoctor')}
+            onClick={() => this.props.history.push('/doctor/dashboard')}
           >
             Mis Pacientes
           </a>
@@ -107,9 +107,7 @@ class Navbar extends Component {
           <a
             id="botonDashboardNutricionista"
             className="nav-link pointer"
-            onClick={() =>
-              this.props.history.push('/nutricionista/dashboardNutricionista')
-            }
+            onClick={() => this.props.history.push('/nutricionista/dashboard')}
           >
             Mis Pacientes
           </a>

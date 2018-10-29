@@ -10,6 +10,10 @@ class DetailPacienteNutricionista extends Component {
   constructor(props) {
     super(props);
 
+    if (!localStorage.getItem('foohealliStuff')) {
+      this.props.history.push('/');
+    }
+
     this.state = {
       token: localStorage.getItem('foohealliStuff'),
       identificacionP: props.match.params.identificacion,
@@ -55,6 +59,12 @@ class DetailPacienteNutricionista extends Component {
         ? this.props.paciente.medicamentosAsignados
         : this.state.usuario.medicamentosAsignados;
 
+      if (medicamentos.length === 0) {
+        return (
+          <li className="list-group-item">No hay medicamentos asignados</li>
+        );
+      }
+
       return medicamentos.map(medicamento => (
         <Medicamento
           key={medicamento._id}
@@ -65,7 +75,7 @@ class DetailPacienteNutricionista extends Component {
         />
       ));
     } else {
-      return <h1>Cargando medicamentos...</h1>;
+      return <li className="list-group-item">No hay medicamentos asignados</li>;
     }
   }
 
@@ -205,6 +215,8 @@ class DetailPacienteNutricionista extends Component {
     );
   }
 }
+
+DetailPacienteNutricionista = withRouter(DetailPacienteNutricionista);
 
 export default withTracker(props => {
   const identificacionP = '' + props.match.params.identificacion;
