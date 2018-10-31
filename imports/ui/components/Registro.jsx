@@ -91,6 +91,8 @@ class Registro extends Component {
   }
 
   render() {
+    //Se podria utilizar una lista de radio buttons de el label es el texto y simplemente se escoge el radio button y ya. 
+    // La seleccion actual con tanto texto de escgoer : 'soy un paciente motivado' (y las demás opciones) es muy largo y se ve raro. 
     return (
       <div className="row">
         <div className="col-12 mt-3 no-gutters">
@@ -110,6 +112,7 @@ class Registro extends Component {
           <hr />
         </div>
         <div className="col-12">
+          
           <form onSubmit={this.handleSubmit.bind(this)}>
             <div className="form-group">
               <label htmlFor="registroInputRol">
