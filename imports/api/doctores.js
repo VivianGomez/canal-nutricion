@@ -1,3 +1,6 @@
+/**
+*Los imports podrían ponerlos en una sola línea, utilizando Iner Line en sublime, por ejemplo.
+*/
 import {
     Meteor
 } from 'meteor/meteor';
