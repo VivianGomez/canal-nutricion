@@ -3,6 +3,10 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
+/**
+* La página donde pueden tener varias ideas de accesibilidad para el código HTML es: https://www.w3.org/TR/wai-aria-1.1/
+*/
+
 class Inicio extends Component {
   constructor(props) {
     super(props);
