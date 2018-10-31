@@ -9,6 +9,7 @@ html {
   height: 100%;
 }
 
+/* Se podría crear una carpeta imagenes que contegan las imagenes asociadas al archivo CSS del cliente */
 #header-site {
   background: url('./fondo.jpg');
   background-size: 100% auto;
