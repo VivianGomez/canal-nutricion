@@ -245,7 +245,8 @@ class FormsAlimentosConsumidos extends Component {
                   <label htmlFor="fechaConsumo">
                     <b>
                       Fecha de consumo{' '}
-                      {!this.state.fecha ||
+                      {// Poner la fecha de hoy por defecto para mejorar el diseño
+                        !this.state.fecha ||
                       this.state.fecha === '' ||
                       this.compararFecha()
                         ? ' (hoy)'
