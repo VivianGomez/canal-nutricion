@@ -3,6 +3,9 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
+/**
+* Al código HTML podrían agregarle algunos atributos a los objetos declarados para hacer la página más accesible
+*/
 class Inicio extends Component {
   constructor(props) {
     super(props);
