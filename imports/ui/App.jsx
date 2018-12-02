@@ -53,7 +53,7 @@ class App extends Component {
               component={ConsumedFood}
             />
             <Route
-              path="/paciente/alimentosConsumidos/nutrientes/:idFood/:value"
+              path="/consumedFood/nutrients/:idFood/:value"
               component={FoodNutrients}
             />
 

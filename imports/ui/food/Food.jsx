@@ -58,7 +58,7 @@ class Food extends Component {
                 className="btn btn-outline-primary m-1"
                 onClick={() => {
                   this.props.history.push(
-                    '/paciente/alimentosConsumidos/nutrientes/' +
+                    '/consumedFood/nutrients/' +
                       alimento.idAlimento +
                       '/' +
                       alimento.porcionConsumidaGramos
@@ -76,7 +76,22 @@ class Food extends Component {
               </button>
             </div>
           ) : (
-            ''
+            <div className="col-12 text-right">
+              <button
+                type="button"
+                className="btn btn-outline-primary m-1"
+                onClick={() => {
+                  this.props.history.push(
+                    '/consumedFood/nutrients/' +
+                      alimento.idAlimento +
+                      '/' +
+                      alimento.porcionConsumidaGramos
+                  );
+                }}
+              >
+                <i className="fas fa-info-circle" />
+              </button>
+            </div>
           )}
         </div>
       </li>
