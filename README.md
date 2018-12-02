@@ -4,7 +4,7 @@ Esta aplicación busca crear un canal de comunicación entre médicos, nutricion
 ## Integrantes del equipo
 - Gabriel Pinto
 
-  **Página personal:** https://glpinto10.github.io/gabriel-pinto-pineda/
+  **Página personal:** https://gabrielpinto.me
 
 - Vivian Gómez
 
@@ -17,11 +17,10 @@ Esta aplicación busca crear un canal de comunicación entre médicos, nutricion
 ## Descripción
 Foohealli es una plataforma en la cual las personas que quieren y/o necesitan llevar un tratamiento nutricional, como los que padecen de IRC (Insuficiencia Renal Crónica), pueden llevar el registro de su tratamiento en términos de medicamentos y dieta. De tal forma que los médicos y nutricionistas que llevan el caso de dicho paciente, puedan acceder a dicha información, en tiempo real y ayudar a la persona durante el tratamiento y proponer mejores alternativas en los controles. 
 
-
 ## Objetivos
 
--Buscamos permitir a las personas con enfermedades crónicas mejorar su calidad de vida al poder llevar un tratamiento correcto.
--Queremos ayudar a los médicos y nutricionistas a poder diagnosticar y tratar mejor a sus pacientes, al permitirles ver el día a día de los mismos mediante la plataforma
+- Buscamos permitir a las personas con enfermedades crónicas mejorar su calidad de vida al poder llevar un tratamiento correcto.
+- Queremos ayudar a los médicos y nutricionistas a poder diagnosticar y tratar mejor a sus pacientes, al permitirles ver el día a día de los mismos mediante la plataforma
 
 ## Screenshots
 
@@ -50,6 +49,11 @@ A su vez, se usaron varias dependencias instaladas por medio de NPM.
 
 Entre otras que pueden ser observadas en los package.json de la aplicación.
 
+## API utilizado
+
+El API utilizado se puede visualizar en https://ndb.nal.usda.gov/ndb/doc/apilist/API-SEARCH.md y fue utilizado para obtener en tiempo real datos sobre los alimentos a partir de las busquedas realizadas por los pacientes al momento de agregar un alimento consumido. 
+
+
 Finalmente, la aplicación se encuentra despleagada en https://heroku.com/ , para acceder a ella se puede ingresar a https://foohealli-app.herokuapp.com/
 
 ## Instructivo para ejecución
@@ -68,12 +72,22 @@ Es necesario tenerlo para correr la aplicación localmente. Se puede descargar d
 
 ### Pasos para ejecutar
 
-1) Abrir la carpeta raíz en un CMD.
-2) Ejecutar "npm install" para instalar todas las dependencias necesarias.
-3) Ejecutar "meteor", que despliega el cliente y el servidor en los puertos 3000 y 3001, respectivamente
-3.1) Tener en cuenta que la base de datos que corre Meteor es su propia base de datos de Mongo, la corre localmente y
+1. Abrir la carpeta raíz en un CMD.
+
+2. Ejecutar "npm install" para instalar todas las dependencias necesarias.
+
+3. Generar 2 hash diferentes usando alguna página para esto tal como https://passwordsgenerator.net/sha256-hash-generator/.
+
+3.1. Definir una variable de entorno de esta forma (windows): SET CODE_CRYPTR={HASH1}
+
+3.2. Definir una variable de entorno de esta forma (windows): SET CODE_TOKEN={HASH2}
+
+4. Ejecutar "meteor", que despliega el cliente y el servidor en los puertos 3000 y 3001, respectivamente
+
+4.1. Tener en cuenta que la base de datos que corre Meteor es su propia base de datos de Mongo, la corre localmente y
 no es la base de datos real.
-5) La aplicación será abierta de forma automática en http://localhost:3000/
+
+5. La aplicación será abierta de forma automática en http://localhost:3000/
 
 
 Esta página fue desarrollada por Gabriel Pinto Pineda y Vivian Gómez Cubillos y está listada bajo la licencia del MIT (ver archivo [LICENSE](https://github.com/VivianGomez/canal-nutricion/blob/master/LICENSE) )

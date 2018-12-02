@@ -59,7 +59,7 @@ class Home extends Component {
           </div>
         </div>
         <div className="row text-center mt-5">
-          <div className="col-md-4 col-sm-12">
+          <div className="col-md-4 col-sm-12 mb-3">
             <center>
               <span className="fa-stack fa-4x">
                 <i className="fas fa-circle fa-stack-2x text-primary" />
@@ -72,7 +72,7 @@ class Home extends Component {
             medicamentos y dieta. Puedes controlar sus medicamentos en tiempo
             real y facilitarle dicho tratamiento.
           </div>
-          <div className="col-md-4 col-sm-12">
+          <div className="col-md-4 col-sm-12 mb-3">
             <center>
               <span className="fa-stack fa-4x">
                 <i className="fas fa-circle fa-stack-2x foohealli-text-light-green" />
@@ -87,7 +87,7 @@ class Home extends Component {
             diagnósticos y tratamientos más acertados. Así lograrás vivir
             tranquilo, saludable y con menos preocupaciones.
           </div>
-          <div className="col-md-4 col-sm-12">
+          <div className="col-md-4 col-sm-12 mb-3">
             <center>
               <span className="fa-stack fa-4x">
                 <i className="fas fa-circle fa-stack-2x text-info" />
