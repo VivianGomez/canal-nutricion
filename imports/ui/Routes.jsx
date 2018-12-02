@@ -5,7 +5,7 @@ import App from './App.jsx';
 
 Meteor.startup(() => {
   render(
-    <div>
+    <div className="h-100">
       <BrowserRouter>
         <Route path="/" component={App} />
       </BrowserRouter>

@@ -204,7 +204,8 @@ class ConsumedFood extends Component {
           <hr />
         </div>
         <div className="col-12">
-          {this.state.alimentosConsumidos.length === 0 ? (
+          {this.state.alimentosConsumidos.length === 0 &&
+          this.state.paciente ? (
             <li className="list-group-item">
               No hay reportes de consumo para este día.
             </li>

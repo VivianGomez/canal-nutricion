@@ -10,12 +10,13 @@ import DetailPatient from './patient/DetailPatient.jsx';
 import DashboardNutritionist from './nutritionist/DashboardNutritionist.jsx';
 import DashboardPatient from './patient/DashboardPatient.jsx';
 import ConsumedFood from './patient/ConsumedFood.jsx';
+import FoodNutrients from './food/FoodNutrients.jsx';
 import DetailPatientNutritionist from './nutritionist/DetailPatientNutritionist.jsx';
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="h-100">
         <Navbar />
         <div id="mainContainer" className="container container-fluid">
           <Switch>
@@ -51,6 +52,10 @@ class App extends Component {
               path="/paciente/alimentosConsumidos"
               component={ConsumedFood}
             />
+            <Route
+              path="/paciente/alimentosConsumidos/nutrientes/:idFood/:value"
+              component={FoodNutrients}
+            />
 
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
@@ -59,7 +64,7 @@ class App extends Component {
           </Switch>
         </div>
         <br />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

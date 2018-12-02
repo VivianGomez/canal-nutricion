@@ -13,10 +13,15 @@ import {
 import {
     Nutritionists
 } from './nutritionists';
+import axios from 'axios';
 
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FAF5F3E0460C9');
+
+const allowedNutrients = [
+    '203', '208', '255', '269', '291', '301', '305', '306', '307', '324', '326', '401', '430', '601', '605'
+]
 
 export const Patients = new Mongo.Collection('patients');
 
@@ -335,6 +340,33 @@ Meteor.methods({
             throw new Meteor.Error("Se presentó un error eliminando el alimento");
         }
 
+    },
+    'patients.foodNutrients'({
+        ndbno
+    }) {
+        check(ndbno, String);
+
+        return new Promise((resolve, reject) => {
+            axios
+                .get(
+                    'https://api.nal.usda.gov/ndb/reports/?type=s&format=json&api_key=d88AhCQq0DlNsy2PSzi6IiixEpuKo6pMsEPnLVMK&ndbno=' +
+                    ndbno
+                )
+                .then(({
+                    data
+                }) => {
+                    if (data.report && data.report.food) {
+                        let food = data.report.food;
+                        let nutrients = food.nutrients;
+                        food.nutrients = nutrients.filter(nutrient => allowedNutrients.includes(nutrient.nutrient_id));
+                        resolve(food);
+                    } else {
+                        reject("There is not a food with an id: " + ndbno);
+                    }
+                }).catch(err => {
+                    reject("There is not a food with an id: " + ndbno);
+                });
+        });
     },
 });
 

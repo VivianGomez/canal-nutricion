@@ -9,7 +9,7 @@ class ConsumedFoodForm extends Component {
     super(props);
 
     this.state = {
-      fecha: '',
+      fecha: new Date(),
       paciente: this.props.paciente,
       busqueda: '',
       resultados: [],

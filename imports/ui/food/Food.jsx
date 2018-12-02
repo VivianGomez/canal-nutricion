@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
+import { withRouter } from 'react-router-dom';
 
 class Food extends Component {
   constructor(props) {
@@ -54,7 +55,21 @@ class Food extends Component {
             <div className="col-12 text-right">
               <button
                 type="button"
-                className="btn btn-outline-danger"
+                className="btn btn-outline-primary m-1"
+                onClick={() => {
+                  this.props.history.push(
+                    '/paciente/alimentosConsumidos/nutrientes/' +
+                      alimento.idAlimento +
+                      '/' +
+                      alimento.porcionConsumidaGramos
+                  );
+                }}
+              >
+                <i className="fas fa-info-circle" />
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-danger m-1"
                 onClick={() => this.removerAlimento()}
               >
                 <i className="fas fa-trash-alt" />
@@ -69,4 +84,4 @@ class Food extends Component {
   }
 }
 
-export default Food;
+export default withRouter(Food);
