@@ -5,7 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Patients } from '../../api/patients.js';
 import { withRouter } from 'react-router';
 
-class DashboardNutricionista extends Component {
+class DashboardNutritionist extends Component {
   constructor(props) {
     super(props);
     this.pacienteAAsignarInput = React.createRef();
@@ -173,11 +173,11 @@ class DashboardNutricionista extends Component {
   }
 }
 
-DashboardNutricionista = withRouter(DashboardNutricionista);
+DashboardNutritionist = withRouter(DashboardNutritionist);
 
 export default withTracker(() => {
   Meteor.subscribe('patients', localStorage.getItem('foohealliStuff'));
   return {
     pacientes: Patients.find({}).fetch()
   };
-})(DashboardNutricionista);
+})(DashboardNutritionist);

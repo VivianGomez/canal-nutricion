@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import Medicamento from '../medicamento/Medicamento.jsx';
-import AlimentosConsumidos from '../paciente/AlimentosConsumidos.jsx';
+import Medicine from '../medicine/Medicine.jsx';
+import ConsumedFood from '../patient/ConsumedFood.jsx';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Pacientes } from '../../api/pacientes.js';
+import { Patients } from '../../api/patients.js';
 import { withRouter } from 'react-router';
 
-class DetailPacienteNutricionista extends Component {
+class DetailPatientNutritionist extends Component {
   constructor(props) {
     super(props);
 
@@ -31,7 +31,7 @@ class DetailPacienteNutricionista extends Component {
   }
 
   componentDidMount() {
-    Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
+    Meteor.call('users.decodificar', this.state.token, (err, res) => {
       if (err) {
         alert(err.error);
       } else if (res) {
@@ -66,7 +66,7 @@ class DetailPacienteNutricionista extends Component {
       }
 
       return medicamentos.map(medicamento => (
-        <Medicamento
+        <Medicine
           key={medicamento._id}
           medicamento={medicamento}
           identificacionP={this.state.identificacionP}
@@ -183,7 +183,7 @@ class DetailPacienteNutricionista extends Component {
             >
               <div className="col-12">
                 {this.state.paciente ? (
-                  <AlimentosConsumidos
+                  <ConsumedFood
                     nutricionista={true}
                     paciente={this.state.paciente}
                   />
@@ -216,12 +216,12 @@ class DetailPacienteNutricionista extends Component {
   }
 }
 
-DetailPacienteNutricionista = withRouter(DetailPacienteNutricionista);
+DetailPatientNutritionist = withRouter(DetailPatientNutritionist);
 
 export default withTracker(props => {
   const identificacionP = '' + props.match.params.identificacion;
-  Meteor.subscribe('pacientes.identificacion', identificacionP);
+  Meteor.subscribe('patients.identificacion', identificacionP);
   return {
-    paciente: Pacientes.findOne({ identificacion: identificacionP })
+    paciente: Patients.findOne({ identificacion: identificacionP })
   };
-})(DetailPacienteNutricionista);
+})(DetailPatientNutritionist);

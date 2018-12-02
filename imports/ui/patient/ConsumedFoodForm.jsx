@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import axios from 'axios';
 import DatePicker from 'react-date-picker';
 
-class FormsAlimentosConsumidos extends Component {
+class ConsumedFoodForm extends Component {
   constructor(props) {
     super(props);
 
@@ -46,7 +46,7 @@ class FormsAlimentosConsumidos extends Component {
     }
 
     Meteor.call(
-      'pacientes.registrarAlimento',
+      'patients.registrarAlimento',
       {
         identificacion: this.state.paciente.identificacion,
         alimento: this.state.seleccion,
@@ -319,4 +319,4 @@ class FormsAlimentosConsumidos extends Component {
   }
 }
 
-export default FormsAlimentosConsumidos;
+export default ConsumedFoodForm;

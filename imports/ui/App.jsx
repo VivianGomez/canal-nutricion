@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
-import Inicio from './Inicio.jsx';
-import Registro from './components/Registro.jsx';
-import Login from './components/Login.jsx';
+import Home from './components/Home.jsx';
+import Register from './authentication/Register.jsx';
+import Login from './authentication/Login.jsx';
 import Footer from './components/Footer.jsx';
 import DashboardDoctor from './doctor/DashboardDoctor.jsx';
-import DetailPaciente from './paciente/DetailPaciente.jsx';
-import DashboardNutricionista from './nutricionista/DashboardNutricionista.jsx';
-import DashboardPaciente from './paciente/DashboardPaciente.jsx';
-import AlimentosConsumidos from './paciente/AlimentosConsumidos.jsx';
-import DetailPacienteNutricionista from './paciente/DetailPacienteNutricionista.jsx';
+import DetailPatient from './patient/DetailPatient.jsx';
+import DashboardNutritionist from './nutritionist/DashboardNutritionist.jsx';
+import DashboardPatient from './patient/DashboardPatient.jsx';
+import ConsumedFood from './patient/ConsumedFood.jsx';
+import DetailPatientNutritionist from './nutritionist/DetailPatientNutritionist.jsx';
 
 class App extends Component {
   render() {
@@ -19,40 +19,40 @@ class App extends Component {
         <Navbar />
         <div id="mainContainer" className="container container-fluid">
           <Switch>
-            <Route exact path="/" component={Inicio} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/doctor/dashboard" component={DashboardDoctor} />
             <Route
               exact
               path="/nutricionista/dashboard"
-              component={DashboardNutricionista}
+              component={DashboardNutritionist}
             />
             <Route
               exact
               path="/doctor/detailPaciente/:identificacion"
-              component={DetailPaciente}
+              component={DetailPatient}
             />
             <Route
               exact
               path="/nutricionista/detailPaciente/:identificacion"
-              component={DetailPacienteNutricionista}
+              component={DetailPatientNutritionist}
             />
             <Route
               exact
               path="/paciente/dashboard"
-              component={DashboardPaciente}
+              component={DashboardPatient}
             />
             <Route
               exact
               path="/paciente/medicamentos"
-              component={DetailPaciente}
+              component={DetailPatient}
             />
             <Route
               exact
               path="/paciente/alimentosConsumidos"
-              component={AlimentosConsumidos}
+              component={ConsumedFood}
             />
 
-            <Route exact path="/registro" component={Registro} />
+            <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
 
             <Redirect from="*" to="/" />

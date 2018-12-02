@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 
-class Alimento extends Component {
+class Food extends Component {
   constructor(props) {
     super(props);
 
@@ -21,7 +21,7 @@ class Alimento extends Component {
 
   removerAlimento() {
     Meteor.call(
-      'pacientes.removerAlimento',
+      'patients.removerAlimento',
       {
         identificacion: this.state.identificacion,
         alimento: this.state.alimento
@@ -69,4 +69,4 @@ class Alimento extends Component {
   }
 }
 
-export default Alimento;
+export default Food;

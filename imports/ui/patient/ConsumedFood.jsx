@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import DatePicker from 'react-date-picker';
-import Alimento from '../alimento/Alimento.jsx';
+import Food from '../food/Food.jsx';
 
-class DashboardPaciente extends Component {
+class ConsumedFood extends Component {
   constructor(props) {
     super(props);
 
@@ -25,7 +25,7 @@ class DashboardPaciente extends Component {
   cargarConsumidosFecha(fecha) {
     if (this.state.paciente) {
       Meteor.call(
-        'pacientes.alimentosConsumidosFecha',
+        'patients.alimentosConsumidosFecha',
         {
           identificacion: this.state.paciente.identificacion,
           fecha: fecha
@@ -55,7 +55,7 @@ class DashboardPaciente extends Component {
 
     alimentos.map(alimento => {
       let alimentoListo = (
-        <Alimento
+        <Food
           key={alimento.idAlimento}
           alimento={alimento}
           nutricionista={this.state.nutricionista}
@@ -120,7 +120,7 @@ class DashboardPaciente extends Component {
         }
       );
     } else {
-      Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
+      Meteor.call('users.decodificar', this.state.token, (err, res) => {
         if (err) {
           alert(err);
           this.props.history.push('/');
@@ -217,6 +217,6 @@ class DashboardPaciente extends Component {
   }
 }
 
-DashboardPaciente = withRouter(DashboardPaciente);
+ConsumedFood = withRouter(ConsumedFood);
 
-export default DashboardPaciente;
+export default ConsumedFood;

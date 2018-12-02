@@ -1,10 +1,10 @@
 import {
   Meteor
 } from 'meteor/meteor';
-import '../imports/api/pacientes.js';
-import '../imports/api/usuarios.js';
-import '../imports/api/doctores.js';
-import '../imports/api/nutricionistas.js';
+import '../imports/api/patients';
+import '../imports/api/users';
+import '../imports/api/doctors';
+import '../imports/api/nutritionists';
 
 Meteor.startup(() => {
   // code to run on server at startup

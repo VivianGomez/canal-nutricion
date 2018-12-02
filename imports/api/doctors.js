@@ -12,33 +12,33 @@ const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FAF5F3E0460C9');
 
-export const Nutricionistas = new Mongo.Collection('nutricionistas');
+export const Doctors = new Mongo.Collection('doctors');
 
 Meteor.methods({
-    'nutricionistas.validarNutricionista'({
+    'doctors.validarDoctor'({
         correo,
         clave
     }) {
         check(correo, String);
         check(clave, String);
 
-        let nutricionista = null;
+        let doctor = null;
 
-        nutricionista = Nutricionistas.findOne({
+        doctor = Doctors.findOne({
             correo: correo
         });
 
-        if (!nutricionista) {
-            throw new Meteor.Error('No existe un nutricionista con ese correo.');
+        if (!doctor) {
+            throw new Meteor.Error('No existe un doctor con ese correo.');
         } else {
-            if (cryptr.decrypt(nutricionista.clave) !== clave) {
+            if (cryptr.decrypt(doctor.clave) !== clave) {
                 throw new Meteor.Error('La contraseña ingresada no es correcta.');
             }
         }
 
-        delete nutricionista.clave;
+        delete doctor.clave;
 
-        let token = jwt.sign(nutricionista, process.env.CODE_TOKEN);
+        let token = jwt.sign(doctor, process.env.CODE_TOKEN);
 
         return token;
     }

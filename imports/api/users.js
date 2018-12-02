@@ -5,23 +5,23 @@ import {
     Mongo
 } from 'meteor/mongo';
 import {
-    Pacientes
-} from './pacientes.js';
+    Patients
+} from './patients';
 import {
-    Doctores
-} from './doctores';
+    Doctors
+} from './doctors';
 import {
-    Nutricionistas
-} from './nutricionistas';
+    Nutritionists
+} from './nutritionists';
 
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FAF5F3E0460C9');
 
-export const Usuarios = new Mongo.Collection('usuarios');
+export const Users = new Mongo.Collection('users');
 
 Meteor.methods({
-    'usuarios.insertar'({
+    'users.insert'({
         nombre,
         identificacion,
         correo,
@@ -50,19 +50,19 @@ Meteor.methods({
                 usuario.examenesMedicos = [];
                 usuario.medicamentosAsignados = [];
 
-                Pacientes.insert(
+                Patients.insert(
                     usuario
                 );
             } else if (rol === 'doctor') {
                 usuario.pacientes = [];
 
-                Doctores.insert(
+                Doctors.insert(
                     usuario
                 );
             } else if (rol === 'nutricionista') {
                 usuario.nutricionistas = [];
 
-                Nutricionistas.insert(
+                Nutritionists.insert(
                     usuario
                 );
             }
@@ -79,22 +79,22 @@ Meteor.methods({
         }
 
     },
-    'usuarios.decodificar'(token) {
+    'users.decodificar'(token) {
         let usuario = decodificarToken(token);
         if (usuario) {
 
             let nUsuario = null;
 
             if (usuario.rol === 'paciente') {
-                nUsuario = Pacientes.findOne({
+                nUsuario = Patients.findOne({
                     _id: usuario._id
                 });
             } else if (usuario.rol === 'doctor') {
-                nUsuario = Doctores.findOne({
+                nUsuario = Doctors.findOne({
                     _id: usuario._id
                 });
             } else if (usuario.rol === 'nutricionista') {
-                nUsuario = Nutricionistas.findOne({
+                nUsuario = Nutritionists.findOne({
                     _id: usuario._id
                 });
             }
@@ -111,7 +111,7 @@ Meteor.methods({
             return null;
         }
     },
-    'usuarios.asignarNutricionista'({
+    'users.asignarNutricionista'({
         identificacionPaciente,
         identificacionNutricionista
     }) {
@@ -120,13 +120,13 @@ Meteor.methods({
 
         verificarPermisos(usuario.rol);
 
-        const paciente = Pacientes.findOne({
+        const paciente = Patients.findOne({
             identificacion: identificacionPaciente,
         });
 
         verificarExistenciaPaciente(paciente);
 
-        const nutricionista = Nutricionistas.findOne({
+        const nutricionista = Nutritionists.findOne({
             identificacion: identificacionNutricionista,
         });
 
@@ -134,7 +134,7 @@ Meteor.methods({
 
 
         try {
-            Pacientes.update({
+            Patients.update({
                 identificacion: identificacionPaciente
             }, {
                 $set: {

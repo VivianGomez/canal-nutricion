@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import InfoPaciente from '../paciente/InfoPaciente.jsx';
+import InformationPatient from '../patient/InformationPatient.jsx';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Pacientes } from '../../api/pacientes.js';
+import { Patients } from '../../api/patients.js';
 import { withRouter } from 'react-router';
 
 class DashboardDoctor extends Component {
@@ -21,7 +21,7 @@ class DashboardDoctor extends Component {
   }
 
   componentDidMount() {
-    Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
+    Meteor.call('users.decodificar', this.state.token, (err, res) => {
       if (err) {
         alert(err.error);
       } else if (res) {
@@ -40,7 +40,7 @@ class DashboardDoctor extends Component {
   renderPacientes() {
     let pacientes = this.props.pacientes;
     return pacientes.map(paciente => (
-      <InfoPaciente
+      <InformationPatient
         key={paciente._id}
         paciente={paciente}
         nombre={paciente.nombre}
@@ -78,8 +78,8 @@ class DashboardDoctor extends Component {
 DashboardDoctor = withRouter(DashboardDoctor);
 
 export default withTracker(() => {
-  Meteor.subscribe('pacientes', localStorage.getItem('foohealliStuff'));
+  Meteor.subscribe('patients', localStorage.getItem('foohealliStuff'));
   return {
-    pacientes: Pacientes.find({}).fetch()
+    pacientes: Patients.find({}).fetch()
   };
 })(DashboardDoctor);

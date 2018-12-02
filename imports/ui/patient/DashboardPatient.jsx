@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
-class DashboardPaciente extends Component {
+class DashboardPatient extends Component {
   constructor(props) {
     super(props);
 
@@ -17,7 +17,7 @@ class DashboardPaciente extends Component {
   }
 
   componentDidMount() {
-    Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
+    Meteor.call('users.decodificar', this.state.token, (err, res) => {
       if (err) {
         alert(err.error);
       } else if (res) {
@@ -59,7 +59,7 @@ class DashboardPaciente extends Component {
             <div className="card">
               <img
                 className="card-img-top pointer img-paciente"
-                src="../paciente/logoAlimentosConsumidos.jpeg"
+                src="../patient/logoAlimentosConsumidos.jpeg"
                 alt="Card image cap"
               />
             </div>
@@ -73,7 +73,7 @@ class DashboardPaciente extends Component {
             <div className="card">
               <img
                 className="card-img-top pointer img-paciente"
-                src="../paciente/logoMedicamentos.jpeg"
+                src="../patient/logoMedicamentos.jpeg"
                 alt="Card image cap"
               />
             </div>
@@ -84,6 +84,6 @@ class DashboardPaciente extends Component {
   }
 }
 
-DashboardPaciente = withRouter(DashboardPaciente);
+DashboardPatient = withRouter(DashboardPatient);
 
-export default DashboardPaciente;
+export default DashboardPatient;

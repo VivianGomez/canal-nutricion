@@ -23,7 +23,7 @@ class Login extends Component {
 
     if (this.state.rol === 'paciente') {
       Meteor.call(
-        'pacientes.validarPaciente',
+        'patients.validarPaciente',
         {
           correo: this.correoInput.current.value,
           clave: this.claveInput.current.value
@@ -40,7 +40,7 @@ class Login extends Component {
       );
     } else if (this.state.rol === 'doctor') {
       Meteor.call(
-        'doctores.validarDoctor',
+        'doctors.validarDoctor',
         {
           correo: this.correoInput.current.value,
           clave: this.claveInput.current.value
@@ -57,7 +57,7 @@ class Login extends Component {
       );
     } else if (this.state.rol === 'nutricionista') {
       Meteor.call(
-        'nutricionistas.validarNutricionista',
+        'nutritionists.validarNutricionista',
         {
           correo: this.correoInput.current.value,
           clave: this.claveInput.current.value
@@ -120,7 +120,7 @@ class Login extends Component {
 
   irARegistro() {
     document.getElementById('botonParaIniciarSesion').click();
-    this.props.history.push('/registro');
+    this.props.history.push('/register');
   }
 
   render() {

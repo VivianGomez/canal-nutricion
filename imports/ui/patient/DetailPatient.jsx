@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import Medicamento from '../medicamento/Medicamento.jsx';
+import Medicine from '../medicine/Medicine.jsx';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Pacientes } from '../../api/pacientes.js';
+import { Patients } from '../../api/patients.js';
 import { withRouter } from 'react-router';
 
-class DetailPaciente extends Component {
+class DetailPatient extends Component {
   constructor(props) {
     super(props);
 
@@ -35,7 +35,7 @@ class DetailPaciente extends Component {
   }
 
   componentDidMount() {
-    Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
+    Meteor.call('users.decodificar', this.state.token, (err, res) => {
       if (err) {
         alert(err.error);
       } else if (res) {
@@ -88,7 +88,7 @@ class DetailPaciente extends Component {
       }
 
       return medicamentos.map(medicamento => (
-        <Medicamento
+        <Medicine
           key={medicamento.medicamento}
           medicamento={medicamento}
           identificacionP={this.state.identificacionP}
@@ -164,7 +164,7 @@ class DetailPaciente extends Component {
   handleCrearMedicamentoSubmit(event) {
     event.preventDefault();
 
-    Meteor.call('pacientes.agregarMedicamento', {
+    Meteor.call('patients.agregarMedicamento', {
       identificacionP: this.state.identificacionP,
       medicamentoP: this.nombreMedInput.current.value,
       posologiaP: this.posologiaInput.current.value,
@@ -355,12 +355,12 @@ class DetailPaciente extends Component {
   }
 }
 
-DetailPaciente = withRouter(DetailPaciente);
+DetailPatient = withRouter(DetailPatient);
 
 export default withTracker(props => {
   const identificacionP = '' + props.match.params.identificacion;
-  Meteor.subscribe('pacientes.identificacion', identificacionP);
+  Meteor.subscribe('patients.identificacion', identificacionP);
   return {
-    paciente: Pacientes.findOne({ identificacion: identificacionP })
+    paciente: Patients.findOne({ identificacion: identificacionP })
   };
-})(DetailPaciente);
+})(DetailPatient);

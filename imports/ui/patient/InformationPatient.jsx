@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
-class InfoPaciente extends Component {
+class InfoPatient extends Component {
   constructor(props) {
     super(props);
 
@@ -100,4 +100,4 @@ class InfoPaciente extends Component {
   }
 }
 
-export default withRouter(InfoPaciente);
+export default withRouter(InfoPatient);

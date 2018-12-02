@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
-class Inicio extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +13,7 @@ class Inicio extends Component {
   }
 
   componentDidMount() {
-    Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
+    Meteor.call('users.decodificar', this.state.token, (err, res) => {
       if (err) {
         alert(err.error);
       } else if (res) {
@@ -110,7 +110,7 @@ class Inicio extends Component {
               ¿No tienes una cuenta?{' '}
               <span
                 className="foohealli-text font-weight-bold pointer"
-                onClick={() => this.props.history.push('/registro')}
+                onClick={() => this.props.history.push('/register')}
               >
                 Regístrate
               </span>
@@ -136,6 +136,6 @@ class Inicio extends Component {
   }
 }
 
-Inicio = withRouter(Inicio);
+Home = withRouter(Home);
 
-export default Inicio;
+export default Home;

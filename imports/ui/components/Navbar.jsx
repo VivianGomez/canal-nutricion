@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withRouter, Link } from 'react-router-dom';
-import Login from './Login.jsx';
-import FormsAlimentosConsumidos from '../paciente/FormsAlimentosConsumidos.jsx';
+import Login from '../authentication/Login.jsx';
+import ConsumedFoodForm from '../patient/ConsumedFoodForm.jsx';
 
 class Navbar extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
-    Meteor.call('usuarios.decodificar', this.state.token, (err, res) => {
+    Meteor.call('users.decodificar', this.state.token, (err, res) => {
       if (err) {
         alert(err.error);
       } else if (res) {
@@ -163,7 +163,7 @@ class Navbar extends Component {
           <a
             id="botonParaRegistrarse"
             className="nav-link pointer"
-            onClick={() => this.props.history.push('/registro')}
+            onClick={() => this.props.history.push('/register')}
           >
             Registrarse
           </a>
@@ -177,7 +177,7 @@ class Navbar extends Component {
     return (
       <div>
         {this.state.usuario && this.state.usuario.rol === 'paciente' ? (
-          <FormsAlimentosConsumidos paciente={this.state.usuario} />
+          <ConsumedFoodForm paciente={this.state.usuario} />
         ) : (
           ''
         )}

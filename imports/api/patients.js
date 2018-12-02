@@ -11,45 +11,45 @@ import {
     Match
 } from 'meteor/check';
 import {
-    Nutricionistas
-} from './nutricionistas';
+    Nutritionists
+} from './nutritionists';
 
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FAF5F3E0460C9');
 
-export const Pacientes = new Mongo.Collection('pacientes');
+export const Patients = new Mongo.Collection('patients');
 
 if (Meteor.isServer) {
-    Meteor.publish('pacientes', function pacientesPublication(token) {
+    Meteor.publish('patients', function pacientesPublication(token) {
 
         let usuario = decodificarToken(token);
 
         if (usuario) {
             if (usuario.rol === "doctor") {
-                return Pacientes.find({
+                return Patients.find({
                     $or: [{
                         doctor: usuario.identificacion
                     }, ],
                 });
             }
             if (usuario.rol === "nutricionista") {
-                return Pacientes.find({
+                return Patients.find({
                     $or: [{
                         nutricionista: usuario.identificacion
                     }, ],
                 });
             } else {
-                return Pacientes.find();
+                return Patients.find();
             }
         } else {
             throw new Meteor.Error("Debes haber iniciado sesión para acceder a esta funcionalidad.");
         }
     });
 
-    Meteor.publish('pacientes.identificacion', function pacientesPublic(identificacion) {
+    Meteor.publish('patients.identificacion', function pacientesPublic(identificacion) {
         check(identificacion, String);
-        return Pacientes.find({
+        return Patients.find({
             identificacion: identificacion
         });
     });
@@ -57,17 +57,17 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'pacientes.buscarPaciente'({
+    'patients.buscarPaciente'({
         identificacion
     }) {
         check(identificacion, String);
 
-        const paciente = Pacientes.findOne({
+        const paciente = Patients.findOne({
             identificacion: identificacion
         });
         return paciente;
     },
-    'pacientes.validarPaciente'({
+    'patients.validarPaciente'({
         correo,
         clave
     }) {
@@ -76,7 +76,7 @@ Meteor.methods({
 
         let paciente = null;
 
-        paciente = Pacientes.findOne({
+        paciente = Patients.findOne({
             correo: correo
         });
 
@@ -94,7 +94,7 @@ Meteor.methods({
 
         return token;
     },
-    'pacientes.removerMedicamento'({
+    'patients.removerMedicamento'({
         identificacion,
         medicamentoNombre,
         usuario
@@ -105,14 +105,14 @@ Meteor.methods({
 
         verificarPermisos(usuario.rol);
 
-        const paciente = Pacientes.findOne({
+        const paciente = Patients.findOne({
             identificacion: identificacion
         });
 
         verificarExistenciaPaciente(paciente);
 
         try {
-            Pacientes.update({
+            Patients.update({
                 identificacion: identificacion
             }, {
                 $pull: {
@@ -128,7 +128,7 @@ Meteor.methods({
         }
 
     },
-    'pacientes.agregarMedicamento'({
+    'patients.agregarMedicamento'({
         identificacionP,
         medicamentoP,
         posologiaP,
@@ -148,7 +148,7 @@ Meteor.methods({
         verificarPermisos(usuario.rol);
 
         try {
-            Pacientes.update({
+            Patients.update({
                 identificacion: identificacionP
             }, {
                 $addToSet: {
@@ -171,7 +171,7 @@ Meteor.methods({
         }
 
     },
-    'pacientes.actualizarMedicamento'({
+    'patients.actualizarMedicamento'({
         identificacion,
         medicamento,
         posologia,
@@ -191,7 +191,7 @@ Meteor.methods({
         verificarPermisos(usuario.rol);
 
         try {
-            Pacientes.update({
+            Patients.update({
                 identificacion: identificacion,
                 "medicamentosAsignados.medicamento": medicamento
             }, {
@@ -210,14 +210,14 @@ Meteor.methods({
             throw new Meteor.Error(error);
         }
     },
-    'pacientes.alimentosConsumidosFecha'({
+    'patients.alimentosConsumidosFecha'({
         identificacion,
         fecha
     }) {
 
         check(identificacion, String);
 
-        const paciente = Pacientes.findOne({
+        const paciente = Patients.findOne({
             identificacion: identificacion,
         });
 
@@ -236,20 +236,20 @@ Meteor.methods({
         return alimentosConsumidosFecha;
 
     },
-    'pacientes.asignarNutricionista'(
+    'patients.asignarNutricionista'(
         identificacionPaciente,
         identificacionNutricionista
     ) {
         check(identificacionPaciente, String);
         check(identificacionNutricionista, String);
 
-        const paciente = Pacientes.findOne({
+        const paciente = Patients.findOne({
             identificacion: identificacionPaciente,
         });
 
         verificarExistenciaPaciente(paciente);
 
-        const nutricionista = Nutricionistas.findOne({
+        const nutricionista = Nutritionists.findOne({
             identificacion: identificacionNutricionista,
         });
 
@@ -257,7 +257,7 @@ Meteor.methods({
         yaTieneNutricionista(paciente.nutricionista);
 
         try {
-            Pacientes.update({
+            Patients.update({
                 identificacion: identificacionPaciente
             }, {
                 $set: {
@@ -270,7 +270,7 @@ Meteor.methods({
             throw new Meteor.Error(error);
         }
     },
-    'pacientes.registrarAlimento'({
+    'patients.registrarAlimento'({
         identificacion,
         alimento,
         porcion,
@@ -283,7 +283,7 @@ Meteor.methods({
         check(tipoComida, String);
 
         try {
-            Pacientes.update({
+            Patients.update({
                 identificacion: identificacion
             }, {
                 $addToSet: {
@@ -303,21 +303,21 @@ Meteor.methods({
             throw new Meteor.Error("Se presentó un error registrando tu comida");
         }
     },
-    'pacientes.removerAlimento'({
+    'patients.removerAlimento'({
         identificacion,
         alimento
     }) {
         check(identificacion, String);
         check(alimento, Object);
 
-        const paciente = Pacientes.findOne({
+        const paciente = Patients.findOne({
             identificacion: identificacion
         });
 
         verificarExistenciaPaciente(paciente);
 
         try {
-            Pacientes.update({
+            Patients.update({
                 identificacion: identificacion
             }, {
                 $pull: {
@@ -355,7 +355,7 @@ function verificarExistenciaPaciente(paciente) {
 }
 
 function yaTieneNutricionista(nutricionista) {
-    if (nutricionista!=="") {
+    if (nutricionista !== "") {
         throw new Meteor.Error('El paciente ya tiene un nutricionista asignado.');
     }
 }

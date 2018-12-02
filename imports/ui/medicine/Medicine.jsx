@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withRouter } from 'react-router';
 
-class Medicamento extends Component {
+class Medicine extends Component {
   constructor(props) {
     super(props);
 
@@ -41,7 +41,7 @@ class Medicamento extends Component {
     let confirmar = confirm('¿Está seguro que desea borrar este medicamento?');
     if (confirmar) {
       Meteor.call(
-        'pacientes.removerMedicamento',
+        'patients.removerMedicamento',
         {
           identificacion: this.state.identificacionP,
           medicamentoNombre: this.state.medicamento.medicamento,
@@ -73,7 +73,7 @@ class Medicamento extends Component {
       alert('Los valores del medicamento no han cambiado');
     } else {
       Meteor.call(
-        'pacientes.actualizarMedicamento',
+        'patients.actualizarMedicamento',
         {
           identificacion: this.state.identificacionP,
           medicamento: this.state.medicamento.medicamento,
@@ -272,4 +272,4 @@ class Medicamento extends Component {
   }
 }
 
-export default Medicamento;
+export default Medicine;

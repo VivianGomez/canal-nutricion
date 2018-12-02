@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withRouter } from 'react-router-dom';
 
-class Registro extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
 
@@ -31,7 +31,7 @@ class Registro extends Component {
     let rol = this.rolInput.current.value;
 
     Meteor.call(
-      'usuarios.insertar',
+      'users.insert',
       {
         nombre: this.nombreInput.current.value,
         identificacion: this.identificacionInput.current.value,
@@ -46,7 +46,7 @@ class Registro extends Component {
         } else if (res) {
           if (rol === 'paciente') {
             Meteor.call(
-              'pacientes.validarPaciente',
+              'patients.validarPaciente',
               { correo, clave },
               (err, res) => {
                 if (err) {
@@ -60,7 +60,7 @@ class Registro extends Component {
             );
           } else if (rol === 'doctor') {
             Meteor.call(
-              'doctores.validarDoctor',
+              'doctors.validarDoctor',
               { correo, clave },
               (err, res) => {
                 if (err) {
@@ -73,7 +73,7 @@ class Registro extends Component {
             );
           } else if (rol === 'nutricionista') {
             Meteor.call(
-              'nutricionistas.validarNutricionista',
+              'nutritionists.validarNutricionista',
               { correo, clave },
               (err, res) => {
                 if (err) {
@@ -213,4 +213,4 @@ class Registro extends Component {
     );
   }
 }
-export default withRouter(Registro);
+export default withRouter(Register);
