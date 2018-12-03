@@ -23,7 +23,7 @@ class Login extends Component {
 
     if (this.state.rol === 'Patient') {
       Meteor.call(
-        'patients.validarPatient',
+        'patients.validarPaciente',
         {
           correo: this.correoInput.current.value,
           clave: this.claveInput.current.value

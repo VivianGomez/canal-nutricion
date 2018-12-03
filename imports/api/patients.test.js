@@ -4,7 +4,7 @@ describe("foohealli", function () {
   it("package.json has correct name", async function () {
     const {
       name
-    } = await import("../package.json");
+    } = await import("../../package.json");
     assert.strictEqual(name, "foohealli");
   });
 
