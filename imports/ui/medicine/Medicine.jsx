@@ -109,7 +109,7 @@ class Medicine extends Component {
           <h5>Actualizar medicamento {this.state.medicamento.medicamento} </h5>
           <form onSubmit={this.handleActualizarMedicamentoSubmit.bind(this)}>
             <div className="form-group">
-              <label htmlFor="posologiaInput">Posología: </label>
+              <label htmlFor="posologiaInput">Posology: </label>
               <input
                 type="text"
                 className="form-control"
@@ -122,7 +122,7 @@ class Medicine extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="frecuenciaInput">Frecuencia: </label>
+              <label htmlFor="frecuenciaInput">Frequency: </label>
               <input
                 type="text"
                 className="form-control"
@@ -135,7 +135,7 @@ class Medicine extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="cantidadInput">Cantidad</label>
+              <label htmlFor="cantidadInput">Dose</label>
               <input
                 id={'cantidadInput' + this.state.medicamento._id}
                 className="form-control"
@@ -149,25 +149,25 @@ class Medicine extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="estadoActualizarInput">Current status</label>
-              (It is still being part of the patient treatment?)
+              <label htmlFor="estadoActualizarInput">Current status </label>
+              &nbsp;(It is still being part of the patient treatment?)
               <select
                 id="estadoActualizarInput"
                 className="form-control"
                 ref={this.estadoActualizarInput}
               >
                 <option key="Activo" value="Activo">
-                  Activo
+                  Active
                 </option>
                 <option key="Inactivo" value="Inactivo">
-                  Inactivo
+                  Inactive
                 </option>
               </select>
             </div>
 
             <button type="submit" className="btn btn-foohealli-yellow mr-1">
               <i className="far fa-edit" />
-              &nbsp;Enviar
+              &nbsp;Edit
             </button>
             <button
               type="button"
@@ -175,7 +175,7 @@ class Medicine extends Component {
               onClick={this.toggleFormActualizarMedicamento}
             >
               <i className="far fa-times-circle" />
-              &nbsp;Cancelar
+              &nbsp;Cancel
             </button>
           </form>
         </div>

@@ -157,7 +157,12 @@ class DetailPatient extends Component {
         </div>
       );
     } else {
-      return <h1>...</h1>;
+      return (
+        <div className="spinner">
+          <div className="double-bounce1" />
+          <div className="double-bounce2" />
+        </div>
+      );
     }
   }
 
