@@ -33,7 +33,6 @@
     }
   },
   "devDependencies": {
-    "async-wait-until": "^1.2.4",
     "chai": "^4.2.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",

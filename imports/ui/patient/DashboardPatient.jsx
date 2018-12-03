@@ -57,7 +57,7 @@ class DashboardPatient extends Component {
               <img
                 className="card-img-top pointer img-paciente"
                 src="../patient/logoAlimentosConsumidos.jpeg"
-                alt="Card image cap"
+                alt="See your consumed food"
               />
             </div>
           </Link>
@@ -68,7 +68,7 @@ class DashboardPatient extends Component {
               <img
                 className="card-img-top pointer img-paciente"
                 src="../patient/logoMedicamentos.jpeg"
-                alt="Card image cap"
+                alt="See your assigned medicines"
               />
             </div>
           </Link>

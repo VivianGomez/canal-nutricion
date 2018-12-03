@@ -26,29 +26,29 @@ const allowedNutrients = [
 export const Patients = new Mongo.Collection('patients');
 
 if (Meteor.isServer) {
-    Meteor.publish('patients', function pacientesPublication(token) {
+    Meteor.publish('patients', function patientsPublish(token) {
 
-        let usuario = decodificarToken(token);
+        let user = decodeToken(token);
 
-        if (usuario) {
-            if (usuario.rol === "doctor") {
+        if (user) {
+            if (user.rol === "doctor") {
                 return Patients.find({
                     $or: [{
-                        doctor: usuario.identificacion
+                        doctor: user.identificacion
                     }, ],
                 });
             }
-            if (usuario.rol === "nutricionista") {
+            if (user.rol === "nutricionista") {
                 return Patients.find({
                     $or: [{
-                        nutricionista: usuario.identificacion
+                        nutricionista: user.identificacion
                     }, ],
                 });
             } else {
                 return Patients.find();
             }
         } else {
-            throw new Meteor.Error("Debes haber iniciado sesión para acceder a esta funcionalidad.");
+            throw new Meteor.Error("You must login to access to this functionality.");
         }
     });
 
@@ -88,10 +88,10 @@ Meteor.methods({
         });
 
         if (!paciente) {
-            throw new Meteor.Error('No existe un usuario con ese correo.');
+            throw new Meteor.Error('Does not exist a user with this email.');
         } else {
             if (cryptr.decrypt(paciente.clave) !== clave) {
-                throw new Meteor.Error('La contraseña ingresada no es correcta.');
+                throw new Meteor.Error('Incorrect password.');
             }
         }
 
@@ -129,9 +129,9 @@ Meteor.methods({
                 }
             });
 
-            return "El medicamento " + medicamentoNombre + " se eliminó correctamente";
+            return "The medicine " + medicamentoNombre + " was correctly deleted.";
         } catch (error) {
-            throw new Meteor.Error("Se presentó un error eliminando el medicamento " + medicamentoNombre);
+            throw new Meteor.Error("An error occurred deleting the medicine " + medicamentoNombre);
         }
 
     },
@@ -172,9 +172,9 @@ Meteor.methods({
                 }
             });
 
-            return "El medicamento " + medicamentoP + " se agregó correctamente";
+            return "The medicine " + medicamentoP + " was correctly added.";
         } catch (error) {
-            throw new Meteor.Error("Se presentó un error agregando el medicamento " + medicamentoP + ", error: " + error);
+            throw new Meteor.Error("An error occurred adding the medicine  " + medicamentoP + ", error: " + error);
         }
 
     },
@@ -212,7 +212,7 @@ Meteor.methods({
                 }
             });
 
-            return "El medicamento " + medicamento + " se actualizó correctamente";
+            return "The medicine " + medicamento + " was correctly updated.";
         } catch (error) {
             throw new Meteor.Error(error);
         }
@@ -260,20 +260,19 @@ Meteor.methods({
 
         verificarExistenciaNutricionista(nutricionista);
         yaTieneNutricionista(paciente.nutricionista);
-            // console.log(paciente);
 
         try {
 
             Patients.update({
-                    identificacion: identificacionPaciente,
+                    identificacion: identificacionPaciente
             }, {
                 $set: {
                     nutricionista: identificacionNutricionista
                 }
             });
-           // console.log(paciente);
 
-            return "El paciente " + paciente.nombre + " fue asignado al nutricionista " + nutricionista.nombre + " correctamente";
+            return "The patient " + paciente.nombre + " was correclty added to the nutritionist " + nutricionista.nombre + ".";
+
         } catch (error) {
             throw new Meteor.Error(error);
         }
@@ -284,6 +283,7 @@ Meteor.methods({
         porcion,
         tipoComida,
         fechaConsumo
+
     }) {
         check(identificacion, String);
         check(alimento, Object);
@@ -306,9 +306,9 @@ Meteor.methods({
                 }
             });
 
-            return "Tu comida ha sido registrada exitosamente.";
+            return "Your food was correctly registered.";
         } catch (error) {
-            throw new Meteor.Error("Se presentó un error registrando tu comida :" + error);
+            throw new Meteor.Error("An error occurred adding the food: " + error);
         }
     },
     'patients.removerAlimento'({
@@ -338,9 +338,9 @@ Meteor.methods({
                 }
             });
 
-            return "El alimento se eliminó correctamente";
+            return "The food was correctly deleted.";
         } catch (error) {
-            throw new Meteor.Error("Se presentó un error eliminando el alimento");
+            throw new Meteor.Error("An error occurred deleting the food");
         }
 
     },
@@ -373,32 +373,32 @@ Meteor.methods({
     },
 });
 
-function decodificarToken(token) {
+function decodeToken(token) {
     return token ? jwt.verify(token, process.env.CODE_TOKEN) : null;
 }
 
 function verificarPermisos(rol) {
     if (rol === "paciente") {
-        throw new Meteor.Error('No se encuentra autorizado para realizar esta acción');
+        throw new Meteor.Error('You are not authorized to do this action.');
     }
 }
 
 function verificarExistenciaPaciente(paciente) {
     if (!paciente) {
-        throw new Meteor.Error('No se encuentra el paciente.');
+        throw new Meteor.Error('The patient is not found.');
     }
 }
 
 function yaTieneNutricionista(nutricionista) {
     console.log();
     if (nutricionista !== "") {
-        throw new Meteor.Error('El paciente ya tiene un nutricionista asignado.');
+        throw new Meteor.Error('The patient already have an assigned nutritionist.');
     }
 }
 
 function verificarExistenciaNutricionista(nutricionista) {
     if (!nutricionista) {
-        throw new Meteor.Error('No se encuentra el nutricionista.');
+        throw new Meteor.Error('The nutritionist is not found.');
     }
 }
 

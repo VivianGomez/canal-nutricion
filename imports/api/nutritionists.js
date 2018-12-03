@@ -22,23 +22,23 @@ Meteor.methods({
         check(correo, String);
         check(clave, String);
 
-        let nutricionista = null;
+        let nutricionist = null;
 
-        nutricionista = Nutritionists.findOne({
+        nutricionist = Nutritionists.findOne({
             correo: correo
         });
 
-        if (!nutricionista) {
-            throw new Meteor.Error('No existe un nutricionista con ese correo.');
+        if (!nutricionist) {
+            throw new Meteor.Error('Does not exist a nutricionist with this email.');
         } else {
-            if (cryptr.decrypt(nutricionista.clave) !== clave) {
-                throw new Meteor.Error('La contraseña ingresada no es correcta.');
+            if (cryptr.decrypt(nutricionist.clave) !== clave) {
+                throw new Meteor.Error('Incorrect password.');
             }
         }
 
-        delete nutricionista.clave;
+        delete nutricionist.clave;
 
-        let token = jwt.sign(nutricionista, process.env.CODE_TOKEN);
+        let token = jwt.sign(nutricionist, process.env.CODE_TOKEN);
 
         return token;
     }
