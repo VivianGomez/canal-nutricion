@@ -64,12 +64,14 @@ if (Meteor.isServer) {
 Meteor.methods({
     'patients.buscarPaciente'({
         identificacion
-    }) {
+    }) {        
+
         check(identificacion, String);
 
         const paciente = Patients.findOne({
             identificacion: identificacion
         });
+
         return paciente;
     },
     'patients.validarPaciente'({
@@ -252,23 +254,24 @@ Meteor.methods({
             identificacion: identificacionPaciente,
         });
 
-        verificarExistenciaPaciente(paciente);
-
         const nutricionista = Nutritionists.findOne({
             identificacion: identificacionNutricionista,
         });
 
         verificarExistenciaNutricionista(nutricionista);
         yaTieneNutricionista(paciente.nutricionista);
+            // console.log(paciente);
 
         try {
+
             Patients.update({
-                identificacion: identificacionPaciente
+                    identificacion: identificacionPaciente,
             }, {
                 $set: {
                     nutricionista: identificacionNutricionista
                 }
             });
+           // console.log(paciente);
 
             return "El paciente " + paciente.nombre + " fue asignado al nutricionista " + nutricionista.nombre + " correctamente";
         } catch (error) {
@@ -305,7 +308,7 @@ Meteor.methods({
 
             return "Tu comida ha sido registrada exitosamente.";
         } catch (error) {
-            throw new Meteor.Error("Se presentó un error registrando tu comida");
+            throw new Meteor.Error("Se presentó un error registrando tu comida :" + error);
         }
     },
     'patients.removerAlimento'({
@@ -387,6 +390,7 @@ function verificarExistenciaPaciente(paciente) {
 }
 
 function yaTieneNutricionista(nutricionista) {
+    console.log();
     if (nutricionista !== "") {
         throw new Meteor.Error('El paciente ya tiene un nutricionista asignado.');
     }

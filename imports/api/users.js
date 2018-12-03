@@ -110,42 +110,6 @@ Meteor.methods({
         } else {
             return null;
         }
-    },
-    'users.asignarNutricionista'({
-        identificacionPaciente,
-        identificacionNutricionista
-    }) {
-        check(identificacionPaciente, String);
-        check(identificacionNutricionista, String);
-
-        verificarPermisos(usuario.rol);
-
-        const paciente = Patients.findOne({
-            identificacion: identificacionPaciente,
-        });
-
-        verificarExistenciaPaciente(paciente);
-
-        const nutricionista = Nutritionists.findOne({
-            identificacion: identificacionNutricionista,
-        });
-
-        verificarExistenciaNutricionista(nutricionista);
-
-
-        try {
-            Patients.update({
-                identificacion: identificacionPaciente
-            }, {
-                $set: {
-                    nutricionista: identificacionNutricionista
-                }
-            });
-
-            return "El paciente " + paciente.nombre + " fue asignado al nutricionista " + nutricionista.nombre + " correctamente";
-        } catch (error) {
-            throw new Meteor.Error(error);
-        }
     }
 });
 
