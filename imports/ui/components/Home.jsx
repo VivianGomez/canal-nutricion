@@ -48,13 +48,13 @@ class Home extends Component {
             </center>
             <center>
               <h1 className="foohealli-text-yellow mt-3 mb-3">
-                ¡Bienvenido a Foohealli!
+                Welcome to Foohealli!
               </h1>
             </center>
             <h5 className="mt-3 mb-3">
-              Foohealli es una aplicación que busca mejorar la comunicanicación
-              entre médicos, nutricionistas y pacientes con el fin de lograr
-              tratamientos nutricionales exitosos.
+              Foohealli is an application that seeks to improve communication
+              between doctors, nutritionists and patients in order to achieve
+              successful nutritional treatments.
             </h5>
           </div>
         </div>
@@ -67,10 +67,10 @@ class Home extends Component {
               </span>
             </center>
             <br />
-            Como <b className="foohealli-text">médico</b> puedes conocer la
-            información de tu paciente, como va su tratamiento en términos de
-            medicamentos y dieta. Puedes controlar sus medicamentos en tiempo
-            real y facilitarle dicho tratamiento.
+            As <b className="foohealli-text">doctor</b> you can know the
+            information about your patient, how it's treatment goes in terms of
+            medicines and diet and you can also control it's medicines in real
+            time.
           </div>
           <div className="col-md-4 col-sm-12 mb-3">
             <center>
@@ -80,12 +80,11 @@ class Home extends Component {
               </span>
             </center>
             <br />
-            Como <b className="foohealli-text">paciente</b>, usando foohealli
-            podrás registrar como llevas el tratamiento recomendado por tu
-            médico y nutricionista, quienes podrán verlo en tiempo real y
-            entender como ayudarte además de darte una retroalimentación,
-            diagnósticos y tratamientos más acertados. Así lograrás vivir
-            tranquilo, saludable y con menos preocupaciones.
+            As <b className="foohealli-text">patient</b>, using foohealli you
+            can register your diet for that your doctor and nutritionist could
+            see it in real time, understand how to help you, give you feedback
+            and most accurate diagnoses and treatments. Thanks to this, you will
+            be able to live calm, healthy and with less worries.
           </div>
           <div className="col-md-4 col-sm-12 mb-3">
             <center>
@@ -95,11 +94,11 @@ class Home extends Component {
               </span>
             </center>
             <br />
-            Como <b className="foohealli-text">nutricionista</b> puedes conocer
-            la información de tu paciente, ver como va su dieta en tiempo real.
-            Conocerás sus alimentos consumidos para las diferentes comidas del
-            día durante el tiempo antes del control y así podrás hacer un mejor
-            diagnóstico, ayudar a tu paciente y lograr el éxito esperado.
+            As <b className="foohealli-text">nutritionist</b> you can know the
+            information of your patient, see how it's diet goes in real time.
+            You can know it's consumed food for different times of the day
+            during the time before control and so you can do better diagnosis,
+            help your patient and achieve the expected success.
           </div>
           <div className="col-12">
             <br />
@@ -107,23 +106,23 @@ class Home extends Component {
           <div className="col-12 text-center">
             <hr />
             <h6>
-              ¿No tienes una cuenta?{' '}
+              Don't have an account?{' '}
               <span
                 className="foohealli-text font-weight-bold pointer"
                 onClick={() => this.props.history.push('/register')}
               >
-                Regístrate
+                Register
               </span>
             </h6>
             <h6>
-              ¿Ya haces parte de Foohealli?{' '}
+              Already have an account?{' '}
               <span
                 className="foohealli-text-yellow font-weight-bold pointer"
                 onClick={() =>
                   document.getElementById('botonParaIniciarSesion').click()
                 }
               >
-                Inicia sesión
+                Login
               </span>
             </h6>
           </div>

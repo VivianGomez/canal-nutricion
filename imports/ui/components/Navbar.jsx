@@ -71,7 +71,7 @@ class Navbar extends Component {
               this.props.history.push('/paciente/alimentosConsumidos')
             }
           >
-            Alimentos consumidos
+            Consumed food
           </a>
         </li>
       );
@@ -82,7 +82,7 @@ class Navbar extends Component {
             className="nav-link pointer"
             onClick={() => this.props.history.push('/paciente/medicamentos')}
           >
-            Medicamentos asignados
+            Assigned medicine
           </a>
         </li>
       );
@@ -94,7 +94,7 @@ class Navbar extends Component {
             className="nav-link pointer"
             onClick={() => this.props.history.push('/doctor/dashboard')}
           >
-            Mis Pacientes
+            My patients
           </a>
         </li>
       );
@@ -109,7 +109,7 @@ class Navbar extends Component {
             className="nav-link pointer"
             onClick={() => this.props.history.push('/nutricionista/dashboard')}
           >
-            Mis Pacientes
+            My patients
           </a>
         </li>
       );
@@ -140,7 +140,7 @@ class Navbar extends Component {
               className="dropdown-item pointer foohealli-text"
               onClick={() => this.cerrarSesion()}
             >
-              Cerrar sesión
+              Log out
             </a>
           </div>
         </li>
@@ -154,7 +154,7 @@ class Navbar extends Component {
             data-toggle="modal"
             data-target="#loginModal"
           >
-            Iniciar sesión
+            Login
           </a>
         </li>
       );
@@ -165,7 +165,7 @@ class Navbar extends Component {
             className="nav-link pointer"
             onClick={() => this.props.history.push('/register')}
           >
-            Registrarse
+            Register
           </a>
         </li>
       );
