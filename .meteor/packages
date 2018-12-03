@@ -19,3 +19,6 @@ shell-server@0.3.1            # Server-side component of the `meteor shell` comm
 
 react-meteor-data
 momentjs:moment
+cultofcoders:mocha
+xolvio:cleaner
+dburles:factory
