@@ -85,9 +85,9 @@ class Food extends Component {
           </div>
         ) : (
           <div className="col-12 text-center">
-            <div class="spinner">
-              <div class="double-bounce1" />
-              <div class="double-bounce2" />
+            <div className="spinner">
+              <div className="double-bounce1" />
+              <div className="double-bounce2" />
             </div>
             <br />
             <button

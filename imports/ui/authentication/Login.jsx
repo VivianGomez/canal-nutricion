@@ -10,7 +10,7 @@ class Login extends Component {
       identificacion: '',
       clave: '',
       error: [],
-      rol: 'paciente'
+      rol: 'Patient'
     };
 
     this.correoInput = React.createRef();
@@ -21,9 +21,9 @@ class Login extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    if (this.state.rol === 'paciente') {
+    if (this.state.rol === 'Patient') {
       Meteor.call(
-        'patients.validarPaciente',
+        'patients.validarPatient',
         {
           correo: this.correoInput.current.value,
           clave: this.claveInput.current.value
@@ -33,12 +33,12 @@ class Login extends Component {
             alert(err.error);
           } else {
             localStorage.setItem('foohealliStuff', res);
-            this.props.history.push('/paciente/dashboard');
+            this.props.history.push('/Patient/dashboard');
             window.location.reload();
           }
         }
       );
-    } else if (this.state.rol === 'doctor') {
+    } else if (this.state.rol === 'Doctor') {
       Meteor.call(
         'doctors.validarDoctor',
         {
@@ -55,7 +55,7 @@ class Login extends Component {
           }
         }
       );
-    } else if (this.state.rol === 'nutricionista') {
+    } else if (this.state.rol === 'Nutritionist') {
       Meteor.call(
         'nutritionists.validarNutricionista',
         {
@@ -76,38 +76,68 @@ class Login extends Component {
   }
 
   cargarBotonRol() {
-    if (this.state.rol === 'paciente') {
+    if (this.state.rol === 'Patient') {
       return (
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => this.cambiarRolIngreso('doctor')}
-        >
-          <i className="fas fa-user-md" />
-          &nbsp;Soy doctor
-        </button>
+        <div class="btn-group" role="group" aria-label="Login buttons options">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => this.cambiarRolIngreso('Doctor')}
+          >
+            <i className="fas fa-user-md" />
+            &nbsp;Doctor
+          </button>
+          <button
+            type="button"
+            className="btn btn-info"
+            onClick={() => this.cambiarRolIngreso('Nutritionist')}
+          >
+            <i className="fas fa-diagnoses" />
+            &nbsp;Nutritionist
+          </button>
+        </div>
       );
-    } else if (this.state.rol === 'doctor') {
+    } else if (this.state.rol === 'Doctor') {
       return (
-        <button
-          type="button"
-          className="btn btn-info"
-          onClick={() => this.cambiarRolIngreso('nutricionista')}
-        >
-          <i className="fas fa-diagnoses" />
-          &nbsp;Soy nutricionista
-        </button>
+        <div class="btn-group" role="group" aria-label="Login buttons options">
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => this.cambiarRolIngreso('Patient')}
+          >
+            <i className="fas fa-user" />
+            &nbsp;Patient
+          </button>
+          <button
+            type="button"
+            className="btn btn-info"
+            onClick={() => this.cambiarRolIngreso('Nutritionist')}
+          >
+            <i className="fas fa-diagnoses" />
+            &nbsp;Nutritionist
+          </button>
+        </div>
       );
-    } else if (this.state.rol === 'nutricionista') {
+    } else if (this.state.rol === 'Nutritionist') {
       return (
-        <button
-          type="button"
-          className="btn btn-success"
-          onClick={() => this.cambiarRolIngreso('paciente')}
-        >
-          <i className="fas fa-user" />
-          &nbsp;Soy paciente
-        </button>
+        <div class="btn-group" role="group" aria-label="Login buttons options">
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => this.cambiarRolIngreso('Patient')}
+          >
+            <i className="fas fa-user" />
+            &nbsp;Patient
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => this.cambiarRolIngreso('Doctor')}
+          >
+            <i className="fas fa-user-md" />
+            &nbsp;Doctor
+          </button>
+        </div>
       );
     }
   }
@@ -140,7 +170,7 @@ class Login extends Component {
           <div className="modal-content">
             <div className="modal-header bg-foohealli text-light">
               <h5 className="modal-title" id="exampleModalLabel">
-                ¡Bienvenido de vuelta!
+                Welcome back!
               </h5>
               <button
                 type="button"
@@ -155,14 +185,12 @@ class Login extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <span className="small">
-                Estás ingresando a Foohealli como <b>{this.state.rol}</b>
-              </span>
+              <h5 className="text-center">{this.state.rol}</h5>
               <hr />
               <form onSubmit={this.handleSubmit.bind(this)}>
                 <div className="form-group">
                   <label htmlFor="loginInputCorreo">
-                    <b>Correo electrónico</b>
+                    <b>Email</b>
                   </label>
                   <input
                     type="mail"
@@ -176,7 +204,7 @@ class Login extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="loginInputClave">
-                    <b>Contraseña</b>
+                    <b>Password</b>
                   </label>
                   <input
                     type="password"
@@ -191,23 +219,23 @@ class Login extends Component {
                 </div>
                 <center>
                   <button type="submit" className="btn btn-foohealli">
-                    Iniciar sesión
+                    Login
                   </button>
                 </center>
               </form>
               <hr />
               <p className="text-center">
-                ¿No tienes cuenta en Foohealli?
+                Don't have an account?
                 <br />
                 <span
                   className="foohealli-text font-weight-bold pointer"
                   onClick={this.irARegistro.bind(this)}
                 >
-                  Regístrate
+                  Register
                 </span>
               </p>
               <hr />
-              <h6 className="text-center">Cambiar mi rol</h6>
+              <h6 className="text-center">Change role</h6>
               <div className="text-center">{this.cargarBotonRol()}</div>
             </div>
           </div>
