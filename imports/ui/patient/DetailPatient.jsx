@@ -21,7 +21,7 @@ class DetailPatient extends Component {
 
     this.state = {
       token: localStorage.getItem('foohealliStuff'),
-      identificacionP: this.props.match.params.identificacion,
+      identificacionP: this.props.match.params.id,
       paciente: this.props.paciente,
       botonAgregarMedicamento: false,
       formCrearMedicamento: false,
@@ -40,7 +40,7 @@ class DetailPatient extends Component {
         alert(err.error);
       } else if (res) {
         if (res.rol === 'doctor') {
-          if (!this.props.match.params.identificacion) {
+          if (!this.props.match.params.id) {
             this.props.history.push('/');
           } else {
             this.setState({
@@ -50,7 +50,7 @@ class DetailPatient extends Component {
             });
           }
         } else if (res.rol === 'paciente') {
-          if (this.props.match.params.identificacion) {
+          if (this.props.match.params.id) {
             this.props.history.push('/');
           } else {
             this.setState({
@@ -82,7 +82,7 @@ class DetailPatient extends Component {
       if (medicamentos.length === 0) {
         return (
           <li key="noMedicamentosVacio" className="list-group-item">
-            No hay medicamentos asignados
+            There are no assigned medicines
           </li>
         );
       }
@@ -99,7 +99,7 @@ class DetailPatient extends Component {
     } else {
       return (
         <li key="noMedicamentos" className="list-group-item">
-          No hay medicamentos asignados
+          There are no assigned medicines
         </li>
       );
     }
@@ -119,7 +119,7 @@ class DetailPatient extends Component {
           <div className="bg-foohealli text-light">
             <br />
             <h2 className="text-center font-weight-bold">
-              &nbsp;Información paciente {nombre}
+              &nbsp;{nombre}
               &nbsp;
             </h2>
             <br />
@@ -130,13 +130,13 @@ class DetailPatient extends Component {
             <div className="col-lg-4  col-12">
               <i className="fas fa-id-card foohealli-text" />
               &nbsp;
-              <b>Identificación : </b>
+              <b>Id: </b>
               {identificacion}
             </div>
             <div className="col-lg-4  col-12">
               <i className="fas fa-calendar-alt foohealli-text" />
               &nbsp;
-              <b>En tratamiento desde : </b>
+              <b>Start date: </b>
               {fechaR}
             </div>
             <div className="col-lg-2" />
@@ -144,20 +144,25 @@ class DetailPatient extends Component {
             <div className="col-lg-4  col-12">
               <i className="fas fa-phone-volume foohealli-text" />
               &nbsp;
-              <b>Celular: </b>
+              <b>Phone: </b>
               <a href={'tel:' + celular}> {celular} &nbsp;</a>
             </div>
             <div className="col-lg-6 col-12">
               <i className="fas fa-envelope-open foohealli-text" />
               &nbsp;
-              <b>Correo: </b>
+              <b>Email: </b>
               <a href={'mailto:' + correo}>{correo}</a>
             </div>
           </div>
         </div>
       );
     } else {
-      return <h1>...</h1>;
+      return (
+        <div className="spinner">
+          <div className="double-bounce1" />
+          <div className="double-bounce2" />
+        </div>
+      );
     }
   }
 
@@ -193,11 +198,11 @@ class DetailPatient extends Component {
     if (this.state.formCrearMedicamento && this.state.doctor) {
       return (
         <div className="col-12">
-          <h5>Asignar un medicamento</h5>
+          <h5>Add a medicine</h5>
           <form onSubmit={this.handleCrearMedicamentoSubmit.bind(this)}>
             <div className="form-group">
               <div className="form-group">
-                <label htmlFor="nombreMed">Nombre del medicamento: </label>
+                <label htmlFor="nombreMed">Name: </label>
                 <input
                   type="text"
                   className="form-control"
@@ -209,7 +214,7 @@ class DetailPatient extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="posologiaInput">Posología: </label>
+              <label htmlFor="posologiaInput">Posology: </label>
               <input
                 type="text"
                 className="form-control"
@@ -221,7 +226,7 @@ class DetailPatient extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="frecuenciaInput">Frecuencia: </label>
+              <label htmlFor="frecuenciaInput">Frequency: </label>
               <input
                 type="text"
                 className="form-control"
@@ -233,7 +238,7 @@ class DetailPatient extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="cantidadInput">Cantidad</label>
+              <label htmlFor="cantidadInput">Dose</label>
               <input
                 id="cantidadInput"
                 className="form-control"
@@ -245,7 +250,7 @@ class DetailPatient extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="viaInput">Vía de administración</label>
+              <label htmlFor="viaInput">Way of consumption</label>
               <select
                 id="viaInput"
                 className="form-control"
@@ -254,17 +259,17 @@ class DetailPatient extends Component {
                 <option key="Oral" value="Oral">
                   Oral
                 </option>
-                <option key="Digestiva" value="Digestiva">
-                  Digestiva
+                <option key="Digestive" value="Digestive">
+                  Digestive
                 </option>
                 <option key="Sublingual" value="Sublingual">
                   Sublingual
                 </option>
-                <option key="Gastroentérica" value="Gastroentérica">
-                  Gastroentérica
+                <option key="Gastroenteric" value="Gastroenteric">
+                  Gastroenteric
                 </option>
-                <option key="Respiratoria" value="Respiratoria">
-                  Respiratoria
+                <option key="Respiratory" value="Respiratory">
+                  Respiratory
                 </option>
               </select>
             </div>
@@ -272,7 +277,7 @@ class DetailPatient extends Component {
             <center>
               <button type="submit" className="btn btn-foohealli mr-1">
                 <i className="far fa-check-circle" />
-                &nbsp;Asignar medicamento
+                &nbsp;Add medicine
               </button>
               <button
                 type="button"
@@ -280,7 +285,7 @@ class DetailPatient extends Component {
                 onClick={this.toggleFormAgregarMedicamentos}
               >
                 <i className="far fa-times-circle" />
-                &nbsp;Cancelar
+                &nbsp;Cancel
               </button>
             </center>
           </form>
@@ -301,7 +306,7 @@ class DetailPatient extends Component {
           onClick={this.toggleFormAgregarMedicamentos}
         >
           <i className="fas fa-plus" />
-          &nbsp;Agregar medicamento
+          &nbsp;Add medicine
         </button>
       );
       botones.push(<hr key="separadorBotones" />);
@@ -324,7 +329,7 @@ class DetailPatient extends Component {
               <hr />
               <h2 className="foohealli-text-yellow font-weight-bold">
                 <i className="fas fa-pills foohealli-text-yellow" />
-                &nbsp;Medicamentos asignados&nbsp;
+                &nbsp;Assigned medicines&nbsp;
               </h2>
             </center>
           ) : (
@@ -332,7 +337,7 @@ class DetailPatient extends Component {
               <br />
               <h2 className="text-center font-weight-bold">
                 <i className="fas fa-pills" />
-                &nbsp;Medicamentos asignados&nbsp;
+                &nbsp;Assigned medicines&nbsp;
               </h2>
               <br />
             </div>
@@ -358,7 +363,7 @@ class DetailPatient extends Component {
 DetailPatient = withRouter(DetailPatient);
 
 export default withTracker(props => {
-  const identificacionP = '' + props.match.params.identificacion;
+  const identificacionP = '' + props.match.params.id;
   Meteor.subscribe('patients.identificacion', identificacionP);
   return {
     paciente: Patients.findOne({ identificacion: identificacionP })

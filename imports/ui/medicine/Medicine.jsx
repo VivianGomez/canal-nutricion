@@ -38,7 +38,7 @@ class Medicine extends Component {
   }
 
   eliminarMedicamento() {
-    let confirmar = confirm('¿Está seguro que desea borrar este medicamento?');
+    let confirmar = confirm('Are you sure you want to delete this medicine?');
     if (confirmar) {
       Meteor.call(
         'patients.removerMedicamento',
@@ -70,7 +70,7 @@ class Medicine extends Component {
       cantidad === this.state.medicamento.cantidad &&
       estado === this.state.medicamento.estado
     ) {
-      alert('Los valores del medicamento no han cambiado');
+      alert('The medicine values have changed');
     } else {
       Meteor.call(
         'patients.actualizarMedicamento',
@@ -109,7 +109,7 @@ class Medicine extends Component {
           <h5>Actualizar medicamento {this.state.medicamento.medicamento} </h5>
           <form onSubmit={this.handleActualizarMedicamentoSubmit.bind(this)}>
             <div className="form-group">
-              <label htmlFor="posologiaInput">Posología: </label>
+              <label htmlFor="posologiaInput">Posology: </label>
               <input
                 type="text"
                 className="form-control"
@@ -122,7 +122,7 @@ class Medicine extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="frecuenciaInput">Frecuencia: </label>
+              <label htmlFor="frecuenciaInput">Frequency: </label>
               <input
                 type="text"
                 className="form-control"
@@ -135,7 +135,7 @@ class Medicine extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="cantidadInput">Cantidad</label>
+              <label htmlFor="cantidadInput">Dose</label>
               <input
                 id={'cantidadInput' + this.state.medicamento._id}
                 className="form-control"
@@ -149,25 +149,25 @@ class Medicine extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="estadoActualizarInput">Estado actual</label>
-              (¿Sigue haciendo parte del tratamiento del usuario o no?)
+              <label htmlFor="estadoActualizarInput">Current status </label>
+              &nbsp;(It is still being part of the patient treatment?)
               <select
                 id="estadoActualizarInput"
                 className="form-control"
                 ref={this.estadoActualizarInput}
               >
                 <option key="Activo" value="Activo">
-                  Activo
+                  Active
                 </option>
                 <option key="Inactivo" value="Inactivo">
-                  Inactivo
+                  Inactive
                 </option>
               </select>
             </div>
 
             <button type="submit" className="btn btn-foohealli-yellow mr-1">
               <i className="far fa-edit" />
-              &nbsp;Enviar
+              &nbsp;Edit
             </button>
             <button
               type="button"
@@ -175,7 +175,7 @@ class Medicine extends Component {
               onClick={this.toggleFormActualizarMedicamento}
             >
               <i className="far fa-times-circle" />
-              &nbsp;Cancelar
+              &nbsp;Cancel
             </button>
           </form>
         </div>
@@ -226,7 +226,7 @@ class Medicine extends Component {
       return (
         <p>
           <br />
-          <b>Fecha en que se dejó de usar: </b>
+          <b>Termination date: </b>
           {this.state.medicamento.fechaFin}
         </p>
       );
@@ -243,22 +243,22 @@ class Medicine extends Component {
               &nbsp;&nbsp;
               {this.state.medicamento.medicamento}
               <br />
-              <b>Posologia: </b>
+              <b>Posology: </b>
               {this.state.medicamento.posologia}
               <br />
-              <b>Frecuencia: </b>
+              <b>Frequency: </b>
               {this.state.medicamento.frecuencia}
               <br />
-              <b>Cantidad a tomar: </b>
+              <b>Dose: </b>
               {this.state.medicamento.cantidad}
               <br />
-              <b>Via: </b>
+              <b>Way of consumption: </b>
               {this.state.medicamento.via}
               <br />
-              <b>Tomado desde: </b>
+              <b>Taken since: </b>
               {this.state.medicamento.fechaInicio}
               <br />
-              <b>Estado actual: </b>
+              <b>Current status: </b>
               {this.state.medicamento.estado}
             </p>
             {this.mostrarFechaFinMedicamento()}

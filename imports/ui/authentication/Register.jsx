@@ -53,7 +53,7 @@ class Register extends Component {
                   alert(err);
                 } else {
                   localStorage.setItem('foohealliStuff', res);
-                  this.props.history.push('/paciente/dashboard');
+                  this.props.history.push('/patient/dashboard');
                   window.location.reload();
                 }
               }
@@ -97,12 +97,12 @@ class Register extends Component {
           <div className="bg-foohealli text-light">
             <br />
             <h3 className="text-center font-weight-bold">
-              &nbsp;Bienvenido a Foohealli&nbsp;
+              &nbsp;Welcome to Foohealli&nbsp;
             </h3>
             <div className="container">
               <h5 className="text-center">
-                Te invitamos a que llenes los siguientes datos para poder hacer
-                uso de los servicios de la plataforma.
+                We invite you to register for being able of using the platform
+                services.
               </h5>
             </div>
             <br />
@@ -113,23 +113,23 @@ class Register extends Component {
           <form onSubmit={this.handleSubmit.bind(this)}>
             <div className="form-group">
               <label htmlFor="registroInputRol">
-                <b>¿Cuál es tu rol?</b>
+                <b>Which is your role?</b>
               </label>
               <select
                 className="form-control"
                 id="registroInputRol"
                 ref={this.rolInput}
               >
-                <option value="paciente">Soy un Paciente motivado</option>
-                <option value="doctor">Soy un Doctor excelente</option>
+                <option value="paciente">I'm a motivated Patient</option>
+                <option value="doctor">I'm an excellent Doctor</option>
                 <option value="nutricionista">
-                  Soy un Nutricionista excelente
+                  I'm an excellent Nutritionist
                 </option>
               </select>
             </div>
             <div className="form-group">
               <label htmlFor="registroInputNombre">
-                <b>Nombre</b>
+                <b>Name</b>
               </label>
               <input
                 type="text"
@@ -142,7 +142,7 @@ class Register extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="registroInputIdentificacion">
-                <b>Número de identificación</b>
+                <b>Id number</b>
               </label>
               <input
                 type="number"
@@ -158,7 +158,7 @@ class Register extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="registroInputCelular">
-                <b>Celular</b>
+                <b>Phone</b>
               </label>
               <input
                 type="number"
@@ -175,7 +175,7 @@ class Register extends Component {
 
             <div className="form-group">
               <label htmlFor="registroInputFoohealliCorreo">
-                <b>Correo electrónico</b>
+                <b>Email</b>
               </label>
               <input
                 type="mail"
@@ -189,7 +189,7 @@ class Register extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="registroInputFoohealliClave">
-                <b>Contraseña</b>
+                <b>Password</b>
               </label>
               <input
                 type="password"
@@ -204,7 +204,7 @@ class Register extends Component {
             </div>
             <center>
               <button type="submit" className="btn btn-foohealli mr-1">
-                ¡Empecemos!
+                Let's begin!
               </button>
             </center>
           </form>

@@ -80,10 +80,10 @@ class ConsumedFood extends Component {
 
     return (
       <div>
-        {desayuno.length > 0 ? this.listaAlimento('Desayuno', desayuno) : ''}
-        {almuerzo.length > 0 ? this.listaAlimento('Almuerzo', almuerzo) : ''}
-        {cena.length > 0 ? this.listaAlimento('Cena', cena) : ''}
-        {onces.length > 0 ? this.listaAlimento('Onces', onces) : ''}
+        {desayuno.length > 0 ? this.listaAlimento('Breakfast', desayuno) : ''}
+        {almuerzo.length > 0 ? this.listaAlimento('Lunch', almuerzo) : ''}
+        {cena.length > 0 ? this.listaAlimento('Dinner', cena) : ''}
+        {onces.length > 0 ? this.listaAlimento('Snacks', onces) : ''}
       </div>
     );
   }
@@ -205,13 +205,19 @@ class ConsumedFood extends Component {
         </div>
         <div className="col-12">
           {this.state.alimentosConsumidos.length === 0 &&
-          this.state.paciente ? (
+          this.state.paciente &&
+          this.state.paciente.identificacion ? (
             <li className="list-group-item">
               There is no consumed food on this day.
             </li>
           ) : (
-            this.renderAlimentos(this.state.alimentosConsumidos)
+            ''
           )}
+          {this.state.alimentosConsumidos.length > 0 &&
+          this.state.paciente &&
+          this.state.paciente.identificacion
+            ? this.renderAlimentos(this.state.alimentosConsumidos)
+            : ''}
         </div>
       </div>
     );

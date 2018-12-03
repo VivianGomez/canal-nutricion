@@ -56,7 +56,7 @@ class Navbar extends Component {
           <a
             id="botonDashboardPaciente"
             className="nav-link pointer"
-            onClick={() => this.props.history.push('/paciente/dashboard')}
+            onClick={() => this.props.history.push('/patient/dashboard')}
           >
             Dashboard
           </a>
@@ -67,9 +67,7 @@ class Navbar extends Component {
           <a
             id="botonAlimentosConsumidosPaciente"
             className="nav-link pointer"
-            onClick={() =>
-              this.props.history.push('/paciente/alimentosConsumidos')
-            }
+            onClick={() => this.props.history.push('/patient/consumedFood')}
           >
             Consumed food
           </a>
@@ -80,7 +78,7 @@ class Navbar extends Component {
           <a
             id="botonMedicamentosAsignadosPaciente"
             className="nav-link pointer"
-            onClick={() => this.props.history.push('/paciente/medicamentos')}
+            onClick={() => this.props.history.push('/patient/medicines')}
           >
             Assigned medicine
           </a>
@@ -107,7 +105,7 @@ class Navbar extends Component {
           <a
             id="botonDashboardNutricionista"
             className="nav-link pointer"
-            onClick={() => this.props.history.push('/nutricionista/dashboard')}
+            onClick={() => this.props.history.push('/nutritionist/dashboard')}
           >
             My patients
           </a>

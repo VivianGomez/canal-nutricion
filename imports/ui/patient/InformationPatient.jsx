@@ -52,8 +52,8 @@ class InfoPatient extends Component {
       <Link
         to={
           (this.state.nutricionista
-            ? '/nutricionista/detailPaciente/'
-            : '/doctor/detailPaciente/') + this.state.identificacion
+            ? '/nutritionist/patient/detail/'
+            : '/doctor/patient/detail/') + this.state.identificacion
         }
         style={{ textDecoration: 'none' }}
         className="text-dark"
@@ -62,27 +62,27 @@ class InfoPatient extends Component {
           <div className="row">
             <div className="col-md-7 col-12">
               <p>
-                <b>Paciente: </b>
+                <b>Patient: </b>
                 &nbsp;
                 {this.state.nombre}
               </p>
             </div>
             <div className="col-md-5 col-12">
               <p>
-                <b>Identificacion: </b>
+                <b>Id: </b>
                 &nbsp;
                 {this.state.identificacion}
               </p>
             </div>
             <div className="col-md-7 col-12">
               <p>
-                <b>Correo: </b>
+                <b>Email: </b>
                 <a href={'mailto:' + this.state.correo}>{this.state.correo}</a>
               </p>
             </div>
             <div className="col-md-5 col-12">
               <p>
-                <b>Celular: </b>
+                <b>Phone: </b>
                 <a href={'tel:' + this.state.celular}>
                   {this.state.celular}
                   &nbsp;

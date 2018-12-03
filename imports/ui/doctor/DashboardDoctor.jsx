@@ -61,7 +61,7 @@ class DashboardDoctor extends Component {
           <div className="bg-foohealli text-light">
             <br />
             <h3 className="text-center font-weight-bold">
-              &nbsp;Tus Pacientes&nbsp;
+              &nbsp;My patients&nbsp;
             </h3>
             <br />
           </div>

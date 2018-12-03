@@ -36,7 +36,7 @@ class DashboardPatient extends Component {
     return (
       <div className="row">
         <div className="col-12 text-center mt-4 mb-3">
-          <h1 className="foohealli-text-yellow">¡Bienvenido!</h1>
+          <h1 className="foohealli-text-yellow">Welcome!</h1>
         </div>
         <div className="col-12 mb-3 text-center">
           <button
@@ -47,15 +47,12 @@ class DashboardPatient extends Component {
             className="btn btn-foohealli"
           >
             <i className="fas fa-apple-alt" />
-            &nbsp;Registrar una comida
+            &nbsp;Add a food
           </button>
         </div>
         <div className="col-md-2" />
         <div className="col-md-4 mb-3">
-          <Link
-            to={'/paciente/alimentosConsumidos'}
-            style={{ textDecoration: 'none' }}
-          >
+          <Link to={'/patient/consumedFood'} style={{ textDecoration: 'none' }}>
             <div className="card">
               <img
                 className="card-img-top pointer img-paciente"
@@ -66,10 +63,7 @@ class DashboardPatient extends Component {
           </Link>
         </div>
         <div className="col-md-4 mb-3">
-          <Link
-            to={'/paciente/medicamentos'}
-            style={{ textDecoration: 'none' }}
-          >
+          <Link to={'/patient/medicines'} style={{ textDecoration: 'none' }}>
             <div className="card">
               <img
                 className="card-img-top pointer img-paciente"
