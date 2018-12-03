@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import { resetDatabase } from "meteor/xolvio:cleaner";
-import { Doctors } from "./doctors.js";
+import { Doctors } from "../doctors.js";
 import faker  from "faker";
 import chai from 'chai';
 

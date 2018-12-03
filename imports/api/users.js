@@ -71,9 +71,9 @@ Meteor.methods({
         } catch (err) {
             if (err) {
                 if (err.code === 11000) {
-                    throw new Meteor.Error("Ya existe un usuario con ese número de identificación o correo asociado.");
+                    throw new Meteor.Error("An existing user already have this identification or email.");
                 } else {
-                    throw new Meteor.Error("Se presentó un error al crear el usuario. Por favor intenta nuevamente");
+                        throw new Meteor.Error("An error occurred in the user creation. Please try again "+ err);
                 }
             }
         }
@@ -117,15 +117,16 @@ function decodificarToken(token) {
     return token ? jwt.verify(token, process.env.CODE_TOKEN) : null;
 }
 
-function verificarPermisos(rol) {
-    if (rol === "paciente") {
-        throw new Meteor.Error('No se encuentra autorizado para realizar esta acción');
+function verificarExistenciaPaciente(paciente) {
+    if (!paciente) {
+        throw new Meteor.Error('The patient is not found.');
     }
 }
 
-function verificarExistenciaPaciente(paciente) {
-    if (!paciente) {
-        throw new Meteor.Error('No se encuentra el paciente.');
+function yaTieneNutricionista(nutricionista) {
+    console.log();
+    if (nutricionista !== "") {
+        throw new Meteor.Error('The patient already have an assigned nutritionist.');
     }
 }
 

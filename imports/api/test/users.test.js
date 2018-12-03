@@ -1,9 +1,9 @@
 import { Meteor } from "meteor/meteor";
 import { resetDatabase } from "meteor/xolvio:cleaner";
 import { Factory } from "meteor/dburles:factory";
-import { Patients } from "./patients.js";
-import { Users } from "./users.js";
-import { Nutritionists } from "./nutritionists.js";
+import { Patients } from "../patients.js";
+import { Users } from "../users.js";
+import { Nutritionists } from "../nutritionists.js";
 import faker  from "faker";
 import chai from 'chai';
 import sinon from 'sinon';

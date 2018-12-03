@@ -29,10 +29,10 @@ Meteor.methods({
         });
 
         if (!nutricionista) {
-            throw new Meteor.Error('No existe un nutricionista con ese correo.');
+            throw new Meteor.Error('Does not exist a nutricionist with this email.');
         } else {
-            if (cryptr.decrypt(nutricionista.clave) !== clave) {
-                throw new Meteor.Error('La contraseña ingresada no es correcta.');
+            if (cryptr.decrypt(paciente.clave) !== clave) {
+                throw new Meteor.Error('Incorrect password.');
             }
         }
 

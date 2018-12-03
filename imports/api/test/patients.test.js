@@ -1,8 +1,8 @@
 import { Meteor } from "meteor/meteor";
 import { resetDatabase } from "meteor/xolvio:cleaner";
 import { Factory } from "meteor/dburles:factory";
-import { Patients } from "./patients.js";
-import { Nutritionists } from "./nutritionists.js";
+import { Patients } from "../patients.js";
+import { Nutritionists } from "../nutritionists.js";
 import faker  from "faker";
 import chai from 'chai';
 import sinon from 'sinon';
@@ -62,13 +62,13 @@ if (Meteor.isServer) {
                 return true;
 
             } catch (err) {
-                if (err) {
-                    if (err.code === 11000) {
-                        throw new Meteor.Error("Ya existe un usuario con ese número de identificación o correo asociado.");
-                    } else {
-                        throw new Meteor.Error("Se presentó un error al crear el usuario. Por favor intenta nuevamente"+ err);
-                    }
+                            if (err) {
+                if (err.code === 11000) {
+                    throw new Meteor.Error("An existing user already have this identification or email.");
+                } else {
+                        throw new Meteor.Error("An error occurred in the user creation. Please try again "+ err);
                 }
+              }
             }
         });
 
