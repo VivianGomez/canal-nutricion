@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import Medicine from '../medicine/Medicine.jsx';
 import ConsumedFood from '../patient/ConsumedFood.jsx';
+import DailyReport from '../nutritionist/DailyReport.jsx';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Patients } from '../../api/patients.js';
 import { withRouter } from 'react-router';
@@ -61,7 +62,7 @@ class DetailPatientNutritionist extends Component {
 
       if (medicamentos.length === 0) {
         return (
-          <li className="list-group-item">No hay medicamentos asignados</li>
+          <li className="list-group-item">There are no assigned medicines.</li>
         );
       }
 
@@ -75,7 +76,9 @@ class DetailPatientNutritionist extends Component {
         />
       ));
     } else {
-      return <li className="list-group-item">No hay medicamentos asignados</li>;
+      return (
+        <li className="list-group-item">There are no assigned medicines.</li>
+      );
     }
   }
 
@@ -93,7 +96,7 @@ class DetailPatientNutritionist extends Component {
           <div className="bg-foohealli text-light">
             <br />
             <h2 className="text-center font-weight-bold">
-              &nbsp;Información paciente {nombre}
+              &nbsp;{nombre}
               &nbsp;
             </h2>
             <br />
@@ -104,13 +107,13 @@ class DetailPatientNutritionist extends Component {
             <div className="col-lg-4  col-12">
               <i className="fas fa-id-card foohealli-text" />
               &nbsp;
-              <b>Identificación : </b>
+              <b>Id: </b>
               {identificacion}
             </div>
             <div className="col-lg-4  col-12">
               <i className="fas fa-calendar-alt foohealli-text" />
               &nbsp;
-              <b>En tratamiento desde : </b>
+              <b>Start date: </b>
               {fechaR}
             </div>
             <div className="col-lg-2" />
@@ -118,20 +121,27 @@ class DetailPatientNutritionist extends Component {
             <div className="col-lg-4  col-12">
               <i className="fas fa-phone-volume foohealli-text" />
               &nbsp;
-              <b>Celular: </b>
+              <b>Phone: </b>
               <a href={'tel:' + celular}> {celular} &nbsp;</a>
             </div>
             <div className="col-lg-6 col-12">
               <i className="fas fa-envelope-open foohealli-text" />
               &nbsp;
-              <b>Correo: </b>
+              <b>Email: </b>
               <a href={'mailto:' + correo}>{correo}</a>
             </div>
           </div>
         </div>
       );
     } else {
-      return <h1>...</h1>;
+      return (
+        <div className="container text-center">
+          <div className="spinner">
+            <div className="double-bounce1" />
+            <div className="double-bounce2" />
+          </div>
+        </div>
+      );
     }
   }
 
@@ -155,7 +165,7 @@ class DetailPatientNutritionist extends Component {
                     role="tab"
                     aria-controls="beneficios-gratuitos"
                   >
-                    Alimentos consumidos
+                    Consumed food
                   </a>
                 </li>
                 <li className="nav-item">
@@ -167,7 +177,19 @@ class DetailPatientNutritionist extends Component {
                     role="tab"
                     aria-controls="beneficios-bronce"
                   >
-                    Medicamentos asignados
+                    Assigned medicine
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className="nav-link bg-foohealli-yellow-dark text-text-white"
+                    id="tab-bronce"
+                    data-toggle="tab"
+                    href="#dailyReport"
+                    role="tab"
+                    aria-controls="daily-report"
+                  >
+                    Daily report
                   </a>
                 </li>
               </ul>
@@ -202,11 +224,28 @@ class DetailPatientNutritionist extends Component {
                 <center>
                   <h2 className="foohealli-text-yellow font-weight-bold">
                     <i className="fas fa-pills foohealli-text-yellow" />
-                    &nbsp;Medicamentos asignados&nbsp;
+                    &nbsp;Assigned medicine&nbsp;
                   </h2>
                 </center>
                 <hr />
                 <ul className="list-group">{this.renderMedicamentos()}</ul>
+              </div>
+            </div>
+            <div
+              className="tab-pane fade show active"
+              id="dailyReport"
+              role="tabpanel"
+              aria-labelledby="daily-report-tab"
+            >
+              <div className="col-12">
+                {this.state.paciente ? (
+                  <DailyReport
+                    nutritionist={true}
+                    patient={this.state.paciente}
+                  />
+                ) : (
+                  ''
+                )}
               </div>
             </div>
           </div>

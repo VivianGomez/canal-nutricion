@@ -150,7 +150,7 @@ class ConsumedFood extends Component {
             <center>
               <h2 className="foohealli-text-yellow font-weight-bold">
                 <i className="fas fa-apple-alt foohealli-text-yellow" />
-                &nbsp;Alimentos consumidos&nbsp;
+                &nbsp;Consumed food&nbsp;
               </h2>
             </center>
           ) : (
@@ -158,7 +158,7 @@ class ConsumedFood extends Component {
               <br />
               <h2 className="text-center font-weight-bold">
                 <i className="fas fa-apple-alt" />
-                &nbsp;Alimentos consumidos&nbsp;
+                &nbsp;Consumed food&nbsp;
               </h2>
               <br />
             </div>
@@ -207,7 +207,7 @@ class ConsumedFood extends Component {
           {this.state.alimentosConsumidos.length === 0 &&
           this.state.paciente ? (
             <li className="list-group-item">
-              No hay reportes de consumo para este día.
+              There is no consumed food on this day.
             </li>
           ) : (
             this.renderAlimentos(this.state.alimentosConsumidos)
