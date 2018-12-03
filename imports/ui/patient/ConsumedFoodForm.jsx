@@ -122,7 +122,7 @@ class ConsumedFoodForm extends Component {
       } else {
         return (
           <li className="list-group-item">
-            <Emoji text="No hay resultados 😪" />
+            <Emoji text="There are no results 😪" />
           </li>
         );
       }
@@ -150,7 +150,7 @@ class ConsumedFoodForm extends Component {
         <div className="row mb-2 align-items-center h-100">
           <div className="col-12">
             <label htmlFor="nombreComida">
-              <b>Comida</b>
+              <b>Food</b>
             </label>
           </div>
           <div className="col-9 ">{this.state.seleccion.name}</div>
@@ -169,7 +169,7 @@ class ConsumedFoodForm extends Component {
       return (
         <div className="form-group">
           <label htmlFor="nombreComidaInput">
-            <b>Comida</b>
+            <b>Food</b>
           </label>
           <input
             type="text"
@@ -177,7 +177,7 @@ class ConsumedFoodForm extends Component {
             id="nombreComidaInput"
             onChange={this.handleChange}
             minLength="2"
-            placeholder="Busca una comida..."
+            placeholder="Search for a food..."
             required
           />
           <ul className="list-group">{this.renderBusquedas()}</ul>
@@ -221,7 +221,7 @@ class ConsumedFoodForm extends Component {
           <div className="modal-content bg-foohealli">
             <div className="modal-header bg-foohealli text-light">
               <h5 className="modal-title" id="exampleModalLabel">
-                <Emoji text="Dinos qué comiste 😋" />
+                <Emoji text="Tell us what you ate 😋" />
               </h5>
               <button
                 id="butonCerrarModalAlimentos"
@@ -234,9 +234,7 @@ class ConsumedFoodForm extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <p className="small">
-                Al seleccionar una comida podrás registrarla.
-              </p>
+              <p className="small">When you select a food, you can save it.</p>
               <form
                 id="formRegistroAlimentos"
                 onSubmit={this.handleSubmit.bind(this)}
@@ -244,11 +242,11 @@ class ConsumedFoodForm extends Component {
                 <div className="form-group">
                   <label htmlFor="fechaConsumo">
                     <b>
-                      Fecha de consumo{' '}
+                      Consume date{' '}
                       {!this.state.fecha ||
                       this.state.fecha === '' ||
                       this.compararFecha()
-                        ? ' (hoy)'
+                        ? ' (today)'
                         : ''}
                     </b>
                   </label>
@@ -267,7 +265,7 @@ class ConsumedFoodForm extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="tipoComidaInput">
-                    <b>Tipo de comida</b>
+                    <b>Type of food</b>
                   </label>
                   <select
                     type="text"
@@ -276,16 +274,16 @@ class ConsumedFoodForm extends Component {
                     id="tipoComidaInput"
                     ref={this.tipoComidaInput}
                   >
-                    <option value="desayuno">Desayuno</option>
-                    <option value="almuerzo">Almuerzo</option>
-                    <option value="cena">Cena</option>
-                    <option value="onces">Onces</option>
+                    <option value="desayuno">Breakfast</option>
+                    <option value="almuerzo">Lunch</option>
+                    <option value="cena">Dinner</option>
+                    <option value="onces">Snacks</option>
                   </select>
                 </div>
                 {this.renderBarraBusqueda()}
                 <div className="form-group">
                   <label htmlFor="porcionComidaInput">
-                    <b>Porción ingerida (gr)</b>
+                    <b>Consumed portion (gr)</b>
                   </label>
                   <input
                     type="number"
@@ -294,7 +292,7 @@ class ConsumedFoodForm extends Component {
                     id="porcionComidaInput"
                     ref={this.porcionDeComidaInput}
                     min="0"
-                    placeholder="Ej: 200"
+                    placeholder="Ex: 200"
                     required
                   />
                 </div>
@@ -303,7 +301,7 @@ class ConsumedFoodForm extends Component {
                   {this.state.seleccionado ? (
                     <button type="submit" className="btn btn-foohealli">
                       <i className="fas fa-utensils" />
-                      &nbsp;Registrar comida
+                      &nbsp;Save food
                     </button>
                   ) : (
                     <h1 />

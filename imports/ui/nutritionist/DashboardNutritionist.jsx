@@ -89,13 +89,11 @@ class DashboardNutritionist extends Component {
     if (this.state.formCrearPaciente && this.state.nutricionista) {
       return (
         <div className="col-12">
-          <h5>Agregar nuevo paciente</h5>
+          <h5>Add a new patient</h5>
           <form onSubmit={this.handleAgregarPacienteSubmit.bind(this)}>
             <div className="form-group">
               <div className="form-group">
-                <label htmlFor="pacienteAAsignarInput">
-                  Identificación del paciente a asignar:{' '}
-                </label>
+                <label htmlFor="pacienteAAsignarInput">Patient's id: </label>
                 <input
                   type="text"
                   className="form-control"
@@ -109,7 +107,7 @@ class DashboardNutritionist extends Component {
             <center>
               <button type="submit" className="btn btn-success mr-1">
                 <i className="far fa-check-circle" />
-                &nbsp;Agregar
+                &nbsp;Add
               </button>
               <button
                 type="button"
@@ -117,7 +115,7 @@ class DashboardNutritionist extends Component {
                 onClick={this.toggleFormAgregarPacientes}
               >
                 <i className="far fa-times-circle" />
-                &nbsp;Cancelar
+                &nbsp;Cancel
               </button>
             </center>
           </form>
@@ -139,7 +137,7 @@ class DashboardNutritionist extends Component {
           onClick={this.toggleFormAgregarPacientes}
         >
           <i className="fas fa-user-plus" />
-          &nbsp;Agregar paciente
+          &nbsp;Add patient
         </button>
       );
       botones.push(<hr key="separadorBotones" />);
@@ -157,7 +155,7 @@ class DashboardNutritionist extends Component {
           <div className="bg-foohealli text-light">
             <br />
             <h3 className="text-center font-weight-bold">
-              &nbsp;Tus Pacientes&nbsp;
+              &nbsp;My patients&nbsp;
             </h3>
             <br />
           </div>

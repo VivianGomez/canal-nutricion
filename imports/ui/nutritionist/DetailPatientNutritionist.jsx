@@ -232,7 +232,7 @@ class DetailPatientNutritionist extends Component {
               </div>
             </div>
             <div
-              className="tab-pane fade show active"
+              className="tab-pane fade show"
               id="dailyReport"
               role="tabpanel"
               aria-labelledby="daily-report-tab"

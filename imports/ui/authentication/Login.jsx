@@ -78,7 +78,11 @@ class Login extends Component {
   cargarBotonRol() {
     if (this.state.rol === 'Patient') {
       return (
-        <div class="btn-group" role="group" aria-label="Login buttons options">
+        <div
+          className="btn-group"
+          role="group"
+          aria-label="Login buttons options"
+        >
           <button
             type="button"
             className="btn btn-primary"
@@ -99,7 +103,11 @@ class Login extends Component {
       );
     } else if (this.state.rol === 'Doctor') {
       return (
-        <div class="btn-group" role="group" aria-label="Login buttons options">
+        <div
+          className="btn-group"
+          role="group"
+          aria-label="Login buttons options"
+        >
           <button
             type="button"
             className="btn btn-success"
@@ -120,7 +128,11 @@ class Login extends Component {
       );
     } else if (this.state.rol === 'Nutritionist') {
       return (
-        <div class="btn-group" role="group" aria-label="Login buttons options">
+        <div
+          className="btn-group"
+          role="group"
+          aria-label="Login buttons options"
+        >
           <button
             type="button"
             className="btn btn-success"

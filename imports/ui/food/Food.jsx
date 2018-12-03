@@ -46,10 +46,10 @@ class Food extends Component {
           <div className="col-md-8 col-12">
             {alimento.alimento}
             <br />
-            <b>Porción: </b> {alimento.porcionConsumidaGramos} gr
+            <b>Portion: </b> {alimento.porcionConsumidaGramos} gr
           </div>
           <div className="col-md-4 col-12">
-            <b>Categoría: </b> {alimento.categoria}
+            <b>Category: </b> {alimento.categoria}
           </div>
           {!this.state.nutricionista ? (
             <div className="col-12 text-right">

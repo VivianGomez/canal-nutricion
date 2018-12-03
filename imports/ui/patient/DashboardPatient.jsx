@@ -36,7 +36,7 @@ class DashboardPatient extends Component {
     return (
       <div className="row">
         <div className="col-12 text-center mt-4 mb-3">
-          <h1 className="foohealli-text-yellow">¡Bienvenido!</h1>
+          <h1 className="foohealli-text-yellow">Welcome!</h1>
         </div>
         <div className="col-12 mb-3 text-center">
           <button
@@ -47,7 +47,7 @@ class DashboardPatient extends Component {
             className="btn btn-foohealli"
           >
             <i className="fas fa-apple-alt" />
-            &nbsp;Registrar una comida
+            &nbsp;Add a food
           </button>
         </div>
         <div className="col-md-2" />
