@@ -17,7 +17,7 @@ class DetailPatientNutritionist extends Component {
 
     this.state = {
       token: localStorage.getItem('foohealliStuff'),
-      identificacionP: props.match.params.identificacion,
+      identificacionP: props.match.params.id,
       paciente: this.props.paciente,
       botonAgregarMedicamento: false,
       doctor: false,
@@ -258,7 +258,7 @@ class DetailPatientNutritionist extends Component {
 DetailPatientNutritionist = withRouter(DetailPatientNutritionist);
 
 export default withTracker(props => {
-  const identificacionP = '' + props.match.params.identificacion;
+  const identificacionP = '' + props.match.params.id;
   Meteor.subscribe('patients.identificacion', identificacionP);
   return {
     paciente: Patients.findOne({ identificacion: identificacionP })

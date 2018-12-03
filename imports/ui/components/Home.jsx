@@ -20,9 +20,9 @@ class Home extends Component {
         if (res.rol === 'doctor') {
           this.props.history.push('/doctor/dashboard');
         } else if (res.rol === 'nutricionista') {
-          this.props.history.push('/nutricionista/dashboard');
+          this.props.history.push('/nutritionist/dashboard');
         } else if (res.rol === 'paciente') {
-          this.props.history.push('/paciente/dashboard');
+          this.props.history.push('/patient/dashboard');
         }
       } else {
         this.setState({

@@ -53,7 +53,7 @@ class Register extends Component {
                   alert(err);
                 } else {
                   localStorage.setItem('foohealliStuff', res);
-                  this.props.history.push('/paciente/dashboard');
+                  this.props.history.push('/patient/dashboard');
                   window.location.reload();
                 }
               }

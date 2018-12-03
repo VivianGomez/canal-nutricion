@@ -21,7 +21,7 @@ class DetailPatient extends Component {
 
     this.state = {
       token: localStorage.getItem('foohealliStuff'),
-      identificacionP: this.props.match.params.identificacion,
+      identificacionP: this.props.match.params.id,
       paciente: this.props.paciente,
       botonAgregarMedicamento: false,
       formCrearMedicamento: false,
@@ -40,7 +40,7 @@ class DetailPatient extends Component {
         alert(err.error);
       } else if (res) {
         if (res.rol === 'doctor') {
-          if (!this.props.match.params.identificacion) {
+          if (!this.props.match.params.id) {
             this.props.history.push('/');
           } else {
             this.setState({
@@ -50,7 +50,7 @@ class DetailPatient extends Component {
             });
           }
         } else if (res.rol === 'paciente') {
-          if (this.props.match.params.identificacion) {
+          if (this.props.match.params.id) {
             this.props.history.push('/');
           } else {
             this.setState({
@@ -358,7 +358,7 @@ class DetailPatient extends Component {
 DetailPatient = withRouter(DetailPatient);
 
 export default withTracker(props => {
-  const identificacionP = '' + props.match.params.identificacion;
+  const identificacionP = '' + props.match.params.id;
   Meteor.subscribe('patients.identificacion', identificacionP);
   return {
     paciente: Patients.findOne({ identificacion: identificacionP })

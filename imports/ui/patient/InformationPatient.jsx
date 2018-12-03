@@ -52,8 +52,8 @@ class InfoPatient extends Component {
       <Link
         to={
           (this.state.nutricionista
-            ? '/nutricionista/detailPaciente/'
-            : '/doctor/detailPaciente/') + this.state.identificacion
+            ? '/nutritionist/patient/detail/'
+            : '/doctor/patient/detail/') + this.state.identificacion
         }
         style={{ textDecoration: 'none' }}
         className="text-dark"

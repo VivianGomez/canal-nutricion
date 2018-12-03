@@ -1,7 +1,7 @@
 import assert from "assert";
 
 describe("foohealli", function () {
-  it("package.json has correct name", async function () {
+  it("package.json has correct namee", async function () {
     const {
       name
     } = await import("../../package.json");

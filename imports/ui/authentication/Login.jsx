@@ -67,7 +67,7 @@ class Login extends Component {
             alert(err.error);
           } else {
             localStorage.setItem('foohealliStuff', res);
-            this.props.history.push('/nutricionista/dashboard');
+            this.props.history.push('/nutritionist/dashboard');
             window.location.reload();
           }
         }

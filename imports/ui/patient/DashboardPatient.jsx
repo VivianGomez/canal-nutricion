@@ -52,10 +52,7 @@ class DashboardPatient extends Component {
         </div>
         <div className="col-md-2" />
         <div className="col-md-4 mb-3">
-          <Link
-            to={'/paciente/alimentosConsumidos'}
-            style={{ textDecoration: 'none' }}
-          >
+          <Link to={'/patient/consumedFood'} style={{ textDecoration: 'none' }}>
             <div className="card">
               <img
                 className="card-img-top pointer img-paciente"
@@ -66,10 +63,7 @@ class DashboardPatient extends Component {
           </Link>
         </div>
         <div className="col-md-4 mb-3">
-          <Link
-            to={'/paciente/medicamentos'}
-            style={{ textDecoration: 'none' }}
-          >
+          <Link to={'/patient/medicines'} style={{ textDecoration: 'none' }}>
             <div className="card">
               <img
                 className="card-img-top pointer img-paciente"

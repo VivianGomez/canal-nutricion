@@ -24,32 +24,28 @@ class App extends Component {
             <Route exact path="/doctor/dashboard" component={DashboardDoctor} />
             <Route
               exact
-              path="/nutricionista/dashboard"
+              path="/nutritionist/dashboard"
               component={DashboardNutritionist}
             />
             <Route
               exact
-              path="/doctor/detailPaciente/:identificacion"
+              path="/doctor/patient/detail/:id"
               component={DetailPatient}
             />
             <Route
               exact
-              path="/nutricionista/detailPaciente/:identificacion"
+              path="/nutritionist/patient/detail/:id"
               component={DetailPatientNutritionist}
             />
             <Route
               exact
-              path="/paciente/dashboard"
+              path="/patient/dashboard"
               component={DashboardPatient}
             />
+            <Route exact path="/patient/medicines" component={DetailPatient} />
             <Route
               exact
-              path="/paciente/medicamentos"
-              component={DetailPatient}
-            />
-            <Route
-              exact
-              path="/paciente/alimentosConsumidos"
+              path="/patient/consumedFood"
               component={ConsumedFood}
             />
             <Route
