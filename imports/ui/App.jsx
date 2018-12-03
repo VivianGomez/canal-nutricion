@@ -12,8 +12,10 @@ import DashboardPatient from './patient/DashboardPatient.jsx';
 import ConsumedFood from './patient/ConsumedFood.jsx';
 import FoodNutrients from './food/FoodNutrients.jsx';
 import DetailPatientNutritionist from './nutritionist/DetailPatientNutritionist.jsx';
-
 import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-130264942-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 class App extends Component {
   render() {
@@ -68,9 +70,6 @@ class App extends Component {
   }
 }
 
-function initializeReactGA() {
-  ReactGA.initialize('UA-130264942-1');
-  ReactGA.pageview('/home');
-}
+function initializeReactGA() {}
 
 export default App;
