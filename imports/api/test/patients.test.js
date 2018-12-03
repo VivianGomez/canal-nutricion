@@ -257,6 +257,18 @@ it("should show the food consumed by the patient in certain date", () => {
       chai.assert.equal(modifiedPatient.nutricionista, nut.identificacion);
 
    });
+
+    it("should show the nitritional information of a certain food", () => {
+
+      let ndbno = "14075";
+      let res = Meteor.call("patients.foodNutrients", {
+        ndbno: ndbno
+      });
+      
+      chai.assert.notEqual(res, null);
+      chai.assert.notEqual(res, undefined);
+   });
+
   });
  });
 }
