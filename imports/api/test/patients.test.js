@@ -253,7 +253,9 @@ it("should show the food consumed by the patient in certain date", () => {
         nut.identificacion
       );
       
-      //chai.assert.equal(Patients.findOne({ identificacion:  currentUser.identificacion }).nutritionist, nut.identificacion);
+      let modifiedPatient = Patients.findOne({identificacion: currentUser.identificacion});
+      chai.assert.equal(modifiedPatient.nutricionista, nut.identificacion);
+
    });
   });
  });

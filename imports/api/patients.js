@@ -272,6 +272,7 @@ Meteor.methods({
             });
 
             return "The patient " + paciente.nombre + " was correclty added to the nutritionist " + nutricionista.nombre + ".";
+
         } catch (error) {
             throw new Meteor.Error(error);
         }
