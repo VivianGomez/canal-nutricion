@@ -40,9 +40,9 @@ if (Meteor.isServer) {
             } catch (err) {
                 if (err) {
                     if (err.code === 11000) {
-                        throw new Meteor.Error("Ya existe un usuario con ese número de identificación o correo asociado.");
+                        throw new Meteor.Error("The user with this identification or name already exists.");
                     } else {
-                        throw new Meteor.Error("Se presentó un error al crear el usuario. Por favor intenta nuevamente"+ err);
+                        throw new Meteor.Error("An error occurred in the user creation. Please try again "+ err);
                     }
                 }
             }

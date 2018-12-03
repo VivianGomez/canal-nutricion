@@ -32,7 +32,7 @@ Meteor.methods({
         if (!doctor) {
             throw new Meteor.Error('Does not exist a doctor with this email.');
         } else {
-            if (cryptr.decrypt(paciente.clave) !== clave) {
+            if (cryptr.decrypt(doctor.clave) !== clave) {
                 throw new Meteor.Error('Incorrect password.');
             }
         }
