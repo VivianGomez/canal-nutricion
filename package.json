@@ -37,6 +37,7 @@
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "faker": "^4.1.0",
+    "ignore-styles": "^5.0.1",
     "sinon": "^7.1.1"
   }
 }
