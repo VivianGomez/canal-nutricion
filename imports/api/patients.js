@@ -77,6 +77,7 @@ Meteor.methods({
         correo,
         clave
     }) {
+
         check(correo, String);
         check(clave, String);
 
