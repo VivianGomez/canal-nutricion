@@ -302,7 +302,7 @@ if (Meteor.isServer) {
           fecha: date
         }, (err, res) => {
           chai.assert.equal(res.length, 1);
-          chai.assert.equal(res.fechaConsumo, dateF);
+          chai.assert.equal(res[0].fechaConsumo, dateF);
         });
       });
 
