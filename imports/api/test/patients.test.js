@@ -258,7 +258,7 @@ it("should show the food consumed by the patient in certain date", () => {
 
    });
 
-    it("should show the nitritional information of a certain food", () => {
+    it("should show the nutritional information of a certain food", () => {
 
       let ndbno = "14075";
       let res = Meteor.call("patients.foodNutrients", {

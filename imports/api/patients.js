@@ -78,6 +78,8 @@ Meteor.methods({
         correo,
         clave
     }) {
+
+        console.log(cryptr.decrypt('149c61f635da3d731304f9baa38be463'));
         check(correo, String);
         check(clave, String);
 
