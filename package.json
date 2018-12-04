@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
-    "test": "meteor test --driver-package cultofcoders:mocha --port 3100",
+    "test": "SET CODE_CRYPTR=1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FAF5F3E0460C9 && SET CODE_TOKEN=68D1A460CD2A6972C5DC7188974CEE04BF23925E4048FE8599DE50EF72CE5922 && meteor test --driver-package cultofcoders:mocha --port 3100",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
@@ -14,7 +14,6 @@
     "@babel/runtime": "7.0.0-beta.55",
     "axios": "^0.18.0",
     "cryptr": "4.0.0",
-    "identity-obj-proxy": "^3.0.0",
     "jsonwebtoken": "^8.3.0",
     "meteor-node-stubs": "^0.4.1",
     "react": "^16.5.2",
@@ -33,11 +32,20 @@
       "server": "server/main.js"
     }
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    },
+    "transform": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/fileTransformer.js"
+    }
+  },
   "devDependencies": {
     "chai": "^4.2.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "faker": "^4.1.0",
+    "identity-obj-proxy": "^3.0.0",
     "ignore-styles": "^5.0.1",
     "sinon": "^7.1.1"
   }
