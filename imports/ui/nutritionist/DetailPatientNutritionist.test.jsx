@@ -37,7 +37,7 @@ if (Meteor.isClient) {
         chai
         .expect(detailPatient.find('#medicamentosPaciente'))
         .to.have.length(1);
-        chai.expect(detailPatient.find('.col-12')).to.have.length(6);
+        chai.expect(detailPatient.find('.col-12')).to.have.length(7);
         chai.expect(detailPatient.find('.nav-pills')).to.have.length(1);
         chai.expect(detailPatient.find('.nav-item')).to.have.length(3);
         chai.expect(detailPatient.text()).to.have.string('Consumed food');
