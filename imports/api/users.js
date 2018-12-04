@@ -73,7 +73,7 @@ Meteor.methods({
                 if (err.code === 11000) {
                     throw new Meteor.Error("An existing user already have this identification or email.");
                 } else {
-                        throw new Meteor.Error("An error occurred in the user creation. Please try again "+ err);
+                    throw new Meteor.Error("An error occurred in the user creation. Please try again " + err);
                 }
             }
         }
@@ -124,7 +124,6 @@ function verificarExistenciaPaciente(paciente) {
 }
 
 function yaTieneNutricionista(nutricionista) {
-    console.log();
     if (nutricionista !== "") {
         throw new Meteor.Error('The patient already have an assigned nutritionist.');
     }

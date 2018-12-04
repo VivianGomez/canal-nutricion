@@ -18,10 +18,9 @@ import axios from 'axios';
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FAF5F3E0460C9');
-
 const allowedNutrients = [
     '203', '208', '255', '269', '291', '301', '305', '306', '307', '324', '326', '401', '430', '601', '605'
-]
+];
 
 export const Patients = new Mongo.Collection('patients');
 
@@ -64,7 +63,7 @@ if (Meteor.isServer) {
 Meteor.methods({
     'patients.buscarPaciente'({
         identificacion
-    }) {        
+    }) {
 
         check(identificacion, String);
 
@@ -79,7 +78,6 @@ Meteor.methods({
         clave
     }) {
 
-        console.log(cryptr.decrypt('149c61f635da3d731304f9baa38be463'));
         check(correo, String);
         check(clave, String);
 
@@ -266,7 +264,7 @@ Meteor.methods({
         try {
 
             Patients.update({
-                    identificacion: identificacionPaciente
+                identificacion: identificacionPaciente
             }, {
                 $set: {
                     nutricionista: identificacionNutricionista
@@ -392,7 +390,6 @@ function verificarExistenciaPaciente(paciente) {
 }
 
 function yaTieneNutricionista(nutricionista) {
-    console.log();
     if (nutricionista !== "") {
         throw new Meteor.Error('The patient already have an assigned nutritionist.');
     }
