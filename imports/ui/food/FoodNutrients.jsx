@@ -23,7 +23,6 @@ class Food extends Component {
         if (err) {
           alert('There is not a food with an id ' + this.state.id);
         } else {
-          console.log(res);
           this.setState({
             food: res
           });
