@@ -20,7 +20,7 @@ if (Meteor.isClient) {
       );
       it('Should render consumed food', () => {
         chai.expect(consumedFood.find('.row')).to.have.length(1);
-        chai.expect(consumedFood.find('button')).to.have.length(4);
+        chai.expect(consumedFood.find('button')).to.have.length(5);
         chai.expect(consumedFood.find('h2')).to.have.length(1);
         chai
           .expect(consumedFood.find('#botonActualizarConsumo'))

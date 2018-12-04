@@ -34,7 +34,7 @@ describe('DetailPatient', () => {
       chai
         .expect(detailPatient.find('#medicamentosPaciente'))
         .to.have.length(1);
-      chai.expect(detailPatient.find('.col-12')).to.have.length(2);
+      chai.expect(detailPatient.find('.col-12')).to.have.length(3);
       chai.expect(detailPatient.find('.list-group')).to.have.length(1);
       chai.expect(detailPatient.text()).to.have.string('Assigned medicines');
       chai

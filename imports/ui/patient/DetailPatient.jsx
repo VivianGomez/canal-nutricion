@@ -355,6 +355,18 @@ class DetailPatient extends Component {
         <div className="col-12">
           <ul className="list-group">{this.renderMedicamentos()}</ul>
         </div>
+        <div className="col-12 text-center">
+          <hr />
+          <button
+            type="button"
+            className="btn btn-foohealli-yellow"
+            onClick={() => window.history.back()}
+          >
+            <i className="fas fa-chevron-circle-left" />
+            &nbsp; Back
+          </button>
+          <br />
+        </div>
       </div>
     );
   }

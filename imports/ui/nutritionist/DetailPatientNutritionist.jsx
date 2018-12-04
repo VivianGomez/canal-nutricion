@@ -250,6 +250,18 @@ class DetailPatientNutritionist extends Component {
             </div>
           </div>
         </div>
+        <div className="col-12 text-center">
+          <hr />
+          <button
+            type="button"
+            className="btn btn-foohealli-yellow"
+            onClick={() => window.history.back()}
+          >
+            <i className="fas fa-chevron-circle-left" />
+            &nbsp; Back
+          </button>
+          <br />
+        </div>
       </div>
     );
   }
