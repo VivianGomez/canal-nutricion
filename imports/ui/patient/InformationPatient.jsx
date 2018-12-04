@@ -33,20 +33,6 @@ class InfoPatient extends Component {
     });
   }
 
-  mostrarContactoUsuario() {
-    return (
-      <p>
-        <b>Celular: </b>
-        <a href={'tel:' + this.state.celular}>
-          {this.state.celular}
-          &nbsp;
-        </a>
-        <b>Correo: </b>
-        <a href={'mailto:' + this.state.correo}>{this.state.correo}</a>
-      </p>
-    );
-  }
-
   mostrarContenidoUsuario() {
     return (
       <Link
