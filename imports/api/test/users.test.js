@@ -15,8 +15,8 @@ const cryptr = new Cryptr('1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FA
 
 
 if (Meteor.isServer) {
-    describe("users", function () {
-        describe("methods", function () {
+    describe("Users", function () {
+        describe("Methods", function () {
 
             let clave = faker.internet.password(8);
             let id = ""+faker.random.number({min:1000000000, max:9999999999});
@@ -78,7 +78,7 @@ if (Meteor.isServer) {
         });
 
 
-    it("should insert a new user", () => {
+    it("Should insert a new user", () => {
 
       let idNewNutritionist = ""+faker.random.number({min:1000000000, max:9999999999});
 

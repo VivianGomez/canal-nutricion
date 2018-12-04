@@ -10,8 +10,8 @@ const cryptr = new Cryptr('1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FA
 
 
 if (Meteor.isServer) {
-    describe("doctors", function () {
-        describe("methods", function () {
+    describe("Doctors", function () {
+        describe("Methods", function () {
 
             let clave = faker.internet.password(8);
             let idDoc = ""+faker.random.number({min:1000000000, max:9999999999});
@@ -52,7 +52,7 @@ if (Meteor.isServer) {
             resetDatabase();
         });
 
-    it("should validate the current doctor", () => {
+    it("Should validate the current doctor", () => {
 
        let token = Meteor.call("doctors.validarDoctor", {correo: doctor.correo, clave: clave});
        let currentDoctor =  Doctors.findOne({correo: doctor.correo});

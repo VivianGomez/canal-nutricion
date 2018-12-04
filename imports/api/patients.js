@@ -13,6 +13,9 @@ import {
 import {
     Nutritionists
 } from './nutritionists';
+import {
+    Doctors
+} from './doctors';
 import axios from 'axios';
 
 const jwt = require('jsonwebtoken');
@@ -277,6 +280,40 @@ Meteor.methods({
             throw new Meteor.Error(error);
         }
     },
+    'patients.assignDoctor'(
+        identificacionPaciente,
+        identificacionDoctor
+    ) {
+        check(identificacionPaciente, String);
+        check(identificacionDoctor, String);
+
+        const paciente = Patients.findOne({
+            identificacion: identificacionPaciente,
+        });
+
+        const doctor = Doctors.findOne({
+            identificacion: identificacionDoctor,
+        });
+
+        verificarExistenciaDoctor(doctor);
+        yaTieneDoctor(paciente.doctor);
+
+        try {
+
+            Patients.update({
+                identificacion: identificacionPaciente
+            }, {
+                $set: {
+                    doctor: identificacionDoctor
+                }
+            });
+
+            return "The patient " + paciente.nombre + " was correclty added to the doctor " + doctor.nombre + ".";
+
+        } catch (error) {
+            throw new Meteor.Error(error);
+        }
+    },
     'patients.registrarAlimento'({
         identificacion,
         alimento,
@@ -398,6 +435,18 @@ function yaTieneNutricionista(nutricionista) {
 function verificarExistenciaNutricionista(nutricionista) {
     if (!nutricionista) {
         throw new Meteor.Error('The nutritionist is not found.');
+    }
+}
+
+function yaTieneDoctor(doctor) {
+    if (doctor !== "") {
+        throw new Meteor.Error('The patient already have an assigned doctor.');
+    }
+}
+
+function verificarExistenciaDoctor(doctor) {
+    if (!doctor) {
+        throw new Meteor.Error('The doctor is not found.');
     }
 }
 

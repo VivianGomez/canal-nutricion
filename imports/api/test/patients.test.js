@@ -13,6 +13,10 @@ import {
 import {
   Nutritionists
 } from "../nutritionists.js";
+import {
+  Doctors
+} from "../doctors.js";
+
 import faker from "faker";
 import chai from 'chai';
 import sinon from 'sinon';
@@ -24,10 +28,11 @@ const cryptr = new Cryptr('1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FA
 
 
 if (Meteor.isServer) {
-  describe("patients", function () {
-    describe("methods", function () {
+  describe("Patients", function () {
+    describe("Methods", function () {
 
       let clave = faker.internet.password(8);
+
       let id = "" + faker.random.number({
         min: 1000000000,
         max: 9999999999
@@ -44,6 +49,7 @@ if (Meteor.isServer) {
         clave: cryptr.encrypt(clave),
         rol: "Paciente",
         fechaRegistro: moment().format('ddd MMM D YYYY'),
+        doctor: "",
         nutricionista: "",
         alimentosConsumidos: [],
         examenesMedicos: [],
@@ -54,7 +60,8 @@ if (Meteor.isServer) {
       let idNut = "" + faker.random.number({
         min: 1000000000,
         max: 9999999999
-      });
+      }); 
+
       let nut = {
         nombre: faker.name.findName(),
         identificacion: idNut,
@@ -68,6 +75,22 @@ if (Meteor.isServer) {
         fechaRegistro: moment().format('ddd MMM D YYYY')
       };
 
+      let idDoctor = "" + faker.random.number({
+        min: 1000000000,
+        max: 9999999999
+      });
+      let doctor = {
+        nombre: faker.name.findName(),
+        identificacion: idDoctor,
+        correo: faker.internet.email(),
+        celular: faker.random.number({
+          min: 1000000000,
+          max: 9999999999
+        }),
+        clave: cryptr.encrypt(clave),
+        rol: "Doctor",
+        fechaRegistro: moment().format('ddd MMM D YYYY')
+      };
 
       beforeEach(() => {
         resetDatabase();
@@ -79,6 +102,10 @@ if (Meteor.isServer) {
 
           Nutritionists.insert(
             nut
+            );
+
+          Doctors.insert(
+            doctor
             );
 
           return true;
@@ -322,6 +349,26 @@ if (Meteor.isServer) {
           identificacion: user.identificacion
         });
         chai.assert.equal(modifiedPatient.nutricionista, nut.identificacion);
+
+      });
+
+
+
+      it("Should add a doctor to the current patient", () => {
+
+        chai.assert.equal(Patients.findOne({
+          identificacion: user.identificacion
+        }).doctor, '');
+
+        Meteor.call("patients.assignDoctor",
+          user.identificacion,
+          doctor.identificacion
+          );
+
+        let modifiedPatient = Patients.findOne({
+          identificacion: user.identificacion
+        });
+        chai.assert.equal(modifiedPatient.doctor, doctor.identificacion);
 
       });
 

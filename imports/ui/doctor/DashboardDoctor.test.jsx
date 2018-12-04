@@ -34,7 +34,7 @@ describe('DashboardDoctor', () => {
     it('Should render the patients', () => {
       dashboardDoctor.update();
       chai
-        .expect(dashboardDoctor.find('#pacientes-nutricionista'))
+        .expect(dashboardDoctor.find('#pacientes-doctor'))
         .to.have.length(1);
       chai.expect(dashboardDoctor.find('.list-group')).to.have.length(1);
       chai.expect(dashboardDoctor.text()).to.have.string('My patients');

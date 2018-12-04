@@ -10,8 +10,8 @@ const cryptr = new Cryptr('1B5CF523A08CE35BAC7331D955F69723734C7BDF5C2A7A76570FA
 
 
 if (Meteor.isServer) {
-    describe("nutritionists", function () {
-        describe("methods", function () {
+    describe("Nutritionists", function () {
+        describe("Methods", function () {
 
             let clave = faker.internet.password(8);
             let idNut = ""+faker.random.number({min:1000000000, max:9999999999});
@@ -52,7 +52,7 @@ if (Meteor.isServer) {
             resetDatabase();
         });
 
-    it("should validate the current nutritionist", () => {
+    it("Should validate the current nutritionist", () => {
 
        let token = Meteor.call("nutritionists.validarNutricionista", {correo: nutritionist.correo, clave: clave});
        let currentNutritionist =  Nutritionists.findOne({correo: nutritionist.correo});
