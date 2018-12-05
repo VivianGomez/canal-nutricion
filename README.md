@@ -1,91 +1,96 @@
 # Foohealli (Food, health, life)
-Esta aplicación busca crear un canal de comunicación entre médicos, nutricionistas y personas con enfermedades que dependen de un tratamiento nutricional, como por ejemplo las enfermedades crónicas. Dicho canal se crea con el fin de ayudar tanto a los pacientes como a los médicos y nutricionistas. Por un lado, se quiere poder permitirle a los pacientes llevar un mejor tratamiento y mejorar su calidad de vida. Por otro lado, se busca ayudar a los médicos y nutricionistas a poder diagnosticar y tratar mejor a sus pacientes, al permitirles ver el día a día de los mismos mediante la plataforma
+This application seeks to create a communication channel between doctors, nutritionists and people who are dependent on a nutritional treatment, such as patients of chronic diseases. This channel is created in order to help the patients and doctors and nutritionists. On the one hand, we want to allow patients to take better treatments and improve their quality of life. On the other hand, we seek to help doctors and nutritionists to diagnose and treat their patients better, by allowing them to see their daily lives through the platform
 
-## Integrantes del equipo
+
+## Team
 - Gabriel Pinto
 
-  **Página personal:** https://gabrielpinto.me
+  **Personal web page:** https://gabrielpinto.me
 
 - Vivian Gómez
 
-  **Página personal:** https://viviangomez.github.io/viviangomez
+  **Personal web page:** https://viviangomez.github.io/viviangomez
 
-## Links de importancia
+## Important links
 
-**Desplegada en:** https://foohealli-app.herokuapp.com/
+**Deploy in:** https://foohealli-app.herokuapp.com/
 
-## Descripción
-Foohealli es una plataforma en la cual las personas que quieren y/o necesitan llevar un tratamiento nutricional, como los que padecen de IRC (Insuficiencia Renal Crónica), pueden llevar el registro de su tratamiento en términos de medicamentos y dieta. De tal forma que los médicos y nutricionistas que llevan el caso de dicho paciente, puedan acceder a dicha información, en tiempo real y ayudar a la persona durante el tratamiento y proponer mejores alternativas en los controles. 
+## Description
+Foohealli is a platform in which people who want and / or need to take nutritional treatment, such as those who suffer from CDK (Chronic Kidney Disease), can keep track of their treatment in terms of medications and diet. In this way that the doctors and nutritionists who take the case of this patient, can access to him/her information, in real time, help the person during the treatment and propose better alternatives in the controls.
 
-## Objetivos
+## Goals
 
-- Buscamos permitir a las personas con enfermedades crónicas mejorar su calidad de vida al poder llevar un tratamiento correcto.
-- Queremos ayudar a los médicos y nutricionistas a poder diagnosticar y tratar mejor a sus pacientes, al permitirles ver el día a día de los mismos mediante la plataforma
+-To develop a web application that allow to the doctors, nutritionists and patients, to create an effective communication channel during the control of the treatment of certain patient. 
+
+-To allow the people with need of diets for their treatments of diseases or health in general, to have a correct and successful treatment. 
+
+-To help the doctors and nutritionists to diagnose and treat their patients better, throughout the access in real time to the treatment information of them. 
+
 
 ## Screenshots
 
-- Vista del dashboard de un paciente
+- Patient dashboard
 ##
-![Screenshot de la página](https://raw.githubusercontent.com/VivianGomez/canal-nutricion/master/public/dashboardPaciente.PNG?style=centerme)
+![Screenshot](https://raw.githubusercontent.com/VivianGomez/canal-nutricion/master/public/DashboardPatient.PNG?style=centerme)
 ##
 
 ##
-- Vista de un Doctor sobre la información de un Paciente
+- Detail information of a patient seen by a nutritionist
 ##
-![Screenshot de la página](https://raw.githubusercontent.com/VivianGomez/canal-nutricion/master/public/medicamentosPaciente.PNG?style=centerme)
+![Screenshot](https://raw.githubusercontent.com/VivianGomez/canal-nutricion/master/public/DashboardNutritionist.PNG?style=centerme)
 
-## Tecnologías utilizadas
+## Technologies
 
-- **Mongo DB**: Se utilizo una base de datos no relacional de MongoDB que está desplegada en https://mlab.com/
-- **Meteor**: Una infraestructura web basada en JavaScript, que automatiza y simplifica el desarrollo de aplicaciones web que actúan en tiempo real. 
-Maneja toda la lógica y despliegue tanto del cliente como del servidor. https://www.meteor.com
-- **React JS**: Una librería que permite cosas increíbles y que fue utilizada para la creación del front de la aplicación de manera integrada con Meteor https://reactjs.org/
+- **Mongo DB **: We used a non-relational database of MongoDB that is deployed at https://mlab.com/
+- **Meteor **: A web infrastructure based on JavaScript, which automates and simplifies the development of web applications that act in real time.
+It handles all the logic and deployment of both the client and the server. https://www.meteor.com
+- **React JS **: A library that allows incredible things and that was used for the creation of the front-end of the application in an integrated way with Meteor https://reactjs.org/
 
-A su vez, se usaron varias dependencias instaladas por medio de NPM.
+In turn, several dependencies installed through NPM were used. 
 
 - JSON Web Token
 - React-router-dom
 - Bootstrap
 
-Entre otras que pueden ser observadas en los package.json de la aplicación.
-
-## API utilizado
-
-El API utilizado se puede visualizar en https://ndb.nal.usda.gov/ndb/doc/apilist/API-SEARCH.md y fue utilizado para obtener en tiempo real datos sobre los alimentos a partir de las busquedas realizadas por los pacientes al momento de agregar un alimento consumido. 
+Among others that can be observed in the package.json of the application.
 
 
-Finalmente, la aplicación se encuentra despleagada en https://heroku.com/ , para acceder a ella se puede ingresar a https://foohealli-app.herokuapp.com/
+## API 
 
-## Instructivo para ejecución
+The used API can be viewed at https://ndb.nal.usda.gov/ndb/doc/apilist/API-SEARCH.md 
+This API was used to obtain, in real time, the data of food based on the searches carried out by the patients at the time of adding a consumed food.
 
-### Requisitos
+
+Finally, the application is deployed at https://heroku.com/, to access it, you can enter into https://foohealli-app.herokuapp.com/
+
+## Instructions for execution
+
+### Requirements
 
 - **Meteor** 
 
-Verificar que este instalado ejecutando "meteor --version" en el CMD o descargarlo de https://www.meteor.com/install (versión LTS).
-Nota: Para usar Meteor en tu cmd necesitarás installar Chocolately, puedes hacerlo desde https://chocolatey.org/install
+Verify that it is installed, by running "meteor --version" in the CMD, or download it from https://www.meteor.com/install (LTS version).
+Note: To use Meteor in your cmd you will need to install Chocolately, you can do it from https://chocolatey.org/install
 
-- **Mongo DB**
+- **Mongo DB **
 
-Es necesario tenerlo para correr la aplicación localmente. Se puede descargar de https://www.mongodb.com/download-center?jmp=nav#community
+It is necessary to have it to run the application locally. It can be downloaded from https://www.mongodb.com/download-center?jmp=nav#community
 
+### Steps to execute
 
-### Pasos para ejecutar
+1. Open the root folder in a CMD.
 
-1. Abrir la carpeta raíz en un CMD.
+2. Run "npm install" to install all the necessary dependencies.
 
-2. Ejecutar "npm install" para instalar todas las dependencias necesarias.
+3. Generate 2 different hashes using some page for this, such as https://passwordsgenerator.net/sha256-hash-generator/.
 
-3. Generar 2 hash diferentes usando alguna página para esto tal como https://passwordsgenerator.net/sha256-hash-generator/.
+3.1. Define an environment variable in this way (windows): SET CODE_CRYPTR = {HASH1}
 
-3.1. Definir una variable de entorno de esta forma (windows): SET CODE_CRYPTR={HASH1}
+3.2. Define an environment variable in this way (windows): SET CODE_TOKEN = {HASH2}
 
-3.2. Definir una variable de entorno de esta forma (windows): SET CODE_TOKEN={HASH2}
+4. Run "meteor", which displays the client and the server on ports 3000 and 3001, respectively
 
-4. Ejecutar "meteor", que despliega el cliente y el servidor en los puertos 3000 y 3001, respectivamente
-
-4.1. Tener en cuenta que la base de datos que corre Meteor es su propia base de datos de Mongo, la corre localmente y
-no es la base de datos real.
+4.1. Tener en cuenta que la base de datos que corre Meteor es su propia base de datos de Mongo, la corre localmente y no es la base de datos real.
 
 5. La aplicación será abierta de forma automática en http://localhost:3000/
 
