@@ -22,6 +22,7 @@ class Login extends Component {
     event.preventDefault();
 
     if (this.state.rol === 'Patient') {
+      //Deberian validar que el correo y la clave sigan un formato. y avisar al usuario antes de enviar el formulario
       Meteor.call(
         'patients.validarPaciente',
         {
