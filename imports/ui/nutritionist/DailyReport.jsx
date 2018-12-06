@@ -102,6 +102,8 @@ class DailyReport extends Component {
     this.setState({ fecha: event }, this.cargarConsumidosFecha(event));
   }
 
+  //Este metodo es inseguro y será eliminado en el futuro. pueden usar getDerivatedStateFromProps 
+  //o aprovechar mejor withTracker
   componentWillReceiveProps(nextProps) {
     this.setState(
       {
