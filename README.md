@@ -9,7 +9,7 @@ This application seeks to create a communication channel between doctors, nutrit
 
 - Vivian Gómez
 
-  **Personal web page:** https://viviangomezcubillos.herokuapp.com
+  **Personal web page:** https://viviangomez.github.io
 
 ## Important links
 
